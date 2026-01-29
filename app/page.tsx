@@ -1,65 +1,343 @@
+"use client";
+
 import Image from "next/image";
+import { Github, Linkedin, Twitter, Youtube, Calendar } from "lucide-react";
+import { ExperienceItem } from "./components/ExperienceItem";
+import { GithubGraph } from "./components/GithubGraph";
+import { TechStack } from "./components/TechStack";
+
+const DiscordIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1971.3728.2914a.077.077 0 01-.0066.1277 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" />
+  </svg>
+);
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex min-h-screen flex-col items-center bg-white px-4 pt-24 text-black selection:bg-black selection:text-white pb-32">
+      <main className="flex max-w-2xl flex-col items-center text-center">
+        {/* Profile Image */}
+        <div className="relative mb-2 h-48 w-48 grayscale filter sm:h-56 sm:w-56">
+          <Image
+            src="/me.png" // User's photo
+            alt="Profile"
+            fill
+            className="object-contain"
+            priority
+          />
+          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white via-white/60 to-transparent backdrop-blur-[1px]" />
+        </div>
+
+        {/* Hero Text */}
+        <h1 className="mb-4 text-6xl font-bold tracking-tight sm:text-7xl">
+          Aditya Patil
+        </h1>
+
+        {/* Phonetic Pronunciation (Aesthetic touch often found in minimal portfolios) */}
+        <div className="mb-8 flex items-center gap-2 text-sm text-gray-400">
+          <span>/əˈdɪtjə pɑːˈtiːl/</span>
+          <span className="text-gray-300">•</span>
+          <span>noun</span>
+        </div>
+
+        <div className="mb-10 w-full space-y-4 text-left text-lg leading-relaxed text-gray-600 sm:text-xl">
+          <p>
+            a full-stack developer and <span className="underline underline-offset-4">product builder</span> with deep experience across engineering, product strategy, and user-centric design.
+          </p>
+          <p>
+            a <span className="underline underline-offset-4">polymath</span> who bridges technical architecture with business outcomes to create impactful, scalable solutions.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        {/* Experience Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            Experience
+          </h2>
+          <div className="space-y-12">
+            <ExperienceItem
+              title="Entrepreneur First"
+              role="Founder in Residence"
+              collapsible={true}
+              link="https://www.joinef.com/"
+            >
+              <div className="space-y-2">
+                <p>As a Founder in Residence at Entrepreneurs First (EF), a premier global talent investor and startup accelerator known for backing exceptional individuals to build transformative companies from scratch, I am fully immersed in designing and developing cutting-edge Agentic AI systems.</p>
+                <p>Actively building autonomous, goal-driven AI agents that shift from suggestion-based tools to proactive execution, enabling seamless human-AI collaboration and redefining task automation, decision-making, and operations.</p>
+                <p>Driving a bold vision for the future of computing: making traditional web browsing obsolete, turning personal data into the primary interface (your "homepage"), and empowering agentic systems to independently handle complex responsibilities.</p>
+                <p>Hustling full-time in a high-intensity, ambition-fueled environment surrounded by world-class cofounders, mentors, and resources - leveraging EF's structured support (including coaching, community, and potential funding pathways) to explore, validate, and iterate ideas at pace.</p>
+                <p>Positioning myself at the forefront of a paradigm shift in AI, tackling hard technical and conceptual challenges to create meaningful, scalable impact in the emerging agentic era.</p>
+                <p>This role highlights my entrepreneurial drive, deep technical expertise in AI systems, and commitment to pioneering the next wave of intelligent, autonomous technology.</p>
+              </div>
+            </ExperienceItem>
+
+            <ExperienceItem
+              title="Google Summer of Code"
+              role="Emory University School of Medicine, Atlanta, USA"
+              collapsible={true}
+              link="https://minimalistbook.com/gsoc-final-report-2025/"
+            >
+              <div className="space-y-2">
+                <p>Designed and developed a comprehensive system for managing Access Control List (ACL) permissions across multiple Linux file system servers, including NFS and BeeGFS, demonstrating expertise in large-scale distributed systems and secure file management.</p>
+                <p>Built a robust backend capable of processing millions of permission change requests, showcasing proficiency in high-performance computing and scalability.</p>
+                <p>Implemented two Linux systemd daemons communicating via Unix sockets: one for gRPC-based backend interactions and another for executing ACL changes, highlighting skills in daemon development, inter-process communication, and system-level programming.</p>
+                <p>Created a user-friendly Next.js frontend enabling secure login, backend communication, and scheduling of permission requests, illustrating full-stack development capabilities and focus on intuitive user experiences.</p>
+              </div>
+            </ExperienceItem>
+
+            <ExperienceItem
+              title="Professional Freelancer (Technical GTM)"
+              role="Technical Writer, Tel Aviv, Israel"
+              collapsible={true}
+              link="https://www.upwork.com/freelancers/~0172a072394ece49bb?viewMode=1"
+            >
+              <div className="space-y-2">
+                <p>Authored comprehensive, highly technical documentation (50+ pages) for a Software Composition Analysis (SCA) tool, including detailed guides on advanced features such as reachability analysis - focusing on identifying truly exploitable vulnerabilities in open-source dependencies to reduce noise and prioritize remediation in secure software development lifecycles.</p>
+                <p>Ghostwrote in-depth content on Reachability Analysis for the CTO of a security company, explaining how it enhances SCA by determining whether detected vulnerabilities are actually reachable and exploitable in the application's codebase - delivering clear, authoritative thought leadership material suitable for blogs, whitepapers, or technical marketing.</p>
+                <p>Deployed and configured Flipt (an open-source, Git-native feature flagging platform) on cloud infrastructure to support video production workflows for a feature flagging provider; troubleshot and resolved operational issues to ensure reliable, production-ready performance in a dynamic environment.</p>
+                <p>Developed custom scraping tools for a proxy provider targeting real estate platforms, enabling efficient data extraction while adhering to technical and ethical constraints; rapidly produced high-quality articles and technical write-ups on the tools, scraping methodologies, and platform integrations to support knowledge sharing and client deliverables.</p>
+              </div>
+            </ExperienceItem>
+
+            <ExperienceItem
+              title="Engineering Intern"
+              role="Athena Consulting Ltd. Dubai"
+              collapsible={true}
+            >
+              <div className="space-y-2">
+                <p>Led the complete system design and deployment architecture for Eumlet, a UAE-based B2B Web3 payments and financial platform (built on Next.js), on AWS infrastructure. Configured Debian EC2 instances, Application Load Balancer (ALB), and NGINX reverse proxy under senior guidance - ensuring high availability, scalability, and secure handling of financial transactions in a regulated environment.</p>
+                <p>Engineered automated CI/CD pipelines using GitHub Actions for seamless build, test, and deployment workflows, with direct integration and manual orchestration to EC2 targets - demonstrating strong expertise in modern DevOps practices, infrastructure as code principles, and zero-downtime deployments for production fintech applications.</p>
+                <p>Managed a team of 4 developers while simultaneously supporting two high-value clients: Lunarspace and Concordium (a privacy-focused Layer-1 blockchain platform) - balancing tight deadlines, client expectations, and resource constraints in a fast-paced environment. Authored comprehensive legal and technical developer handbooks to standardize onboarding, compliance, and best practices for new recruits.</p>
+                <p>Collaborated remotely with BGTrade (China-based financial platform team) on global security audits and production deployments of sensitive financial systems - coordinating across time zones and cultures to identify vulnerabilities, implement hardening measures, and ensure secure, compliant rollouts in cross-border fintech ecosystems.</p>
+              </div>
+            </ExperienceItem>
+          </div>
+        </div>
+
+        {/* Education Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            Education
+          </h2>
+          <div className="space-y-12">
+            <ExperienceItem
+              title="National Institute of Technology Hamirpur"
+              role="Electrical Engineering"
+            >
+              <p>2022 - Surviving</p>
+            </ExperienceItem>
+          </div>
+        </div>
+
+        {/* Contributions Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            GitHub Contributions
+          </h2>
+          <GithubGraph />
+        </div>
+
+        {/* Research Publications Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            Research Publications
+          </h2>
+          <div className="space-y-12">
+            <ExperienceItem
+              title="Cross-Compatible Encryption Adapter for Securing Legacy Modbus Devices"
+              role=""
+              collapsible={true}
+              collapsedHeight="max-h-40"
+            >
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <p className="text-sm text-gray-400 font-medium">
+                    2025 17th International Conference on COMmunication Systems and NETworks (COMSNETS)
+                  </p>
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+                    <p className="text-gray-600">Authors: Aditya Patil; T. S. Sreeram</p>
+                    <a
+                      href="https://doi.org/10.1109/COMSNETS63942.2025.10885597"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-xs font-medium text-black underline underline-offset-4 hover:text-gray-600"
+                    >
+                      View Publication
+                    </a>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-xs uppercase tracking-wider text-gray-400 font-bold">Abstract</p>
+                  <p>Supervisory Control and Data Acquisition systems are the backbone of managing critical infrastructure in modern industrial control systems, spanning sectors from power generation to logistics. However, these systems face significant challenges due to threats from malicious actors. The Modbus protocol, despite its known lack of security features, is still used in many industries managing critical infrastructure due to the high cost of replacing existing systems. As a result, these legacy systems remain vulnerable to potentially damaging threats. This paper proposes an adapter device for enhancing the security of the Modbus protocol without replacing devices in legacy systems. The proposed adapter is cost-efficient, provides cross-platform support, and is easy to install, update, and maintain.</p>
+                </div>
+              </div>
+            </ExperienceItem>
+          </div>
+        </div>
+
+        {/* Tech Stack Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            Tech Stack
+          </h2>
+          <TechStack />
+        </div>
+
+        {/* Videos Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            Explainer Videos
+          </h2>
+          <p className="mb-8 text-lg text-gray-600">
+            Here is how I explain complex systems on my {" "}
+            <a
+              href="https://www.youtube.com/@theracecondition"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline underline-offset-4 hover:text-gray-600"
+            >
+              YouTube Channel
+            </a>
+          </p>
+          <div className="aspect-video w-full overflow-hidden rounded-xl border border-gray-100 bg-gray-50 shadow-sm transition-all hover:shadow-md grayscale hover:grayscale-0 duration-500">
+            <iframe
+              src="https://www.youtube.com/embed/m84tBP_4DWE"
+              title="Explaining Complex Systems"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="h-full w-full"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+        </div>
+
+        {/* Writings & Blogs Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            Writings & Blogs
+          </h2>
+          <p className="max-w-xl text-lg leading-relaxed text-gray-600">
+            I host my thoughts on{" "}
+            <a
+              href="https://medium.com/@adityapatil24680"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline underline-offset-4 transition-colors hover:text-gray-600"
+            >
+              Medium
+            </a>{" "}
+            rather than building a custom site. Instead of overengineering and reinventing the wheel, I prefer leveraging a mature platform that lets me focus on what matters: sharing insights on AI systems, product strategy, and technical architecture.
+          </p>
+        </div>
+
+        {/* Get in Touch Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400">
+            Get in Touch
+          </h2>
+          <div className="space-y-4">
+            <p className="text-lg text-gray-600">
+              Connect with me on{" "}
+              <a
+                href="https://linkedin.com/in/adityapatil"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black underline underline-offset-4 hover:text-gray-600"
+              >
+                LinkedIn
+              </a>{" "}
+              or{" "} shoot an {" "}
+              <a
+                href="mailto:adityapatil24680@gmail.com"
+                className="text-black underline underline-offset-4 hover:text-gray-600"
+              >
+                email
+              </a>
+            </p>
+            <p className="text-xs text-gray-400 italic">
+              in case anyone (especially girls), if you want my number, just DM me
+            </p>
+          </div>
+        </div>
+
+        {/* Library Section */}
+        <div className="mb-16 w-full text-left">
+          <h2 className="mb- text-xs font-bold uppercase tracking-widest text-gray-400">
+            Library
+          </h2>
+          <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+            {[
+              { title: "Linux Kernel Development", author: "Robert Love" },
+              { title: "Hacking: The Art of Exploitation", author: "Jon Erickson" },
+              { title: "Linux in a Nutshell", author: "Ellen Siever, Stephen Figgins, Robert Love, and Arnold Robbins" },
+              { title: "Linux Kernel in a Nutshell", author: "Greg Kroah-Hartman" },
+              { title: "The Art of Electronics", author: "Paul Horowitz and Winfield Hill" },
+              { title: "Nmap Cookbook", author: "Nicholas Marsh" }
+            ].map((book) => (
+              <div key={book.title} className="group flex flex-col gap-1 transition-all">
+                <span className="text-sm font-medium text-black group-hover:underline underline-offset-4 decoration-gray-200 transition-all">
+                  {book.title}
+                </span>
+                <span className="text-xs text-gray-400">
+                  {book.author}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
+
+      {/* Glass Island Navbar */}
+      <nav className="fixed bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-6 rounded-full border border-gray-200 bg-white/70 px-6 py-3 shadow-sm backdrop-blur-md transition-all hover:bg-white/90">
+        <a
+          href="https://github.com/adityapatil"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-500 transition-colors hover:text-black hover:scale-110"
+        >
+          <Github className="h-5 w-5" />
+        </a>
+        <a
+          href="https://linkedin.com/in/adityapatil"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-500 transition-colors hover:text-black hover:scale-110"
+        >
+          <Linkedin className="h-5 w-5" />
+        </a>
+        <a
+          href="https://twitter.com/adityapatil"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-500 transition-colors hover:text-black hover:scale-110"
+        >
+          <Twitter className="h-5 w-5" />
+        </a>
+        <a
+          href="https://youtube.com/@theracecondition"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-500 transition-colors hover:text-black hover:scale-110"
+        >
+          <Youtube className="h-5 w-5" />
+        </a>
+        <a
+          href="https://discord.gg/ry4YCJaShK"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-500 transition-colors hover:text-black hover:scale-110"
+        >
+          <DiscordIcon className="h-5 w-5" />
+        </a>
+        <a
+          href="https://cal.com/adi-patil/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-500 transition-colors hover:text-black hover:scale-110"
+        >
+          <Calendar className="h-5 w-5" />
+        </a>
+      </nav>
     </div>
   );
 }
+
