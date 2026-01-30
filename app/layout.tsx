@@ -10,8 +10,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Portfolio",
-  description: "Minimalist developer portfolio",
+  title: "Aditya Patil",
+  description: "All about me",
 };
 
 export default function RootLayout({
