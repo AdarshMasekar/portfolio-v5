@@ -252,7 +252,7 @@ export default function Home() {
               <div className="space-y-12">
                 <ExperienceItem
                   title="Entrepreneur First"
-                  role="Founder in Residence"
+                  role="Founder in Residence, Bengaluru"
                   collapsible={true}
                   link="https://www.joinef.com/"
                 >
