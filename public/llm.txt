@@ -96,6 +96,8 @@ Supervisory Control and Data Acquisition systems are the backbone of managing cr
 
 ## Tech Stack
 
+I'm a generalist at heart who can build with anything, but here's the core stack I've spent the most time with:
+
 Next.js, Go, Python, Hugging Face, TypeScript, React, Tailwind CSS, GitHub, Git, Docker, PostgreSQL, FastAPI, MongoDB, Shadcn UI, Redis, Vercel, Google Cloud, Linux, Nginx, PyTorch, Pandas
 
 ## Recommendations by Clients

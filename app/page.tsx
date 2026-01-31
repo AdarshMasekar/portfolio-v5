@@ -408,6 +408,9 @@ export default function Home() {
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
                 Tech Stack
               </h2>
+              <p className="mb-8 text-lg text-gray-600 dark:text-gray-400">
+                I&apos;m a generalist at heart who can build with anything, but here&apos;s the core stack I&apos;ve spent the most time with:
+              </p>
               <TechStack />
             </div>
 
