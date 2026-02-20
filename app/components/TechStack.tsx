@@ -179,9 +179,12 @@ export function TechStack() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="group flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all hover:border-foreground/10 hover:bg-foreground/5"
+                        className="group flex items-center gap-3 rounded-xl border border-foreground/5 bg-foreground/5 p-3 transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-[var(--brand)] hover:shadow-[0_4px_20px_var(--brand-shadow)]"
                         style={
-                          { "--brand": skill.color } as React.CSSProperties
+                          {
+                            "--brand": skill.color,
+                            "--brand-shadow": skill.color + "20", // ~12% opacity
+                          } as React.CSSProperties
                         }
                       >
                         <skill.icon className="h-5 w-5 shrink-0 text-foreground/50 transition-all duration-300 group-hover:[color:var(--brand)]" />

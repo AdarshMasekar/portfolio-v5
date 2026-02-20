@@ -10,10 +10,16 @@ import {
   X,
   Music,
   Pause,
+  Database,
+  Server,
+  Code2,
+  Terminal,
 } from "lucide-react";
 import { ExperienceItem } from "./components/ExperienceItem";
 import { TechStack } from "./components/TechStack";
-import { ResumeButton } from "./components/ResumeButton";
+import { BackgroundBeams } from "./components/ui/BackgroundBeams";
+import { CopyEmailButton } from "./components/ui/CopyEmailButton";
+import { LinkedInButton } from "./components/ui/LinkedInButton";
 import { SiLeetcode } from "react-icons/si";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "next-themes";
@@ -23,6 +29,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { PomodoroTimer } from "./components/PomodoroTimer";
 import { getMarkdownContent } from "./data/content";
+import { GithubGraph } from "./components/GithubGraph";
+import { ResumeButton } from "./components/ResumeButton";
 
 export default function Home() {
   const [time, setTime] = useState<string>("");
@@ -179,8 +187,11 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="flex w-full max-w-2xl flex-col items-center text-center"
+            className="flex w-full max-w-2xl flex-col items-center text-center relative z-10"
           >
+            {/* Background Animations */}
+            <BackgroundBeams className="fixed -z-10" />
+
             {/* Profile Image - Easter Egg Trigger */}
             <button
               onClick={() => setShowEasterEgg(!showEasterEgg)}
@@ -188,7 +199,7 @@ export default function Home() {
               aria-label="Toggle Aura Mode"
             >
               <Image
-                src="/me.png" // User's photo
+                src="/me1.png" // User's photo
                 alt="Profile"
                 fill
                 className={`object-contain transition-all duration-700 ${showEasterEgg ? "grayscale-0 scale-105" : "grayscale"}`}
@@ -366,14 +377,14 @@ export default function Home() {
                   role="MongoDB, Express.js, React.js, Node.js, LLM | 2025"
                   collapsible={true}
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-4 pt-2">
                     <p>
                       - Built full-stack MERN portal to automate error log
                       analysis for support teams, integrating file uploads, API
                       integrations, and real-time diagnostics.
                     </p>
                     <p>
-                      - Integrated Grok API and local LLM models to parse Java
+                      - Integrated Groq API and local LLM models to parse Java
                       stack traces and error patterns, targeting 40% deflection
                       in L1 support tickets.
                     </p>
@@ -385,7 +396,7 @@ export default function Home() {
                   role="Java, Eclipse RCP | 2025"
                   collapsible={true}
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-4 pt-2">
                     <p>
                       - Analyzed 20+ escalation tickets to propose in-house code
                       editor solution, creating technical specifications
@@ -421,41 +432,13 @@ export default function Home() {
             {/* Skills Section */}
             <div className="mb-16 w-full text-left">
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
-                Skills
+                GitHub Contributions
               </h2>
-              <div className="space-y-4">
-                <p className="text-foreground/70 text-sm leading-relaxed">
-                  <strong className="text-foreground">
-                    Product Support & Troubleshooting:
-                  </strong>{" "}
-                  Production Debugging, Root Cause Analysis (RCA), Log Analysis,
-                  Incident Management, SLA Monitoring
-                </p>
-                <p className="text-foreground/70 text-sm leading-relaxed">
-                  <strong className="text-foreground">
-                    DevOps & Support Tools:
-                  </strong>{" "}
-                  Jira, Git, Jenkins, Linux/Unix, Bash Scripting
-                </p>
-                <p className="text-foreground/70 text-sm leading-relaxed">
-                  <strong className="text-foreground">
-                    Automation & Testing:
-                  </strong>{" "}
-                  Selenium, Appium, API Testing, Postman
-                </p>
-                <p className="text-foreground/70 text-sm leading-relaxed">
-                  <strong className="text-foreground">
-                    Frontend & Integrations:
-                  </strong>{" "}
-                  React.js, JavaScript, HTML5, CSS3
-                </p>
-                <p className="text-foreground/70 text-sm leading-relaxed">
-                  <strong className="text-foreground">
-                    Backend & Databases:
-                  </strong>{" "}
-                  Java, MySQL, Python, Node.js, Express.js, REST APIs
-                </p>
-              </div>
+              <p className="mb-8 text-md text-foreground/70">
+                Here&apos;s a snapshot of my activity and contributions across
+                various projects:
+              </p>
+              <GithubGraph />
             </div>
 
             {/* Tech Stack Section */}
@@ -476,24 +459,15 @@ export default function Home() {
                 Get in Touch
               </h2>
               <div className="space-y-4">
-                <p className="text-lg text-foreground/70">
-                  Connect with me on{" "}
-                  <a
-                    href="https://www.linkedin.com/in/adarsh-masekar/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground underline underline-offset-4 hover:text-foreground/70"
-                  >
-                    LinkedIn
-                  </a>{" "}
-                  or shoot an{" "}
-                  <a
-                    href="mailto:adarshmasekar@gmail.com"
-                    className="text-foreground underline underline-offset-4 hover:text-foreground/70"
-                  >
-                    email
-                  </a>
+                <p className="mb-8 text-md text-foreground/70 max-w-xl">
+                  I'm currently looking for new opportunities. Whether you have
+                  a question, a potential project, or just want to say hi, I'll
+                  try my best to get back to you!
                 </p>
+                <div className="flex flex-wrap items-center gap-4">
+                  <CopyEmailButton email="adarshmasekar@gmail.com" />
+                  <LinkedInButton url="https://www.linkedin.com/in/adarsh-masekar/" />
+                </div>
               </div>
             </div>
 
@@ -503,8 +477,8 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Glass Island Navbar */}
-      <nav className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border border-foreground/10 bg-background/70 px-4 py-3 shadow-sm backdrop-blur-md transition-all hover:bg-background/90 sm:gap-6 sm:px-6">
+      {/* Liquid Glass Island Navbar */}
+      <nav className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/10 dark:border-white/5 bg-background/40 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl backdrop-saturate-[1.8] transition-all hover:bg-background/60 sm:gap-6 sm:px-6">
         {/* Mode Toggle Switch */}
         <div className="flex items-center">
           <button
