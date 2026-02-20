@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Aditya Patil",
+  title: "Adarsh Masekar",
   description: "All about me",
 };
 
@@ -24,9 +24,7 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} antialiased transition-colors duration-300`}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
