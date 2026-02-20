@@ -201,7 +201,7 @@ export default function Home() {
             </button>
 
             {/* Hero Text */}
-            <h1 className="text-pop-out mb-4 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
+            <h1 className="mb-4 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
               Adarsh Masekar
             </h1>
 
