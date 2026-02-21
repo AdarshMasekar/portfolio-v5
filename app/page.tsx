@@ -31,6 +31,8 @@ import { PomodoroTimer } from "./components/PomodoroTimer";
 import { getMarkdownContent } from "./data/content";
 import { GithubGraph } from "./components/GithubGraph";
 import { ResumeButton } from "./components/ResumeButton";
+import { AvatarJourney } from "./components/AvatarJourney";
+import { ATLAQuote } from "./components/ATLAQuote";
 
 export default function Home() {
   const [time, setTime] = useState<string>("");
@@ -111,44 +113,106 @@ export default function Home() {
     <div
       className={`relative flex min-h-screen flex-col items-center bg-background px-3 pt-16 text-foreground selection:bg-foreground/20 pb-32 sm:px-4 sm:pt-24 sm:pb-40 overflow-x-hidden transition-colors duration-300`}
     >
-      {/* Easter Egg Effects */}
+      {/* Avatar State Easter Egg Effects */}
       <AnimatePresence>
         {showEasterEgg && (
           <>
-            {/* Bluish Aura Edge Effect */}
+            {/* ATLA Quote Banner */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] pointer-events-none shadow-[inset_0_0_150px_rgba(29,78,216,0.5)] dark:shadow-[inset_0_0_150px_rgba(59,130,246,0.4)] transition-opacity duration-1000"
-            />
-            {/* Twinkling Stars Background */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
+              initial={{ opacity: 0, y: -24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -24 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+              className="fixed top-4 left-1/2 z-[110] -translate-x-1/2 pointer-events-none"
             >
-              {starPositions.map((pos, i) => (
+              <div className="rounded-full border border-amber-400/30 bg-background/70 backdrop-blur-md px-5 py-2 shadow-[0_0_30px_rgba(251,191,36,0.15)]">
+                <p className="text-[11px] text-amber-300/80 tracking-wider italic whitespace-nowrap">
+                  ✦ &nbsp;Even the greatest Avatars began by moving a single
+                  leaf.&nbsp; ✦
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Outer warm amber edge glow — Air Nomad orange */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="fixed inset-0 z-[100] pointer-events-none"
+              style={{
+                boxShadow:
+                  "inset 0 0 120px rgba(251,191,36,0.18), inset 0 0 60px rgba(251,191,36,0.10)",
+              }}
+            />
+
+            {/* Swirling Air Rings */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.4 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.4 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-0 z-[101] pointer-events-none flex items-center justify-center"
+            >
+              {[160, 240, 330, 430].map((size, i) => (
                 <motion.div
-                  key={i}
-                  className="absolute h-[2px] w-[2px] bg-blue-500 dark:bg-white rounded-full shadow-[0_0_4px_rgba(59,130,246,0.8)] dark:shadow-[0_0_3px_white]"
+                  key={size}
+                  className="absolute rounded-full border"
                   style={{
-                    top: pos.top,
-                    left: pos.left,
+                    width: size,
+                    height: size,
+                    borderColor: `rgba(251,191,36,${0.18 - i * 0.03})`,
+                    borderWidth: 1,
                   }}
-                  animate={{
-                    opacity: [0.2, 1, 0.2],
-                    scale: [0.8, 1.2, 0.8],
-                  }}
+                  animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
                   transition={{
-                    duration: pos.duration,
+                    duration: 8 + i * 3,
                     repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: pos.delay,
+                    ease: "linear",
                   }}
                 />
               ))}
+            </motion.div>
+
+            {/* Twinkling Stars — ATLA element palette */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
+            >
+              {starPositions.map((pos, i) => {
+                const elementColors = [
+                  "rgba(147,197,253,0.9)",
+                  "rgba(253,186,116,0.9)",
+                  "rgba(110,231,183,0.9)",
+                  "rgba(251,191,36,0.9)",
+                ];
+                const color = elementColors[i % 4];
+                return (
+                  <motion.div
+                    key={i}
+                    className="absolute h-[2px] w-[2px] rounded-full"
+                    style={{
+                      top: pos.top,
+                      left: pos.left,
+                      background: color,
+                      boxShadow: `0 0 4px 1px ${color}`,
+                    }}
+                    animate={{
+                      opacity: [0.1, 1, 0.1],
+                      scale: [0.6, 1.4, 0.6],
+                    }}
+                    transition={{
+                      duration: pos.duration,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: pos.delay,
+                    }}
+                  />
+                );
+              })}
             </motion.div>
           </>
         )}
@@ -473,6 +537,16 @@ export default function Home() {
 
             {/* Pomodoro Timer Section */}
             <PomodoroTimer />
+
+            {/* Avatar Journey and Quotes — visible only in Avatar State */}
+            <AnimatePresence>
+              {showEasterEgg && (
+                <>
+                  <AvatarJourney />
+                  <ATLAQuote />
+                </>
+              )}
+            </AnimatePresence>
           </motion.main>
         )}
       </AnimatePresence>

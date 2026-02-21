@@ -76,7 +76,7 @@ const categories: Category[] = [
     name: "Collaboration & Support",
     skills: [
       { name: "Jira", icon: SiJira, color: "#0052CC" },
-      { name: "Microsoft Teams", icon: BsMicrosoftTeams, color: "#4A154B" },
+      { name: "Microsoft Teams", icon: BsMicrosoftTeams, color: "#464EB8" },
       { name: "Slack", icon: SiSlack, color: "#4A154B" },
     ],
   },
