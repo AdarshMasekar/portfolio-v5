@@ -146,34 +146,6 @@ export default function Home() {
               }}
             />
 
-            {/* Swirling Air Rings */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.4 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.4 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 z-[101] pointer-events-none flex items-center justify-center"
-            >
-              {[160, 240, 330, 430].map((size, i) => (
-                <motion.div
-                  key={size}
-                  className="absolute rounded-full border"
-                  style={{
-                    width: size,
-                    height: size,
-                    borderColor: `rgba(251,191,36,${0.18 - i * 0.03})`,
-                    borderWidth: 1,
-                  }}
-                  animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-                  transition={{
-                    duration: 8 + i * 3,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-              ))}
-            </motion.div>
-
             {/* Twinkling Stars — ATLA element palette */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -257,23 +229,25 @@ export default function Home() {
             <BackgroundBeams className="fixed -z-10" />
 
             {/* Profile Image - Easter Egg Trigger */}
-            <button
-              onClick={() => setShowEasterEgg(!showEasterEgg)}
-              className="group relative mb-2 h-40 w-40 grayscale filter sm:h-56 sm:w-56 overflow-hidden cursor-pointer transition-all duration-500 hover:grayscale-0 active:scale-95"
-              aria-label="Toggle Aura Mode"
-            >
-              <Image
-                src="/me1.png" // User's photo
-                alt="Profile"
-                fill
-                className={`object-contain transition-all duration-700 ${showEasterEgg ? "grayscale-0 scale-105" : "grayscale"}`}
-                priority
-              />
-              <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-background via-background/60 to-transparent backdrop-blur-[1px]" />
+            <div className="relative mb-2 group flex items-center justify-center">
+              {/* Diffused Airbender Amber Glow */}
+              <div className="absolute inset-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none bg-amber-500/30 blur-[30px] scale-110" />
 
-              {/* Subtle Glow on Hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-[inset_0_0_20px_rgba(59,130,246,0.3)] rounded-full pointer-events-none" />
-            </button>
+              <button
+                onClick={() => setShowEasterEgg(!showEasterEgg)}
+                className="relative h-40 w-40 sm:h-56 sm:w-56 cursor-pointer transition-all duration-500 grayscale filter group-hover:grayscale-0 active:scale-95 drop-shadow-md group-hover:drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]"
+                aria-label="Toggle Aura Mode"
+              >
+                <Image
+                  src="/me1.png" // User's photo
+                  alt="Profile"
+                  fill
+                  className={`object-contain transition-all duration-700 scale-100`}
+                  priority
+                />
+                <div className="absolute bottom-0 left-0 right-0 w-full h-1/4 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
+              </button>
+            </div>
 
             {/* Hero Text */}
             <h1 className="mb-4 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
@@ -552,7 +526,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Liquid Glass Island Navbar */}
-      <nav className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border border-white/10 dark:border-white/5 bg-background/40 px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl backdrop-saturate-[1.8] transition-all hover:bg-background/60 sm:gap-6 sm:px-6">
+      <nav className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-5 sm:gap-6 rounded-full border border-white/10 dark:border-white/5 bg-background/40 px-6 py-3.5 sm:px-6 sm:py-3 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl backdrop-saturate-[1.8] transition-all hover:bg-background/60">
         {/* Mode Toggle Switch */}
         <div className="flex items-center">
           <button
@@ -580,7 +554,7 @@ export default function Home() {
           className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
           aria-label="Show QR Code"
         >
-          <QrCode className="h-5 w-5" />
+          <QrCode className="h-6 w-6 sm:h-5 sm:w-5" />
         </button>
         <div className="h-6 w-px bg-foreground/10" />
         <a
@@ -589,7 +563,7 @@ export default function Home() {
           rel="noopener noreferrer"
           className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
         >
-          <Github className="h-5 w-5" />
+          <Github className="h-6 w-6 sm:h-5 sm:w-5" />
         </a>
         <a
           href="https://www.linkedin.com/in/adarsh-masekar/"
@@ -597,7 +571,7 @@ export default function Home() {
           rel="noopener noreferrer"
           className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
         >
-          <Linkedin className="h-5 w-5" />
+          <Linkedin className="h-6 w-6 sm:h-5 sm:w-5" />
         </a>
         <a
           href="https://leetcode.com/u/adarshmasekar/"
@@ -605,7 +579,7 @@ export default function Home() {
           rel="noopener noreferrer"
           className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
         >
-          <SiLeetcode className="h-5 w-5" />
+          <SiLeetcode className="h-6 w-6 sm:h-5 sm:w-5" />
         </a>
       </nav>
 

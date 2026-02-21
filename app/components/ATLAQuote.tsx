@@ -170,7 +170,7 @@ const getNationBorderClass = (nation: Nation) => {
     case "earth":
       return "border-emerald-500 shadow-[-1px_0_10px_-2px_rgba(16,185,129,0.5)]";
     case "fire":
-      return "border-red-500 shadow-[-1px_0_10px_-2px_rgba(239,68,68,0.5)]";
+      return "border-amber-600 shadow-[-1px_0_10px_-2px_rgba(245,158,11,0.5)]";
     default:
       return "border-foreground/20";
   }

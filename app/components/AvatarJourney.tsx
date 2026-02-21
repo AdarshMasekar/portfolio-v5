@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
 import { useState, useEffect, useMemo } from "react";
 
 // Accurate ATLA Element SVGs (Based on standard "Symbol" grid)
@@ -164,7 +163,7 @@ const ElementalParticles = ({ element }: { element: string }) => {
         {particles.map((p) => (
           <motion.div
             key={p.id}
-            className="absolute bg-slate-400/20 dark:bg-white/20 blur-[0.5px] rounded-full"
+            className="absolute bg-amber-400/90 dark:bg-amber-400/50 blur-[0.5px] rounded-full"
             style={{
               left: `${p.x / 1.5}%`,
               top: `${p.y}%`,
