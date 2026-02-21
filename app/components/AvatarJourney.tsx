@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 // Accurate ATLA Element SVGs (Based on standard "Symbol" grid)
 const WaterSvg = ({ className }: { className?: string }) => (
@@ -86,7 +86,7 @@ const nations = [
     element: "Air",
     phase: "The Boy in the Iceberg",
     SvgComponent: AirSvg,
-    iconColor: "text-amber-400",
+    iconColor: "text-amber-500",
     shimmerColor: "rgb(251,191,36)",
     phaseColor: "text-amber-500",
     description:
@@ -119,13 +119,168 @@ const nations = [
     element: "Fire",
     phase: "Energy & Life",
     SvgComponent: FireSvg,
-    iconColor: "text-red-500",
-    shimmerColor: "rgb(239,68,68)",
-    phaseColor: "text-red-500 dark:text-red-400",
+    iconColor: "text-orange-500",
+    shimmerColor: "rgb(249,115,22)",
+    phaseColor: "text-orange-500 dark:text-orange-400",
     description:
       "Moving past the fear of destruction. Learning from the Sun Warriors and Zuko that true fire is not about anger, but the pure animating energy of life itself.",
   },
 ];
+
+const AmbientGlow = () => {
+  return (
+    <motion.div
+      className="absolute inset-0 pointer-events-none z-0 opacity-40 dark:opacity-60 blur-[80px] rounded-3xl"
+      animate={{
+        background: [
+          "radial-gradient(circle at 50% 50%, rgba(251,191,36,0.15) 0%, transparent 60%)", // Air
+          "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.15) 0%, transparent 60%)", // Water
+          "radial-gradient(circle at 50% 50%, rgba(16,185,129,0.15) 0%, transparent 60%)", // Earth
+          "radial-gradient(circle at 50% 50%, rgba(249,115,22,0.15) 0%, transparent 60%)", // Fire
+          "radial-gradient(circle at 50% 50%, rgba(251,191,36,0.15) 0%, transparent 60%)", // Back to Air
+        ],
+      }}
+      transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+    />
+  );
+};
+
+const ElementalParticles = ({ element }: { element: string }) => {
+  const particles = useMemo(() => {
+    return Array.from({ length: 15 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 2,
+      duration: Math.random() * 2 + 2,
+      delay: Math.random() * 2,
+      offset: (Math.random() - 0.5) * 40,
+    }));
+  }, []);
+
+  if (element === "Air") {
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute bg-slate-400/20 dark:bg-white/20 blur-[0.5px] rounded-full"
+            style={{
+              left: `${p.x / 1.5}%`,
+              top: `${p.y}%`,
+              width: p.size * 6,
+              height: 1.5,
+            }}
+            animate={{
+              x: [0, p.offset * 2 + 80],
+              y: [0, -10 - p.duration * 3],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: p.duration * 1.5,
+              repeat: Infinity,
+              delay: p.delay,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (element === "Water") {
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute bg-blue-500/40 rounded-full"
+            style={{
+              left: `${p.x}%`,
+              bottom: `-10%`,
+              width: p.size,
+              height: p.size * 1.5,
+            }}
+            animate={{
+              y: [0, -80 - p.y],
+              x: [0, Math.sin(p.id) * 15, -Math.sin(p.id) * 15],
+              opacity: [0, 0.7, 0],
+            }}
+            transition={{
+              duration: p.duration * 1.2,
+              repeat: Infinity,
+              delay: p.delay,
+              ease: "easeOut",
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (element === "Earth") {
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute bg-emerald-700/30 dark:bg-emerald-500/30 rounded-[2px]"
+            style={{
+              left: `${p.x}%`,
+              bottom: `-10%`,
+              width: p.size * 2,
+              height: p.size * 2,
+            }}
+            animate={{
+              y: [0, -60 - p.y],
+              opacity: [0, 0.7, 0],
+              rotate: [0, p.id % 2 === 0 ? 180 : -180],
+            }}
+            transition={{
+              duration: p.duration * 2,
+              repeat: Infinity,
+              delay: p.delay,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (element === "Fire") {
+    return (
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute bg-orange-500/50 shadow-[0_0_8px_rgba(249,115,22,0.6)] rounded-full blur-[0.5px]"
+            style={{
+              left: `${p.x}%`,
+              bottom: `${p.y / 3}%`,
+              width: p.size,
+              height: p.size,
+            }}
+            animate={{
+              y: [0, -60 - p.duration * 10],
+              x: [0, p.offset],
+              opacity: [0, 1, 0],
+              scale: [1, 0.5],
+            }}
+            transition={{
+              duration: p.duration * 0.8,
+              repeat: Infinity,
+              delay: p.delay,
+              ease: "easeIn",
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  return null;
+};
 
 function NationCard({
   nation,
@@ -149,15 +304,18 @@ function NationCard({
             background: `conic-gradient(from 0deg, transparent 0%, transparent 42%, ${nation.shimmerColor} 50%, transparent 58%, transparent 100%)`,
           }}
           animate={{ rotate: 360 }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
         />
       </div>
 
       {/* Inner Card bounding the background to reveal only the shimmer edges inside the padding */}
       <div className="relative w-full h-full z-10 rounded-[10px] bg-white dark:bg-[#121212] transition-colors p-5 overflow-hidden">
+        {/* Particle Effects on Hover */}
+        <ElementalParticles element={nation.element} />
+
         {/* Large background elemental watermark */}
         <motion.div
-          className={`absolute -right-8 -top-8 w-40 h-40 opacity-[0.03] dark:opacity-[0.06] pointer-events-none ${nation.iconColor}`}
+          className={`absolute -right-8 -top-8 w-40 h-40 opacity-[0.06] dark:opacity-[0.06] pointer-events-none ${nation.iconColor}`}
           animate={{
             rotate: 0,
             scale: 1,
@@ -214,9 +372,11 @@ export function AvatarJourney() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="w-full max-w-2xl mt-8 mb-4 relative z-20"
     >
-      <div className="rounded-3xl border border-amber-500/10 bg-slate-50/50 dark:bg-background/80 backdrop-blur-3xl p-6 shadow-[0_0_80px_rgba(251,191,36,0.06)]">
+      <div className="rounded-3xl border border-amber-500/10 bg-slate-50/50 dark:bg-background/80 backdrop-blur-3xl p-6 shadow-[0_0_80px_rgba(251,191,36,0.06)] relative overflow-hidden">
+        <AmbientGlow />
+
         {/* Header */}
-        <div className="mb-6 flex items-center justify-center sm:justify-start gap-4">
+        <div className="relative z-10 mb-6 flex items-center justify-center sm:justify-start gap-4">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -236,7 +396,7 @@ export function AvatarJourney() {
         </div>
 
         {/* Nations Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {nations.map((nation, i) => (
             <NationCard key={nation.name} nation={nation} index={i} />
           ))}
