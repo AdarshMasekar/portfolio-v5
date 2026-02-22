@@ -202,13 +202,24 @@ export function ATLAQuote() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className={`max-w-xl text-left p-4 border-l-2 rounded-xl flex flex-col items-start ${getNationBorderClass(quote.nation)}`}
+          className={`max-w-xl text-left p-4 border-l-2 rounded-xl flex flex-col items-start transition-all duration-300 ${
+            quote.speaker.includes("Iroh")
+              ? "border-[var(--color-fire-accent)] bg-amber-900/10 dark:bg-amber-950/20 shadow-[0_4px_20px_rgba(245,158,11,0.15)]"
+              : getNationBorderClass(quote.nation)
+          }`}
         >
-          <p className="text-[15px] sm:text-[17px] text-foreground/80 font-medium italic leading-relaxed tracking-wide drop-shadow-md">
+          <p
+            className={`text-[15px] sm:text-[17px] font-medium italic leading-relaxed tracking-wide drop-shadow-md ${quote.speaker.includes("Iroh") ? "text-amber-800 dark:text-amber-200" : "text-foreground/80"}`}
+          >
             &ldquo;{quote.text}&rdquo;
           </p>
-          <p className="mt-4 text-[12px] text-foreground/50 font-semibold uppercase tracking-[0.2em] flex items-center gap-2">
-            <span className="w-4 h-px bg-foreground/30 block" /> {quote.speaker}
+          <p
+            className={`mt-4 text-[12px] font-semibold uppercase tracking-[0.2em] flex items-center gap-2 ${quote.speaker.includes("Iroh") ? "text-amber-700/70 dark:text-amber-400/70" : "text-foreground/50"}`}
+          >
+            <span
+              className={`w-4 h-px block ${quote.speaker.includes("Iroh") ? "bg-amber-700/50 dark:bg-amber-400/50" : "bg-foreground/30"}`}
+            />{" "}
+            {quote.speaker}
           </p>
         </motion.div>
       </AnimatePresence>

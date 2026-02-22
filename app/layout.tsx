@@ -3,6 +3,8 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
 import CustomScrollbar from "@/components/ui/CustomScrollbar";
+import { AvatarStateProvider } from "@/components/providers/AvatarStateProvider";
+import { ToastProvider } from "@/components/toast";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -69,8 +71,12 @@ export default function RootLayout({
         className={`${dmSans.variable} antialiased transition-colors duration-300`}
       >
         <ThemeProvider>
-          <CustomScrollbar />
-          {children}
+          <ToastProvider>
+            <AvatarStateProvider>
+              <CustomScrollbar />
+              {children}
+            </AvatarStateProvider>
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

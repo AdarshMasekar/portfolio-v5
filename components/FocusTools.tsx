@@ -1,15 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import {
-  Play,
-  Pause,
-  RotateCcw,
-  Clock,
-  Music,
-  Volume2,
-} from "lucide-react";
+import { Play, Pause, RotateCcw, Clock, Music, Volume2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAvatarState } from "@/components/providers/AvatarStateProvider";
+import { MomoPomodoro } from "@/components/easter-eggs/MomoPomodoro";
 
 interface FocusToolsProps {
   className?: string;
@@ -17,11 +12,15 @@ interface FocusToolsProps {
 
 export function FocusTools({ className = "" }: FocusToolsProps) {
   const [activeTab, setActiveTab] = useState<"pomodoro" | "lofi">("pomodoro");
+  const { isAvatarState } = useAvatarState();
 
   return (
-    <div className={`rounded-2xl border border-foreground/10 bg-background/55 h-24 ${className}`}>
+    <div
+      className={`rounded-2xl border border-foreground/10 bg-background/55 h-24 ${className} data-[avatar-mode=true]:bg-[var(--color-air-bg)] transition-all duration-500`}
+      data-avatar-mode={isAvatarState}
+    >
       {/* Tab Headers */}
-      <div className="flex items-center gap-1 p-2 bg-background/55 rounded-t-lg border-b border-foreground/10">
+      <div className="flex items-center gap-1 p-2 bg-background/55 rounded-t-lg border-b border-foreground/10 data-[avatar-mode=true]:bg-[var(--color-air-bg)] transition-colors">
         <button
           onClick={() => setActiveTab("pomodoro")}
           className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all duration-200 ${
@@ -32,6 +31,7 @@ export function FocusTools({ className = "" }: FocusToolsProps) {
         >
           <Clock size={10} />
           Pomodoro
+          {isAvatarState && <MomoPomodoro />}
         </button>
         <button
           onClick={() => setActiveTab("lofi")}
@@ -47,7 +47,7 @@ export function FocusTools({ className = "" }: FocusToolsProps) {
       </div>
 
       {/* Tab Content */}
-      <div className="h-12 overflow-hidden flex items-center">
+      <div className="h-12 overflow-hidden flex items-center bg-background/55">
         <AnimatePresence mode="wait">
           {activeTab === "pomodoro" ? (
             <motion.div
@@ -254,7 +254,7 @@ function LofiContent() {
     <div className="flex items-center justify-between w-full">
       {/* Left Side - Status and Title */}
       <div>
-          <div className="text-xs font-medium text-foreground">Focus Music</div>
+        <div className="text-xs font-medium text-foreground">Focus Music</div>
       </div>
 
       {/* Right Side - Controls */}
@@ -268,10 +268,14 @@ function LofiContent() {
           {isLofiPlaying ? (
             <Pause size={12} className="text-foreground" fill="currentColor" />
           ) : (
-            <Play size={12} className="text-foreground ml-0.5" fill="currentColor" />
+            <Play
+              size={12}
+              className="text-foreground ml-0.5"
+              fill="currentColor"
+            />
           )}
         </button>
-        
+
         {/* Volume Controls */}
         <div className="flex items-center gap-1">
           <button
@@ -281,7 +285,7 @@ function LofiContent() {
           >
             <span className="text-xs text-foreground/60">−</span>
           </button>
-          
+
           <button
             onClick={() => setLofiVolume(Math.min(1, lofiVolume + 0.1))}
             className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95"

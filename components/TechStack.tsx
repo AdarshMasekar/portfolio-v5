@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAvatarState } from "@/components/providers/AvatarStateProvider";
+import { Badgermole } from "@/components/easter-eggs/Badgermole";
 import {
   SiJavascript,
   SiPython,
@@ -140,6 +142,7 @@ function CloudLogo({ tech }: { tech: Skill }) {
 
 export function TechStack() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { isAvatarState } = useAvatarState();
 
   const logoCloudLogos: Logo[] = marqueeSkills.map((tech) => ({
     alt: tech.name,
@@ -147,8 +150,16 @@ export function TechStack() {
   }));
 
   return (
-    <div className="w-full space-y-2">
-      <div className="flex justify-end">
+    <div className="w-full space-y-2 relative">
+      {isAvatarState && <Badgermole />}
+      <div className="flex justify-between items-end">
+        {isAvatarState ? (
+          <p className="text-xs text-foreground/40 italic flex-1 pb-1">
+            Hint: try typing the strongest earthbender's name.
+          </p>
+        ) : (
+          <div className="flex-1" />
+        )}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/50 hover:text-foreground transition-all duration-300"
@@ -198,11 +209,14 @@ export function TechStack() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="group flex items-center gap-3 rounded-xl border border-foreground/5 bg-foreground/5 p-3 transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-[var(--brand)] hover:shadow-[0_4px_20px_var(--brand-shadow)] avatar:hover:!border-amber-500 avatar:hover:!shadow-amber-500/20"
-                        style={{
-                          "--brand": skill.color,
-                          "--brand-shadow": skill.color + "20", // ~12% opacity
-                        } as React.CSSProperties}
+                        data-avatar-mode={isAvatarState}
+                        className="group flex items-center gap-3 rounded-xl border border-foreground/5 bg-foreground/5 p-3 transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-[var(--brand)] hover:shadow-[0_4px_20px_var(--brand-shadow)] data-[avatar-mode=true]:border-b-4 data-[avatar-mode=true]:border-[var(--color-earth-accent)] data-[avatar-mode=true]:bg-[var(--color-earth-bg)] data-[avatar-mode=true]:shadow-[0_4px_0_var(--color-earth-accent)] data-[avatar-mode=true]:hover:-translate-y-2 data-[avatar-mode=true]:hover:shadow-[0_8px_0_var(--color-earth-accent)]"
+                        style={
+                          {
+                            "--brand": skill.color,
+                            "--brand-shadow": skill.color + "20", // ~12% opacity
+                          } as React.CSSProperties
+                        }
                       >
                         <skill.icon className="h-5 w-5 shrink-0 text-foreground/80 transition-all duration-300 group-hover:[color:var(--brand)] avatar:group-hover:!text-amber-500" />
                         <span className="text-sm font-medium text-foreground/70 group-hover:text-foreground transition-colors avatar:group-hover:text-amber-500">
