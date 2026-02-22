@@ -298,6 +298,7 @@ export default function Home() {
                   src="/me1.png" // User's photo
                   alt="Profile"
                   fill
+                  sizes="(max-width: 640px) 160px, 224px"
                   className={`object-contain transition-all duration-700 scale-100`}
                   priority
                 />

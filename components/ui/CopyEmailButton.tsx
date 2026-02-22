@@ -27,8 +27,9 @@ export function CopyEmailButton({
     >
       <Mail
         className={cn(
-          "h-4 w-4 transition-colors",
-          copied ? "text-emerald-500" : "text-foreground",
+          "h-4 w-4 transition-all duration-300 group-hover:scale-110",
+          copied ? "text-emerald-500 scale-110" : "text-foreground",
+          "group-hover:-rotate-6",
         )}
       />
       <span>{copied ? "Copied to clipboard!" : email}</span>
@@ -41,10 +42,10 @@ export function CopyEmailButton({
         />
         <Copy
           className={cn(
-            "absolute h-4 w-4 transition-all duration-300",
+            "absolute h-4 w-4 transition-all duration-500",
             copied
-              ? "scale-50 opacity-0"
-              : "scale-100 opacity-100 text-foreground/50 group-hover:text-foreground",
+              ? "scale-50 opacity-0 rotate-12"
+              : "scale-100 opacity-100 text-foreground/50 group-hover:text-foreground group-hover:scale-110 group-hover:rotate-6",
           )}
         />
       </div>

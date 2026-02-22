@@ -117,13 +117,17 @@ function CloudLogo({ tech }: { tech: Skill }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className="flex items-center gap-2 transition-all duration-300 cursor-pointer text-foreground/40 hover:text-foreground"
-      style={{ color: hovered ? tech.color : undefined }}
+      className="flex items-center gap-2 transition-all duration-300 cursor-pointer text-foreground/40 hover:text-foreground will-change-transform"
+      style={{
+        color: hovered ? tech.color : undefined,
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <tech.icon className="h-5 w-5 md:h-6 md:w-6" />
-      <span className="text-sm md:text-lg font-bold tracking-tight">
+      <tech.icon className="h-5 w-5 md:h-6 md:w-6 shrink-0" />
+      <span className="text-sm md:text-lg font-bold tracking-tight whitespace-nowrap">
         {tech.name}
       </span>
     </div>
