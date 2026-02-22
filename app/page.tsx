@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Github, Linkedin, Bot, User, QrCode, X, FileText } from "lucide-react";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { QRCodeSVG } from "qrcode.react";
 import {
@@ -23,7 +23,6 @@ import { LinkedInButton } from "@/components/ui/LinkedInButton";
 import { MenuBar, MenuBarItem } from "@/components/ui/bottom-menu";
 import { SiLeetcode } from "react-icons/si";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { getMarkdownContent } from "@/lib/data/content";
 import { useAvatarState } from "@/components/providers/AvatarStateProvider";
 import { JasmineDragon } from "@/components/easter-eggs/JasmineDragon";
 import { ZukoFlame } from "@/components/easter-eggs/ZukoFlame";
@@ -71,7 +70,8 @@ function AnimatedCounter({
   );
 }
 
-// Dynamically imported heavy components
+import { AgentMarkdownView } from "@/components/AgentMarkdownView";
+
 const TechStack = dynamic(
   () => import("@/components/TechStack").then((mod) => mod.TechStack),
   { ssr: true },
@@ -91,70 +91,12 @@ const ATLAQuote = dynamic(
 );
 
 export default function Home() {
-  const [time, setTime] = useState<string>("");
   const [showQR, setShowQR] = useState(false);
   const [mode, setMode] = useState<"human" | "agent">("human");
 
-  const { setTheme, resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString("en-IN", {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        }),
-      );
-    };
-
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const markdownContent = getMarkdownContent(time);
+  const { resolvedTheme } = useTheme();
 
   const { isAvatarState, toggleAvatarState } = useAvatarState();
-  const [isLofiPlaying, setIsLofiPlaying] = useState(false);
-  const [lofiVolume, setLofiVolume] = useState(1);
-  const lofiRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    if (lofiRef.current) {
-      lofiRef.current.volume = lofiVolume;
-    }
-  }, [lofiVolume]);
-
-  useEffect(() => {
-    return () => {
-      if (lofiRef.current) {
-        lofiRef.current.pause();
-        lofiRef.current = null;
-      }
-    };
-  }, []);
-
-  const toggleLofi = () => {
-    if (!lofiRef.current) {
-      lofiRef.current = new Audio("/lofi.mp3");
-      lofiRef.current.loop = true;
-      lofiRef.current.volume = lofiVolume;
-    }
-
-    if (isLofiPlaying) {
-      lofiRef.current.pause();
-    } else {
-      lofiRef.current
-        .play()
-        .catch((e) => console.error("Lofi play failed:", e));
-    }
-    setIsLofiPlaying(!isLofiPlaying);
-  };
 
   const starPositions = useMemo(() => {
     return [...Array(50)].map(() => ({
@@ -305,15 +247,7 @@ export default function Home() {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="flex w-full max-w-2xl flex-col items-start text-left px-4 sm:px-0"
           >
-            <pre
-              className="w-full whitespace-pre-wrap font-mono text-sm leading-relaxed text-foreground antialiased"
-              style={{
-                fontFamily:
-                  '"Courier New", Courier, "Lucida Sans Typewriter", "Lucida Console", monospace',
-              }}
-            >
-              {markdownContent}
-            </pre>
+            <AgentMarkdownView />
           </motion.main>
         ) : (
           /* Human Mode - Original View */
