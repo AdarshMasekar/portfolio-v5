@@ -134,8 +134,10 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
             );
           }
 
+          const Element = item.element ? "div" : "button";
+
           return (
-            <button
+            <Element
               key={index}
               onClick={item.onClick}
               className={cn(
@@ -148,7 +150,7 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
               onMouseLeave={() => setActiveIndex(null)}
             >
               {content}
-            </button>
+            </Element>
           );
         })}
       </div>
