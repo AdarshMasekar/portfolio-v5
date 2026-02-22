@@ -8,34 +8,64 @@ import {
   User,
   QrCode,
   X,
-  Music,
-  Pause,
+  FileText,
 } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "next-themes";
 import { QRCodeSVG } from "qrcode.react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import dynamic from "next/dynamic";
 
-import { ExperienceItem } from "@/components/ExperienceItem";
-import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
-import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
-import { LinkedInButton } from "@/components/ui/LinkedInButton";
+import { BackgroundBeams } from '@/components/ui/BackgroundBeams'
+import { CopyEmailButton } from '@/components/ui/CopyEmailButton'
+import { ExperienceItem } from '@/components/ExperienceItem'
+import { FocusTools } from '@/components/FocusTools'
+import { LinkedInButton } from '@/components/ui/LinkedInButton'
 import { MenuBar, MenuBarItem } from "@/components/ui/bottom-menu";
 import { SiLeetcode } from "react-icons/si";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { ResumeButton } from "@/components/ResumeButton";
 import { getMarkdownContent } from "@/lib/data/content";
+
+// Animated Counter Component
+function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -100px 0px" });
+  
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, { stiffness: 100, damping: 20 });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    const unsubscribe = springValue.on("change", (latest) => {
+      setDisplayValue(Math.round(latest));
+    });
+    
+    if (isInView) {
+      motionValue.set(value);
+    }
+    
+    return () => unsubscribe();
+  }, [isInView, motionValue, springValue, value]);
+
+  return (
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="text-2xl font-bold text-foreground sm:text-3xl"
+    >
+      {displayValue}{suffix}
+    </motion.div>
+  );
+}
 
 // Dynamically imported heavy components
 const TechStack = dynamic(
   () => import("@/components/TechStack").then((mod) => mod.TechStack),
   { ssr: true },
 );
-const PomodoroTimer = dynamic(
-  () => import("@/components/PomodoroTimer").then((mod) => mod.PomodoroTimer),
-  { ssr: false },
-);
+
 const GithubGraph = dynamic(
   () => import("@/components/GithubGraph").then((mod) => mod.GithubGraph),
   { ssr: true },
@@ -149,6 +179,11 @@ export default function Home() {
         </div>
       ),
       onClick: () => setMode(mode === "human" ? "agent" : "human"),
+    },
+    {
+      label: "Download Resume",
+      icon: FileText,
+      href: "/Adarsh Masekar - PSE.pdf",
     },
     {
       label: "QR Code",
@@ -309,75 +344,50 @@ export default function Home() {
             </div>
 
             {/* Hero Text */}
-            <h1 className="mb-4 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
-              Adarsh Masekar
-            </h1>
-
-            {/* Resume Button */}
-            <div className="mb-4">
-              <ResumeButton />
+            <div className="mb-6 text-center">
+              <h1 className="mb-2 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
+                Adarsh Masekar
+              </h1>
+              <h2 className="text-xl font-medium text-foreground/80 sm:text-2xl">
+                Product Support Engineer
+              </h2>
+              <p className="mt-2 text-sm text-foreground/60 sm:text-base">
+                Enterprise B2B SaaS · L2/L3 Support · JavaScript · Java · SQL · Ticketing · RCA · SRE mindset
+              </p>
             </div>
 
-            {/* Phonetic Pronunciation (Aesthetic touch often found in minimal portfolios) */}
-            <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-foreground/70 sm:text-sm">
-              <span>/ˈædɑːrš məˈseɪkər/</span>
-              <span className="text-foreground/20">•</span>
-              <span>noun</span>
-              <span className="text-foreground/20">•</span>
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="tabular-nums text-xs sm:text-sm">
-                    {time || "00:00:00"}
-                  </span>
-                  <span className="text-[10px] uppercase tracking-wider sm:text-xs">
-                    IST
-                  </span>
-                </div>
-
-                <span className="text-foreground/20">•</span>
-
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-tight text-foreground/50">
-                    lofi
-                  </span>
-                  <button
-                    onClick={toggleLofi}
-                    className="flex h-5 w-5 items-center justify-center rounded-full transition-all hover:bg-foreground/10 text-gray-400 hover:text-foreground"
-                    aria-label={isLofiPlaying ? "Pause Lofi" : "Play Lofi"}
-                  >
-                    {isLofiPlaying ? (
-                      <Pause size={10} fill="currentColor" />
-                    ) : (
-                      <Music size={10} />
-                    )}
-                  </button>
-                  <AnimatePresence>
-                    {isLofiPlaying && (
-                      <motion.div
-                        initial={{ width: 0, opacity: 0 }}
-                        animate={{ width: 40, opacity: 1 }}
-                        exit={{ width: 0, opacity: 0 }}
-                        className="flex h-5 items-center overflow-hidden"
-                      >
-                        <input
-                          type="range"
-                          min="0"
-                          max="1"
-                          step="0.01"
-                          value={lofiVolume}
-                          onChange={(e) =>
-                            setLofiVolume(parseFloat(e.target.value))
-                          }
-                          className="h-[2px] w-8 cursor-pointer appearance-none rounded-full bg-foreground/10 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-2 [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-foreground/50 hover:[&::-webkit-slider-thumb]:bg-foreground [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:h-2 [&::-moz-range-thumb]:w-2 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-foreground/50 hover:[&::-moz-range-thumb]:bg-foreground transition-all"
-                        />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+            {/* Summary Highlights */}
+            <div className="mb-16 w-full">
+              <div className="rounded-2xl border border-foreground/10 bg-background/55 p-4 sm:p-6">
+                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-foreground/70">
+                  Key Highlights
+                </h3>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="text-center">
+                    <AnimatedCounter value={2} suffix="+" />
+                    <div className="text-xs text-foreground/60 sm:text-sm">Years Experience</div>
+                    <div className="text-xs text-foreground/50">Enterprise B2B SaaS</div>
+                  </div>
+                  <div className="text-center">
+                    <AnimatedCounter value={300} suffix="+" />
+                    <div className="text-xs text-foreground/60 sm:text-sm">L2/L3 Issues</div>
+                    <div className="text-xs text-foreground/50">Code-Level Debugging</div>
+                  </div>
+                  <div className="text-center">
+                    <AnimatedCounter value={50} suffix="+" />
+                    <div className="text-xs text-foreground/60 sm:text-sm">Knowledge Base</div>
+                    <div className="text-xs text-foreground/50">Self-Service usage +40%</div>
+                  </div>
+                  <div className="text-center">
+                    <AnimatedCounter value={95} suffix="%+" />
+                    <div className="text-xs text-foreground/60 sm:text-sm">SLA Adherence</div>
+                    <div className="text-xs text-foreground/50">Resolution Time -35%</div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="mb-16 mt-8 w-full space-y-4 text-left text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
+            <div className="mb-16 mt-4 w-full space-y-4 text-left text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
               <p>
                 Product Support Engineer with 2+ years in Enterprise B2B SaaS,
                 specializing in solving complex engineering-level issues and
@@ -429,38 +439,45 @@ export default function Home() {
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Experience
               </h2>
-              <div className="space-y-12">
+              <div className="space-y-8">
                 <ExperienceItem
                   title="Qualitia Software"
                   role="Product Support Engineer (L2) | Pune, India (Remote)"
                   collapsible={true}
                 >
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <p className="font-semibold text-foreground/70 text-sm mb-4">
                       January 2025 – Present
                     </p>
-                    <p>
-                      - Resolved 300+ Tier 2/3 technical issues through
-                      code-level debugging of Selenium and Appium frameworks,
-                      maintaining 95%+ SLA adherence and reducing overall
-                      resolution time by 35%.
+                    <p className="text-sm text-foreground/80 mb-4 italic">
+                      Own L2/L3 support for enterprise test automation platform, handling escalations, RCA, and customer-facing fixes for global B2B clients.
                     </p>
-                    <p>
-                      - Engineered custom Java integration module for IBM DB2
-                      within 36 hours, implementing JDBC connectivity layer with
-                      connection pooling to retain critical accounts and enable
-                      seamless database operations.
-                    </p>
-                    <p>
-                      - Architected 50+ technical knowledge base articles with
-                      code samples, achieving 40% increase in self-service
-                      deflection and 20% faster customer onboarding.
-                    </p>
-                    <p>
-                      - Mentored 3 junior engineers and trained 30+ QA testers
-                      on product architecture and troubleshooting methodologies,
-                      reducing team ramp-up time by 40%.
-                    </p>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Reduced incident resolution time by 35%</strong> by debugging Selenium/Appium automation and optimizing test scripts across 300+ L2/L3 issues using Java and Python for enterprise customers.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Engineered custom Java integration module for IBM DB2</strong> within 36 hours, implementing JDBC connectivity layer with connection pooling to retain critical accounts for enterprise stakeholders.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Architected 50+ technical knowledge base articles</strong> with code samples, achieving 40% increase in self-service deflection and 20% faster customer onboarding for QA and product teams.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Mentored 3 junior engineers</strong> and trained 30+ QA testers on product architecture and troubleshooting methodologies, reducing team ramp-up time by 40% for customer success.</span>
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-foreground/10">
+                      <p className="text-xs text-foreground/50">
+                        <strong>Keywords:</strong> Java, Spring Boot, REST APIs, SQL, RCA, Selenium, Appium, CI/CD
+                      </p>
+                      <p className="text-xs text-foreground/50 mt-1">
+                        <strong>Ticketing:</strong> Jira, internal tools (L1–L3 escalations)
+                      </p>
+                    </div>
                   </div>
                 </ExperienceItem>
 
@@ -469,59 +486,69 @@ export default function Home() {
                   role="Associate Software Engineer | Bengaluru, India"
                   collapsible={true}
                 >
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <p className="font-semibold text-foreground/70 text-sm mb-4">
                       December 2023 – December 2024
                     </p>
-                    <p>
-                      - Provided L1/L2 production support for enterprise loan
-                      platform processing 5,000+ daily transactions, performing
-                      code-level debugging in Java/Spring Boot microservices and
-                      reducing incident response time by 25%.
+                    <p className="text-sm text-foreground/80 mb-4 italic">
+                      Provided L1/L2 production support and incident triage for enterprise loan platform performing basic troubleshooting and escalating complex issues to L3 for enterprise banking clients.
                     </p>
-                    <p>
-                      - Conducted comprehensive Root Cause Analysis on
-                      production defects with stack trace analysis and code
-                      references, enabling development teams to implement
-                      permanent fixes 30% faster.
-                    </p>
-                    <p>
-                      - Optimized database performance through SQL query
-                      analysis, indexing strategies, and join refactoring,
-                      reducing loan processing time by 20% during peak periods.
-                    </p>
-                    <p>
-                      - Executed API testing across 50+ RESTful endpoints using
-                      Postman, creating automated test collections with JSON
-                      validation to ensure data integrity across microservices.
-                    </p>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Reduced incident response time by 25%</strong> through L1/L2 production support for enterprise loan platform processing 5,000+ daily transactions using Java/Spring Boot microservices for banking customers.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Enabled 30% faster permanent fixes</strong> by conducting comprehensive Root Cause Analysis on production defects with stack trace analysis and code references for development teams and stakeholders.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Reduced loan processing time by 20%</strong> during peak periods through SQL query analysis, indexing strategies, and join refactoring for database performance optimization serving enterprise clients.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Ensured data integrity</strong> across 50+ RESTful microservices by executing API testing with Postman and creating automated test collections with JSON validation for customer data protection.</span>
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-foreground/10">
+                      <p className="text-xs text-foreground/50">
+                        <strong>Keywords:</strong> Java, Spring Boot, Microservices, SQL, Postman, API Testing, RCA, CI/CD
+                      </p>
+                      <p className="text-xs text-foreground/50 mt-1">
+                        <strong>Ticketing:</strong> Jira, internal tools (L1–L2 escalations)
+                      </p>
+                    </div>
                   </div>
                 </ExperienceItem>
               </div>
             </div>
 
-            {/* Projects Section */}
+            {/* Featured Projects Section */}
             <div className="mb-16 w-full text-left">
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
-                Projects
+                Featured projects
               </h2>
-              <div className="space-y-12">
+              <div className="space-y-8">
                 <ExperienceItem
                   title="AI-Powered Log Analysis Portal"
                   role="MongoDB, Express.js, React.js, Node.js, LLM | 2025"
                   collapsible={true}
                 >
-                  <div className="space-y-4 pt-2">
-                    <p>
-                      - Built full-stack MERN portal to automate error log
-                      analysis for support teams, integrating file uploads, API
-                      integrations, and real-time diagnostics.
+                  <div className="space-y-3">
+                    <p className="text-sm text-foreground/70 mb-3">
+                      Internal tool concept for L1/L2 teams to reduce manual stack-trace analysis and accelerate RCA
                     </p>
-                    <p>
-                      - Integrated Groq API and local LLM models to parse Java
-                      stack traces and error patterns, targeting 40% deflection
-                      in L1 support tickets.
-                    </p>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Problem:</strong> Support teams spending excessive time manually analyzing Java stack traces and error patterns across multiple systems for enterprise customers.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Solution:</strong> Built automated portal with file uploads, API integrations, and Groq API integration to parse errors, targeting 40% deflection in L1 tickets and faster MTTR for L2.</span>
+                      </p>
+                    </div>
                   </div>
                 </ExperienceItem>
 
@@ -530,17 +557,20 @@ export default function Home() {
                   role="Java, Eclipse RCP | 2025"
                   collapsible={true}
                 >
-                  <div className="space-y-4 pt-2">
-                    <p>
-                      - Analyzed 20+ escalation tickets to propose in-house code
-                      editor solution, creating technical specifications
-                      projected to reduce setup-related tickets by 30%.
+                  <div className="space-y-3">
+                    <p className="text-sm text-foreground/70 mb-3">
+                      Technical analysis and specification for in-house IDE solution to reduce customer friction
                     </p>
-                    <p>
-                      - Researched Eclipse RCP and IDE frameworks, presenting
-                      feasibility analysis and implementation roadmap to product
-                      engineering team.
-                    </p>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Problem:</strong> 20+ escalation tickets related to setup issues and external IDE dependencies causing customer friction and longer onboarding for enterprise clients.</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span><strong>Solution:</strong> Researched Eclipse RCP frameworks, created technical specifications projected to reduce setup-related escalation tickets by 30% and cut onboarding time for new users.</span>
+                      </p>
+                    </div>
                   </div>
                 </ExperienceItem>
               </div>
@@ -563,14 +593,13 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Skills Section */}
+            {/* GitHub Activity Section */}
             <div className="mb-16 w-full text-left">
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
-                GitHub Contributions
+                GitHub Activity
               </h2>
               <p className="mb-8 text-md text-foreground/70">
-                Here&apos;s a snapshot of my activity and contributions across
-                various projects:
+                <strong>307 contributions in the last year</strong>, focusing on support automation tools, log analysis utilities, and backend services.
               </p>
               <GithubGraph />
             </div>
@@ -598,21 +627,35 @@ export default function Home() {
               >
                 Get in Touch
               </h2>
-              <div className="space-y-4">
-                <p className="mb-8 text-md text-foreground/70 max-w-xl">
-                  I'm currently looking for new opportunities. Whether you have
-                  a question, a potential project, or just want to say hi, I'll
-                  try my best to get back to you!
-                </p>
-                <div className="flex flex-wrap items-center gap-4">
-                  <CopyEmailButton email="adarshmasekar@gmail.com" />
-                  <LinkedInButton url="https://www.linkedin.com/in/adarsh-masekar/" />
+              <div className="rounded-2xl border border-foreground/10 bg-background/55 p-6 sm:p-8">
+                <div className="space-y-6">
+                  <div>
+                    <p className="mb-4 text-lg font-medium text-foreground max-w-xl">
+                      Ready to contribute to your team's success. Available for Product Support / Application Support / SRE-adjacent roles.
+                    </p>
+                    <p className="text-md text-foreground/70 max-w-xl">
+                      Strong background in enterprise B2B SaaS support, incident management, and automation. Let's discuss how I can help reduce your ticket volume and improve customer satisfaction.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <CopyEmailButton email="adarshmasekar@gmail.com" />
+                    <LinkedInButton url="https://www.linkedin.com/in/adarsh-masekar/" />
+                  </div>
                 </div>
               </div>
             </section>
 
-            {/* Pomodoro Timer Section */}
-            <PomodoroTimer />
+            {/* Focus Tools */}
+            <div className="mb-16 w-full text-left">
+              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+                Extras
+              </h2>
+              <p className="mb-8 text-md text-foreground/70 max-w-xl">
+                Tools I built and use personally for focus and flow:
+              </p>
+              
+              <FocusTools />
+            </div>
 
             {/* Avatar Journey and Quotes — visible only in Avatar State */}
             <AnimatePresence>

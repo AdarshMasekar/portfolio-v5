@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Play,
   Pause,
   RotateCcw,
-  Coffee,
-  Timer as TimerIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -88,7 +86,7 @@ export function PomodoroTimer() {
   };
 
   return (
-    <div className="relative mb-8 w-full text-left">
+    <div className="relative mb-2 w-full text-left">
       {/* Pulsating Aura when timer finishes */}
       <AnimatePresence>
         {completed && (
@@ -119,15 +117,6 @@ export function PomodoroTimer() {
         >
           {showSettings ? "Close Settings" : "Adjust Time"}
         </button>
-      </div>
-
-      <div className="mb-8 w-full text-left">
-        <p className="text-sm italic text-gray-500 dark:text-gray-400">
-          You&apos;ve reached the end! Or have you? Before you vanish into the
-          digital void, I&apos;ve got a quick Pomodoro Timer to help you focus
-          better on your next big thing (or just to remind you to stop
-          doomscrolling).
-        </p>
       </div>
 
       <div className="relative z-10 overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all dark:border-zinc-800 dark:bg-zinc-900/50">

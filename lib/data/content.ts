@@ -3,7 +3,7 @@ export const getMarkdownContent = (time: string) => `# Adarsh Masekar
 
 ## About
 
-Product Support Engineer with 2+ years in Enterprise B2B SaaS, specializing in solving complex engineering-level issues and delivering technical solutions using Java, Python, JavaScript, SQL, and CI/CD integrations while maintaining 95%+ SLA adherence through Root Cause Analysis and automation.
+Product Support Engineer with 2+ years in Enterprise B2B SaaS, specializing in solving complex engineering-level issues and delivering technical solutions using Java, JavaScript, SQL, and CI/CD integrations while maintaining 95%+ SLA adherence through Root Cause Analysis and automation.
 
 ## Experience
 
@@ -33,11 +33,12 @@ December 2023 – December 2024 | Bengaluru, India
 - Built full-stack MERN portal to automate error log analysis for support teams, integrating file uploads, API integrations, and real-time diagnostics.
 - Integrated Grok API and local LLM models to parse Java stack traces and error patterns, targeting 40% deflection in L1 support tickets.
 
-### Product Enhancement: In-House Code Editor
-**Java, Eclipse RCP** | 2025
+### Log Analysis Portal
+**MERN Stack, LLM Integration** | 2025
 
-- Analyzed 20+ escalation tickets to propose in-house code editor solution, creating technical specifications projected to reduce setup-related tickets by 30%.
-- Researched Eclipse RCP and IDE frameworks, presenting feasibility analysis and implementation roadmap to product engineering team.
+- Developed comprehensive web application for automated log analysis and error pattern recognition
+- Integrated AI capabilities to streamline support ticket triage and reduce manual analysis time
+- Built responsive interface with real-time diagnostics and reporting features
 
 ## Education
 
@@ -47,19 +48,23 @@ Graduated: 2023 | CGPA: 8.6/10
 
 ## Skills
 
-**Product Support & Troubleshooting:** Production Debugging, Root Cause Analysis (RCA), Log Analysis, Incident Management, SLA Monitoring
-**DevOps & Support Tools:** Jira, Git, Jenkins, Linux/Unix, Bash Scripting
-**Automation & Testing:** Selenium, Appium, API Testing, Postman
-**Frontend & Integrations:** React.js, JavaScript, HTML5, CSS3
-**Backend & Databases:** Java, MySQL, Python, Node.js, Express.js, REST APIs
+**Product Support & Troubleshooting:** Production Debugging, Root Cause Analysis (RCA), Log Analysis, Incident Management, SLA Monitoring, Ticketing Systems
+**DevOps & Support Tools:** Jira, Git, Jenkins, Linux/Unix, Bash Scripting, CI/CD
+**Automation & Testing:** Selenium, Appium, API Testing, Postman, Test Automation
+**Frontend & Integrations:** React.js, JavaScript, TypeScript, HTML5, CSS3, Next.js
+**Backend & Databases:** Java, MySQL, Python, Node.js, Express.js, REST APIs, MongoDB
 
 ## Get in Touch
 
-Connect with me on [LinkedIn](https://linkedin.com) or shoot an [email](mailto:adarshmasekar@gmail.com)
+Ready to contribute to your team's success. Available for Product Support / Application Support / SRE-adjacent roles. Strong background in enterprise B2B SaaS support, incident management, and automation.
+
+Connect with me on [LinkedIn](https://www.linkedin.com/in/adarsh-masekar/) or shoot an [email](mailto:adarshmasekar@gmail.com)
 
 ---
 
 **Links:**
 - Email: [adarshmasekar@gmail.com](mailto:adarshmasekar@gmail.com)
-- Phone: +91-9591265305
+- LinkedIn: [https://www.linkedin.com/in/adarsh-masekar/](https://www.linkedin.com/in/adarsh-masekar/)
+- GitHub: [https://github.com/adarshmasekar](https://github.com/adarshmasekar)
+- Resume: [Download PDF](/Adarsh%20Masekar%20-%20PSE.pdf)
 `;

@@ -22,7 +22,7 @@ export function LogoCloud({ className, logos, ...props }: LogoCloudProps) {
         className,
       )}
     >
-      <InfiniteSlider gap={66} duration={66}>
+      <InfiniteSlider gap={55} duration={55}>
         {logos.map((logo) =>
           logo.component ? (
             <div

@@ -18,7 +18,9 @@ import {
   SiSlack,
   SiReact,
   SiNodedotjs,
-  SiTailwindcss,
+  SiHtml5,
+  SiCss3,
+  SiShadcnui,
 } from "react-icons/si";
 import { BsMicrosoftTeams } from "react-icons/bs";
 
@@ -41,24 +43,16 @@ interface Category {
 
 const categories: Category[] = [
   {
-    name: "Languages",
+    name: "Languages & Backend",
     skills: [
       { name: "Java", icon: FaJava, color: "#ED8B00" },
       { name: "Python", icon: SiPython, color: "#3776AB" },
       { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-      { name: "SQL", icon: Database, color: "#336791" },
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
     ],
   },
   {
-    name: "Testing & Automation",
-    skills: [
-      { name: "Selenium", icon: SiSelenium, color: "#43B02A" },
-      { name: "Postman", icon: SiPostman, color: "#FF6C37" },
-      { name: "Appium", icon: Smartphone, color: "#662D91" },
-    ],
-  },
-  {
-    name: "DevOps & Infrastructure",
+    name: "DevOps & Collaboration",
     skills: [
       { name: "Git", icon: SiGit, color: "#F05032" },
       { name: "GitHub", icon: SiGithub, color: "#6e40c9" },
@@ -67,26 +61,36 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Databases",
+    name: "Web & Frontend",
     skills: [
-      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
-      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
+      { name: "CSS3", icon: SiCss3, color: "#1572B6" },
+      { name: "React", icon: SiReact, color: "#61DAFB" },
+      { name: "Shadcn", icon: SiShadcnui, color: "#000000" },
     ],
   },
   {
-    name: "Collaboration & Support",
+    name: "Support & Testing Tools",
+    skills: [
+      { name: "Selenium", icon: SiSelenium, color: "#43B02A" },
+      { name: "Appium", icon: Smartphone, color: "#662D91" },
+      { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+    ],
+  },
+  {
+    name: "Collaboration Tools",
     skills: [
       { name: "Jira", icon: SiJira, color: "#0052CC" },
-      { name: "Microsoft Teams", icon: BsMicrosoftTeams, color: "#464EB8" },
+      { name: "Teams", icon: BsMicrosoftTeams, color: "#464EB8" },
       { name: "Slack", icon: SiSlack, color: "#4A154B" },
     ],
   },
   {
-    name: "Web Development",
+    name: "Databases",
     skills: [
-      { name: "React", icon: SiReact, color: "#61DAFB" },
-      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "SQL", icon: Database, color: "#336791" },
     ],
   },
 ];
@@ -117,7 +121,7 @@ function CloudLogo({ tech }: { tech: Skill }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
-      className="flex items-center gap-2 transition-all duration-300 cursor-pointer text-foreground/40 hover:text-foreground will-change-transform"
+      className="flex items-center gap-2 transition-all duration-300 cursor-pointer text-foreground/70 hover:text-foreground will-change-transform"
       style={{
         color: hovered ? tech.color : undefined,
         transform: "translateZ(0)",
@@ -195,14 +199,12 @@ export function TechStack() {
                       <div
                         key={skill.name}
                         className="group flex items-center gap-3 rounded-xl border border-foreground/5 bg-foreground/5 p-3 transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-[var(--brand)] hover:shadow-[0_4px_20px_var(--brand-shadow)] avatar:hover:!border-amber-500 avatar:hover:!shadow-amber-500/20"
-                        style={
-                          {
-                            "--brand": skill.color,
-                            "--brand-shadow": skill.color + "20", // ~12% opacity
-                          } as React.CSSProperties
-                        }
+                        style={{
+                          "--brand": skill.color,
+                          "--brand-shadow": skill.color + "20", // ~12% opacity
+                        } as React.CSSProperties}
                       >
-                        <skill.icon className="h-5 w-5 shrink-0 text-foreground/50 transition-all duration-300 group-hover:[color:var(--brand)] avatar:group-hover:!text-amber-500" />
+                        <skill.icon className="h-5 w-5 shrink-0 text-foreground/80 transition-all duration-300 group-hover:[color:var(--brand)] avatar:group-hover:!text-amber-500" />
                         <span className="text-sm font-medium text-foreground/70 group-hover:text-foreground transition-colors avatar:group-hover:text-amber-500">
                           {skill.name}
                         </span>
