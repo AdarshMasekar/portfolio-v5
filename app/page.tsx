@@ -11,25 +11,43 @@ import {
   Music,
   Pause,
 } from "lucide-react";
-import { ExperienceItem } from "./components/ExperienceItem";
-import { TechStack } from "./components/TechStack";
-import { BackgroundBeams } from "./components/ui/BackgroundBeams";
-import { CopyEmailButton } from "./components/ui/CopyEmailButton";
-import { LinkedInButton } from "./components/ui/LinkedInButton";
-import { MenuBar, MenuBarItem } from "@/components/ui/bottom-menu";
-import { SiLeetcode } from "react-icons/si";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "next-themes";
 import { QRCodeSVG } from "qrcode.react";
-import { ThemeToggle } from "./components/ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 
-import { PomodoroTimer } from "./components/PomodoroTimer";
-import { getMarkdownContent } from "./data/content";
-import { GithubGraph } from "./components/GithubGraph";
-import { ResumeButton } from "./components/ResumeButton";
-import { AvatarJourney } from "./components/AvatarJourney";
-import { ATLAQuote } from "./components/ATLAQuote";
+import { ExperienceItem } from "@/components/ExperienceItem";
+import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
+import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
+import { LinkedInButton } from "@/components/ui/LinkedInButton";
+import { MenuBar, MenuBarItem } from "@/components/ui/bottom-menu";
+import { SiLeetcode } from "react-icons/si";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { ResumeButton } from "@/components/ResumeButton";
+import { getMarkdownContent } from "@/lib/data/content";
+
+// Dynamically imported heavy components
+const TechStack = dynamic(
+  () => import("@/components/TechStack").then((mod) => mod.TechStack),
+  { ssr: true },
+);
+const PomodoroTimer = dynamic(
+  () => import("@/components/PomodoroTimer").then((mod) => mod.PomodoroTimer),
+  { ssr: false },
+);
+const GithubGraph = dynamic(
+  () => import("@/components/GithubGraph").then((mod) => mod.GithubGraph),
+  { ssr: true },
+);
+const AvatarJourney = dynamic(
+  () => import("@/components/AvatarJourney").then((mod) => mod.AvatarJourney),
+  { ssr: false },
+);
+const ATLAQuote = dynamic(
+  () => import("@/components/ATLAQuote").then((mod) => mod.ATLAQuote),
+  { ssr: false },
+);
 
 export default function Home() {
   const [time, setTime] = useState<string>("");
@@ -529,8 +547,14 @@ export default function Home() {
             </div>
 
             {/* Get in Touch Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+            <section
+              className="mb-16 w-full text-left"
+              aria-labelledby="contact-heading"
+            >
+              <h2
+                id="contact-heading"
+                className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70"
+              >
                 Get in Touch
               </h2>
               <div className="space-y-4">
@@ -544,7 +568,7 @@ export default function Home() {
                   <LinkedInButton url="https://www.linkedin.com/in/adarsh-masekar/" />
                 </div>
               </div>
-            </div>
+            </section>
 
             {/* Pomodoro Timer Section */}
             <PomodoroTimer />
@@ -563,9 +587,12 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Liquid Glass Island Navbar */}
-      <div className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center">
+      <nav
+        className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center"
+        aria-label="Main Navigation"
+      >
         <MenuBar items={menuItems} />
-      </div>
+      </nav>
 
       {/* QR Code Modal */}
       {showQR && (

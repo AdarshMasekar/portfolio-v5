@@ -139,7 +139,7 @@ export function TechStack() {
   }));
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-2">
       <div className="flex justify-end">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
@@ -158,7 +158,7 @@ export function TechStack() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="w-full relative py-2"
+            className="w-full relative"
           >
             <div
               aria-hidden="true"

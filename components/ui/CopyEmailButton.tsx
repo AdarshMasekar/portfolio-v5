@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Copy, Check, Mail } from "lucide-react";
-import { cn } from "../../utils/cn";
+import { cn } from "@/lib/utils";
 
 export function CopyEmailButton({
   email = "adarshmasekar@gmail.com",

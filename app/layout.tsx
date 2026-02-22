@@ -10,8 +10,51 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Adarsh Masekar",
-  description: "All about me",
+  title: {
+    default: "Adarsh Masekar | Product Support Engineer",
+    template: "%s | Adarsh Masekar",
+  },
+  description:
+    "Product Support Engineer specializing in enterprise SaaS, solving complex engineering issues with Java, Python, JavaScript, and SQL.",
+  keywords: [
+    "Product Support Engineer",
+    "Software Engineer",
+    "Java",
+    "Python",
+    "JavaScript",
+    "SQL",
+    "Technical Support",
+    "B2B SaaS",
+  ],
+  authors: [{ name: "Adarsh Masekar" }],
+  creator: "Adarsh Masekar",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://adarshmasekar.vercel.app/",
+    title: "Adarsh Masekar | Product Support Engineer",
+    description:
+      "Product Support Engineer specializing in enterprise SaaS, resolving complex engineering issues.",
+    siteName: "Adarsh Masekar Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Adarsh Masekar | Product Support Engineer",
+    description:
+      "Product Support Engineer specializing in enterprise SaaS, resolving complex engineering issues.",
+    creator: "@adarshmasekar",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
