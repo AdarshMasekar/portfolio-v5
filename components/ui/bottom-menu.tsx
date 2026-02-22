@@ -79,7 +79,7 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
               transition={springConfig}
               style={{ width: "auto" }}
             >
-              <p className="text-[13px] font-medium leading-tight whitespace-nowrap text-foreground">
+              <p className="text-[13px] font-medium leading-tight whitespace-nowrap text-foreground avatar:text-amber-500">
                 {items[activeIndex].label}
               </p>
             </motion.div>
@@ -111,7 +111,7 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
             item.element
           ) : (
             <>
-              <div className="flex justify-center items-center text-foreground/70 group-hover:text-foreground transition-colors group-hover:scale-110">
+              <div className="flex justify-center items-center text-foreground/70 transition-colors group-hover:scale-110 group-hover:text-foreground avatar:group-hover:text-amber-500">
                 {item.icon && <item.icon className="h-5 w-5" />}
               </div>
               <span className="sr-only">{item.label}</span>
@@ -125,7 +125,7 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group h-8 w-8 rounded-full flex justify-center items-center transition-colors hover:bg-foreground/5 dark:hover:bg-foreground/10"
+                className="group h-8 w-8 rounded-full flex justify-center items-center transition-colors hover:bg-foreground/5 dark:hover:bg-foreground/10 avatar:hover:bg-amber-500/10"
                 onMouseEnter={() => setActiveIndex(index)}
                 onMouseLeave={() => setActiveIndex(null)}
               >
@@ -144,7 +144,7 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
                 "group flex rounded-full justify-center items-center transition-colors",
                 item.element
                   ? ""
-                  : "h-8 w-8 hover:bg-foreground/5 dark:hover:bg-foreground/10",
+                  : "h-8 w-8 hover:bg-foreground/5 dark:hover:bg-foreground/10 avatar:hover:bg-amber-500/10",
               )}
               onMouseEnter={() => setActiveIndex(index)}
               onMouseLeave={() => setActiveIndex(null)}

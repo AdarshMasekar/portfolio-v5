@@ -194,7 +194,7 @@ export function TechStack() {
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="group flex items-center gap-3 rounded-xl border border-foreground/5 bg-foreground/5 p-3 transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-[var(--brand)] hover:shadow-[0_4px_20px_var(--brand-shadow)]"
+                        className="group flex items-center gap-3 rounded-xl border border-foreground/5 bg-foreground/5 p-3 transition-all duration-300 hover:-translate-y-1 hover:bg-background hover:border-[var(--brand)] hover:shadow-[0_4px_20px_var(--brand-shadow)] avatar:hover:!border-amber-500 avatar:hover:!shadow-amber-500/20"
                         style={
                           {
                             "--brand": skill.color,
@@ -202,8 +202,8 @@ export function TechStack() {
                           } as React.CSSProperties
                         }
                       >
-                        <skill.icon className="h-5 w-5 shrink-0 text-foreground/50 transition-all duration-300 group-hover:[color:var(--brand)]" />
-                        <span className="text-sm font-medium text-foreground/70 group-hover:text-foreground transition-colors">
+                        <skill.icon className="h-5 w-5 shrink-0 text-foreground/50 transition-all duration-300 group-hover:[color:var(--brand)] avatar:group-hover:!text-amber-500" />
+                        <span className="text-sm font-medium text-foreground/70 group-hover:text-foreground transition-colors avatar:group-hover:text-amber-500">
                           {skill.name}
                         </span>
                       </div>

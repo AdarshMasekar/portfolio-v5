@@ -12,7 +12,7 @@ export function LinkedInButton({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex items-center gap-2 overflow-hidden rounded-full border border-foreground/10 bg-background/55 px-6 py-2.5 font-medium text-foreground transition-all duration-300 hover:bg-background/40 hover:border-foreground/25 hover:-translate-y-0.5 active:scale-95"
+      className="group relative flex items-center gap-2 overflow-hidden rounded-full border border-foreground/10 bg-background/55 px-6 py-2.5 font-medium text-foreground transition-all duration-300 hover:bg-background/40 hover:border-foreground/25 hover:-translate-y-0.5 active:scale-95 avatar:hover:border-amber-500/40 avatar:hover:text-amber-500"
     >
       <Linkedin className="h-4 w-4 transition-colors duration-300" />
       <span>LinkedIn</span>

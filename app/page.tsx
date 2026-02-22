@@ -177,7 +177,10 @@ export default function Home() {
 
   return (
     <div
-      className={`relative flex min-h-screen flex-col items-center bg-background px-3 pt-8 text-foreground selection:bg-foreground/20 pb-16 sm:px-4 sm:pt-12 sm:pb-20 overflow-x-hidden transition-colors duration-300`}
+      data-avatar-mode={showEasterEgg}
+      className={`relative flex min-h-screen flex-col items-center bg-background px-3 pt-8 text-foreground selection:bg-foreground/20
+      data-[avatar-mode=true]:selection:bg-amber-500/30 data-[avatar-mode=true]:selection:text-amber-500
+      pb-16 sm:px-4 sm:pt-12 sm:pb-20 overflow-x-hidden transition-colors duration-300`}
     >
       {/* Avatar State Easter Egg Effects */}
       <AnimatePresence>
@@ -383,6 +386,43 @@ export default function Home() {
                 through Root Cause Analysis and automation.
               </p>
             </div>
+
+            {/* Scroll Hint for Easter Egg */}
+            <AnimatePresence>
+              {showEasterEgg && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="w-full flex justify-center mb-16 overflow-hidden"
+                >
+                  <motion.div
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "easeInOut",
+                    }}
+                    className="flex flex-col items-center gap-2 text-amber-500/80"
+                  >
+                    <span className="text-sm font-semibold tracking-widest uppercase">
+                      The Avatar&apos;s Journey Awaits Below
+                    </span>
+                    <svg
+                      className="w-5 h-5 animate-bounce"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Experience Section */}
             <div className="mb-16 w-full text-left">

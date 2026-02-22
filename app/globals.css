@@ -4,6 +4,8 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+@variant avatar (&:where([data-avatar-mode="true"], [data-avatar-mode="true"] *));
+
 :root {
   --background: #ffffff;
   --foreground: #000000;

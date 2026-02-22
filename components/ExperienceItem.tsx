@@ -23,7 +23,7 @@ export function ExperienceItem({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="group hover-shimmer relative rounded-[1rem] border border-foreground/10 p-6 transition-all duration-300 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5">
+    <div className="group hover-shimmer relative rounded-[1rem] border border-foreground/10 p-6 transition-all duration-300 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5 avatar:hover:border-amber-500/50 avatar:hover:shadow-amber-500/10">
       <div className="mb-2 flex flex-col justify-between sm:flex-row sm:items-baseline">
         <div className="flex items-center gap-2">
           <span className="font-medium text-foreground text-lg">{title}</span>
