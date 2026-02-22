@@ -202,7 +202,7 @@ export function ATLAQuote() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className={`max-w-xl text-left p-2 border-l-2 rounded-xl flex flex-col items-start ${getNationBorderClass(quote.nation)}`}
+          className={`max-w-xl text-left p-4 border-l-2 rounded-xl flex flex-col items-start ${getNationBorderClass(quote.nation)}`}
         >
           <p className="text-[15px] sm:text-[17px] text-foreground/80 font-medium italic leading-relaxed tracking-wide drop-shadow-md">
             &ldquo;{quote.text}&rdquo;
