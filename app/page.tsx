@@ -10,10 +10,6 @@ import {
   X,
   Music,
   Pause,
-  Database,
-  Server,
-  Code2,
-  Terminal,
 } from "lucide-react";
 import { ExperienceItem } from "./components/ExperienceItem";
 import { TechStack } from "./components/TechStack";
@@ -111,28 +107,12 @@ export default function Home() {
 
   return (
     <div
-      className={`relative flex min-h-screen flex-col items-center bg-background px-3 pt-16 text-foreground selection:bg-foreground/20 pb-32 sm:px-4 sm:pt-24 sm:pb-40 overflow-x-hidden transition-colors duration-300`}
+      className={`relative flex min-h-screen flex-col items-center bg-background px-3 pt-8 text-foreground selection:bg-foreground/20 pb-16 sm:px-4 sm:pt-12 sm:pb-20 overflow-x-hidden transition-colors duration-300`}
     >
       {/* Avatar State Easter Egg Effects */}
       <AnimatePresence>
         {showEasterEgg && (
           <>
-            {/* ATLA Quote Banner */}
-            <motion.div
-              initial={{ opacity: 0, y: -24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -24 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-              className="fixed top-4 left-1/2 z-[110] -translate-x-1/2 pointer-events-none"
-            >
-              <div className="rounded-full border border-amber-400/30 bg-background/70 backdrop-blur-md px-5 py-2 shadow-[0_0_30px_rgba(251,191,36,0.15)]">
-                <p className="text-[11px] text-amber-300/80 tracking-wider italic whitespace-nowrap">
-                  ✦ &nbsp;Even the greatest Avatars began by moving a single
-                  leaf.&nbsp; ✦
-                </p>
-              </div>
-            </motion.div>
-
             {/* Outer warm amber edge glow — Air Nomad orange */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -265,7 +245,7 @@ export default function Home() {
             </div>
 
             {/* Phonetic Pronunciation (Aesthetic touch often found in minimal portfolios) */}
-            <div className="mb-8 flex flex-wrap items-center justify-center gap-2 text-xs text-foreground/70 sm:text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-foreground/70 sm:text-sm">
               <span>/ˈædɑːrš məˈseɪkər/</span>
               <span className="text-foreground/20">•</span>
               <span>noun</span>

@@ -26,6 +26,7 @@ import { FaJava } from "react-icons/fa";
 import { Database, Smartphone } from "lucide-react";
 import type { IconType } from "react-icons";
 import type { LucideIcon } from "lucide-react";
+import { LogoCloud, type Logo } from "@/components/logo-cloud-3";
 
 interface Skill {
   name: string;
@@ -112,8 +113,30 @@ function TechIcon({
   );
 }
 
+function CloudLogo({ tech }: { tech: Skill }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      className="flex items-center gap-2 transition-all duration-300 cursor-pointer text-foreground/40 hover:text-foreground"
+      style={{ color: hovered ? tech.color : undefined }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <tech.icon className="h-5 w-5 md:h-6 md:w-6" />
+      <span className="text-sm md:text-lg font-bold tracking-tight">
+        {tech.name}
+      </span>
+    </div>
+  );
+}
+
 export function TechStack() {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const logoCloudLogos: Logo[] = marqueeSkills.map((tech) => ({
+    alt: tech.name,
+    component: <CloudLogo tech={tech} />,
+  }));
 
   return (
     <div className="w-full space-y-4">
@@ -135,30 +158,18 @@ export function TechStack() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+            className="w-full relative py-2"
           >
-            <div className="flex w-max animate-infinite-scroll">
-              <div className="flex gap-12 py-4 pr-12">
-                {marqueeSkills.map((tech, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center justify-center gap-2 text-foreground/60"
-                  >
-                    <TechIcon icon={tech.icon} color={tech.color} />
-                  </div>
-                ))}
-              </div>
-              <div className="flex gap-12 py-4 pr-12">
-                {marqueeSkills.map((tech, index) => (
-                  <div
-                    key={index + marqueeSkills.length}
-                    className="flex flex-col items-center justify-center gap-2 text-foreground/60"
-                  >
-                    <TechIcon icon={tech.icon} color={tech.color} />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <div
+              aria-hidden="true"
+              className="absolute -z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-full max-w-[600px] pointer-events-none bg-[radial-gradient(circle_at_center,var(--color-foreground)_0%,transparent_50%)] opacity-[0.03] blur-[20px] rounded-full"
+            />
+
+            <div className="mx-auto my-5 h-px max-w-sm bg-border [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
+
+            <LogoCloud logos={logoCloudLogos} />
+
+            <div className="mt-5 mb-4 h-px max-w-sm mx-auto bg-border [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
           </motion.div>
         ) : (
           <motion.div
