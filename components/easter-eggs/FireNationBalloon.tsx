@@ -2,17 +2,36 @@
 
 import { motion } from "framer-motion";
 
-export function FireNationBalloon() {
+interface FireNationBalloonProps {
+  className?: string;
+  isCentered?: boolean;
+}
+
+export function FireNationBalloon({
+  className,
+  isCentered,
+}: FireNationBalloonProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -50, y: 50 }}
-      animate={{ opacity: 1, x: 0, y: [0, -10, 0] }}
+      initial={
+        isCentered ? { opacity: 0, scale: 0.8 } : { opacity: 0, x: -80, y: 50 }
+      }
+      animate={
+        isCentered
+          ? { opacity: 1, scale: 1, y: [0, -10, 0] }
+          : { opacity: 1, x: 0, y: [0, -10, 0] }
+      }
       transition={{
         opacity: { duration: 1 },
         x: { duration: 1, ease: "easeOut" },
+        scale: { duration: 1, ease: "easeOut" },
         y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
       }}
-      className="absolute right-6 -top-24 z-10 pointer-events-none drop-shadow-xl opacity-90 mix-blend-multiply dark:mix-blend-normal"
+      className={
+        isCentered
+          ? `relative z-10 pointer-events-none drop-shadow-xl opacity-90 mix-blend-multiply dark:mix-blend-normal ${className || ""}`
+          : `absolute right-6 -top-24 z-10 pointer-events-none drop-shadow-xl opacity-90 mix-blend-multiply dark:mix-blend-normal ${className || ""}`
+      }
       title="The Mechanist's War Balloon"
     >
       <svg

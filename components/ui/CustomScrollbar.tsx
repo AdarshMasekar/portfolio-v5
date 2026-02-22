@@ -193,7 +193,7 @@ export default function CustomScrollbar() {
       aria-valuemax={100}
       aria-orientation="vertical"
       onClick={onTrackClick}
-      className="hidden md:block lg:block"
+      className="hidden lg:block"
       style={{
         position: "fixed",
         right: "18px",
