@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/cn";
+import { cn } from "@/app/utils/cn";
 
 export const BackgroundBeams = ({ className }: { className?: string }) => {
   return (
