@@ -16,6 +16,7 @@ import { TechStack } from "./components/TechStack";
 import { BackgroundBeams } from "./components/ui/BackgroundBeams";
 import { CopyEmailButton } from "./components/ui/CopyEmailButton";
 import { LinkedInButton } from "./components/ui/LinkedInButton";
+import { MenuBar, MenuBarItem } from "@/components/ui/bottom-menu";
 import { SiLeetcode } from "react-icons/si";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "next-themes";
@@ -104,6 +105,57 @@ export default function Home() {
       delay: Math.random() * 5,
     }));
   }, []);
+
+  const menuItems: MenuBarItem[] = [
+    {
+      label: `Switch to ${mode === "human" ? "agent" : "human"} mode`,
+      element: (
+        <div className="flex items-center mx-[2px]">
+          <button
+            className="group relative flex h-7 w-12 cursor-pointer rounded-full bg-foreground/10 p-1 transition-colors duration-200 ease-in-out hover:bg-foreground/20 focus:outline-none"
+            role="switch"
+            aria-checked={mode === "agent"}
+          >
+            <div
+              className={`flex h-5 w-5 transform items-center justify-center rounded-full bg-background shadow-sm transition duration-200 ease-in-out ${
+                mode === "agent" ? "translate-x-5" : "translate-x-0"
+              }`}
+            >
+              {mode === "human" ? (
+                <User className="h-3 w-3 text-foreground" />
+              ) : (
+                <Bot className="h-3 w-3 text-foreground" />
+              )}
+            </div>
+          </button>
+        </div>
+      ),
+      onClick: () => setMode(mode === "human" ? "agent" : "human"),
+    },
+    {
+      label: "QR Code",
+      icon: QrCode,
+      onClick: () => setShowQR(true),
+    },
+    {
+      isDivider: true,
+    },
+    {
+      label: "GitHub",
+      icon: Github,
+      href: "https://github.com/adarshmasekar",
+    },
+    {
+      label: "LinkedIn",
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/adarsh-masekar/",
+    },
+    {
+      label: "LeetCode",
+      icon: SiLeetcode,
+      href: "https://leetcode.com/u/adarshmasekar/",
+    },
+  ];
 
   return (
     <div
@@ -511,62 +563,9 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Liquid Glass Island Navbar */}
-      <nav className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-5 sm:gap-6 rounded-full border border-white/10 dark:border-white/5 bg-background/40 px-6 py-3.5 sm:px-6 sm:py-3 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl backdrop-saturate-[1.8] transition-all hover:bg-background/60">
-        {/* Mode Toggle Switch */}
-        <div className="flex items-center">
-          <button
-            onClick={() => setMode(mode === "human" ? "agent" : "human")}
-            className="group relative flex h-7 w-12 cursor-pointer rounded-full bg-foreground/10 p-1 transition-colors duration-200 ease-in-out hover:bg-foreground/20 focus:outline-none"
-            role="switch"
-            aria-checked={mode === "agent"}
-            title={`Switch to ${mode === "human" ? "agent" : "human"} mode`}
-          >
-            <div
-              className={`flex h-5 w-5 transform items-center justify-center rounded-full bg-background shadow-sm transition duration-200 ease-in-out ${
-                mode === "agent" ? "translate-x-5" : "translate-x-0"
-              }`}
-            >
-              {mode === "human" ? (
-                <User className="h-3 w-3 text-foreground" />
-              ) : (
-                <Bot className="h-3 w-3 text-foreground" />
-              )}
-            </div>
-          </button>
-        </div>
-        <button
-          onClick={() => setShowQR(true)}
-          className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
-          aria-label="Show QR Code"
-        >
-          <QrCode className="h-6 w-6 sm:h-5 sm:w-5" />
-        </button>
-        <div className="h-6 w-px bg-foreground/10" />
-        <a
-          href="https://github.com/adarshmasekar"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
-        >
-          <Github className="h-6 w-6 sm:h-5 sm:w-5" />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/adarsh-masekar/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
-        >
-          <Linkedin className="h-6 w-6 sm:h-5 sm:w-5" />
-        </a>
-        <a
-          href="https://leetcode.com/u/adarshmasekar/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-foreground/70 hover:text-foreground transition-colors hover:scale-110"
-        >
-          <SiLeetcode className="h-6 w-6 sm:h-5 sm:w-5" />
-        </a>
-      </nav>
+      <div className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center">
+        <MenuBar items={menuItems} />
+      </div>
 
       {/* QR Code Modal */}
       {showQR && (
