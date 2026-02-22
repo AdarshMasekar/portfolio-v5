@@ -30,9 +30,9 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
       {/* Grid Pattern */}
       <div
         className="absolute inset-0
-          bg-[linear-gradient(to_right,#80808014_1px,transparent_1px),linear-gradient(to_bottom,#80808014_1px,transparent_1px)]
-          dark:bg-[linear-gradient(to_right,#ffffff0d_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0d_1px,transparent_1px)]
-          bg-[size:24px_24px]
+          bg-[linear-gradient(to_right,#80808014_2px,transparent_2px),linear-gradient(to_bottom,#80808014_2px,transparent_2px)]
+          dark:bg-[linear-gradient(to_right,#ffffff0d_2px,transparent_2px),linear-gradient(to_bottom,#ffffff0d_2px,transparent_2px)]
+          bg-[size:41px_41px]
           [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000_60%,transparent_100%)]"
       />
     </div>
