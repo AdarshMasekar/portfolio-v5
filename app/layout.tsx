@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
+import CustomScrollbar from "@/components/ui/CustomScrollbar";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -67,7 +68,10 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} antialiased transition-colors duration-300`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <CustomScrollbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

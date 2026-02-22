@@ -22,6 +22,16 @@
   --font-sans: var(--font-dm-sans);
 }
 
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -29,6 +39,7 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
   line-height: 1.6;
   letter-spacing: -0.01em;
+  overflow-y: scroll; /* keep layout stable, without visible bar */
 }
 
 /* Improved typography hierarchy */
@@ -164,38 +175,7 @@ section {
   scrollbar-width: none;
 }
 
-/* Custom scrollbar with thin line and black circle tracker */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #e5e5e5;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #000000;
-  border-radius: 50%;
-  width: 6px;
-  height: 6px;
-  border: none;
-  background-clip: padding-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #333333;
-}
-
-::-webkit-scrollbar-button:single-button {
-  display: none;
-}
-
-/* Firefox scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #000000 #e5e5e5;
-}
+/* Native scrollbar fully hidden — custom React scrollbar handles this */
 
 /* --- Spotlight Animation --- */
 @keyframes spotlight {
