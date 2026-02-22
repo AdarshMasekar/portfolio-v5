@@ -53,7 +53,7 @@ body {
   );
   opacity: 0;
   transform: translate(-50%, -50%) rotate(0deg);
-  animation: shimmer-circular 3s linear infinite;
+  animation: shimmer-circular 5s linear infinite;
   transition: opacity 0.4s ease;
   pointer-events: none;
   z-index: 0;
