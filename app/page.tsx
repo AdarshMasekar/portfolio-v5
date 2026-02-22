@@ -236,6 +236,12 @@ export default function Home() {
               <button
                 onClick={() => setShowEasterEgg(!showEasterEgg)}
                 className="relative h-40 w-40 sm:h-56 sm:w-56 cursor-pointer transition-all duration-500 grayscale filter group-hover:grayscale-0 active:scale-95 drop-shadow-md group-hover:drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]"
+                style={{
+                  maskImage:
+                    "linear-gradient(to bottom, black 70%, transparent 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, black 70%, transparent 100%)",
+                }}
                 aria-label="Toggle Aura Mode"
               >
                 <Image
@@ -245,7 +251,6 @@ export default function Home() {
                   className={`object-contain transition-all duration-700 scale-100`}
                   priority
                 />
-                <div className="absolute bottom-0 left-0 right-0 w-full h-1/4 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
               </button>
             </div>
 
