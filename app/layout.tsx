@@ -5,6 +5,7 @@ import { ThemeProvider } from "./providers";
 import CustomScrollbar from "@/components/ui/CustomScrollbar";
 import { AvatarStateProvider } from "@/components/providers/AvatarStateProvider";
 import { ToastProvider } from "@/components/toast";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const dmSans = DM_Sans({
@@ -80,6 +81,7 @@ export default function RootLayout({
           </ToastProvider>
         </ThemeProvider>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
