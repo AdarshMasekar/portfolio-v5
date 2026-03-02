@@ -28,6 +28,7 @@ import { JasmineDragon } from "@/components/easter-eggs/JasmineDragon";
 import { ZukoFlame } from "@/components/easter-eggs/ZukoFlame";
 import { FireNationBalloon } from "@/components/easter-eggs/FireNationBalloon";
 import { PaiShoListener } from "@/components/easter-eggs/PaiShoListener";
+import { SideNav } from "@/components/SideNav";
 
 // Animated Counter Component
 function AnimatedCounter({
@@ -236,6 +237,8 @@ export default function Home() {
         <ThemeToggle />
       </div>
 
+      <SideNav />
+
       <AnimatePresence mode="wait">
         {mode === "agent" ? (
           /* Agent Mode - Markdown View */
@@ -280,7 +283,7 @@ export default function Home() {
               >
                 <Image
                   src="/me1.png" // User's photo
-                  alt="Profile"
+                  alt="Adarsh Masekar - Profile Photo"
                   fill
                   sizes="(max-width: 640px) 160px, 224px"
                   className={`object-contain transition-all duration-700 scale-100`}
@@ -294,7 +297,7 @@ export default function Home() {
               <h1 className="mb-2 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
                 Adarsh Masekar
               </h1>
-              <h2 className="text-xl font-medium text-foreground/80 sm:text-2xl data-[avatar-mode=true]:animate-[float_4s_ease-in-out_infinite_alternate] data-[avatar-mode=true]:text-[var(--color-air-accent)] transition-colors duration-500">
+              <h2 className="text-xl font-medium text-foreground/80 sm:text-2xl data-[avatar-mode=true]:animate-[float_2s_ease-in-out_infinite_alternate] data-[avatar-mode=true]:text-[var(--color-air-accent)] transition-colors duration-300">
                 Product Support Engineer
               </h2>
               <p className="mt-2 text-sm text-foreground/60 sm:text-base">
@@ -304,7 +307,7 @@ export default function Home() {
             </div>
 
             {/* Summary Highlights */}
-            <div className="mb-16 w-full relative">
+            <div id="highlights" className="mb-16 w-full relative">
               {isAvatarState}
               <div className="rounded-2xl border border-foreground/10 bg-background/55 p-4 sm:p-6 data-[avatar-mode=true]:border-[var(--color-earth-accent)] data-[avatar-mode=true]:bg-[var(--color-earth-bg)] data-[avatar-mode=true]:shadow-[0_8px_0_var(--color-earth-accent)] data-[avatar-mode=true]:-translate-y-2 transition-all duration-500">
                 <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-foreground/70 data-[avatar-mode=true]:text-[var(--color-earth-accent)]">
@@ -399,7 +402,10 @@ export default function Home() {
             </AnimatePresence>
 
             {/* Experience Section */}
-            <div className="mb-16 w-full text-left data-[avatar-mode=true]:bg-[var(--color-water-bg)] data-[avatar-mode=true]:p-6 data-[avatar-mode=true]:rounded-3xl transition-colors duration-500">
+            <div
+              id="experience"
+              className="mb-16 w-full text-left data-[avatar-mode=true]:bg-[var(--color-water-bg)] data-[avatar-mode=true]:p-6 data-[avatar-mode=true]:rounded-3xl transition-colors duration-500"
+            >
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70 data-[avatar-mode=true]:text-[var(--color-water-accent)]">
                 Experience
               </h2>
@@ -546,7 +552,7 @@ export default function Home() {
             </div>
 
             {/* Featured Projects Section */}
-            <div className="mb-16 w-full text-left">
+            <div id="projects" className="mb-16 w-full text-left">
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Featured projects
               </h2>
@@ -629,7 +635,7 @@ export default function Home() {
             </div>
 
             {/* Education Section */}
-            <div className="mb-16 w-full text-left">
+            <div id="education" className="mb-16 w-full text-left">
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Education
               </h2>
@@ -660,7 +666,7 @@ export default function Home() {
             </div>
 
             {/* Tech Stack Section */}
-            <div className="mb-16 w-full text-left">
+            <div id="skills" className="mb-16 w-full text-left">
               <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Tech Stack
               </h2>
@@ -673,6 +679,7 @@ export default function Home() {
 
             {/* Get in Touch Section */}
             <section
+              id="contact"
               className="mb-16 w-full text-left"
               aria-labelledby="contact-heading"
             >

@@ -60,6 +60,27 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  metadataBase: new URL("https://adarshmasekar.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Adarsh Masekar",
+  jobTitle: "Product Support Engineer",
+  url: "https://adarshmasekar.vercel.app",
+  sameAs: [
+    "https://github.com/adarshmasekar",
+    "https://www.linkedin.com/in/adarsh-masekar/",
+    "https://leetcode.com/u/adarshmasekar/",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Qualitia Software",
+  },
 };
 
 export default function RootLayout({
@@ -69,6 +90,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${dmSans.variable} antialiased transition-colors duration-300`}
       >

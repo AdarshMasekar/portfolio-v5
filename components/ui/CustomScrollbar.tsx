@@ -196,10 +196,10 @@ export default function CustomScrollbar() {
       className="hidden lg:block"
       style={{
         position: "fixed",
-        right: "18px",
+        right: "5px",
         top: "12%",
         bottom: "12%",
-        width: "16px",
+        width: "10px",
         zIndex: 9999,
         opacity: visible ? 1 : 0,
         transition: "opacity 0.5s ease",
