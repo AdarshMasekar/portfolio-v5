@@ -15,7 +15,8 @@ export function GithubGraph() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted)
+    return <div className="min-h-[165px] w-full" aria-hidden="true" />;
 
   const airTheme = {
     light: ["#fffbeb", "#fde68a", "#fbbf24", "#d97706", "#b45309"],
