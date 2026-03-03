@@ -40,3 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /.vscode
+
+# playwright
+playwright-report/
+test-results/
+.playwright/
