@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
-import CustomScrollbar from "@/components/ui/CustomScrollbar";
 import { AvatarStateProvider } from "@/components/providers/AvatarStateProvider";
 import { ToastProvider } from "@/components/toast";
 import { Analytics } from "@vercel/analytics/next";
