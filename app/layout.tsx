@@ -99,17 +99,13 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} antialiased transition-colors duration-300`}
       >
-        {/* Global cinematic noise overlay: optimized via CSS background to prevent main-thread blocking LCP delays */}
         <div
-          className="pointer-events-none fixed inset-0 z-[9999] h-full w-full opacity-[0.05] bg-noise"
+          className="pointer-events-none fixed inset-0 z-[9999] h-full w-full opacity-[0.05] dark:opacity-[0.05] bg-noise"
           aria-hidden="true"
         />
         <ThemeProvider>
           <ToastProvider>
-            <AvatarStateProvider>
-              <CustomScrollbar />
-              {children}
-            </AvatarStateProvider>
+            <AvatarStateProvider>{children}</AvatarStateProvider>
           </ToastProvider>
         </ThemeProvider>
         <SpeedInsights />

@@ -283,6 +283,11 @@ section {
   opacity: 0.6;
 }
 
+@keyframes shimmer-circular {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 /* --- Text Pop-Out Effect --- */
 .text-pop-out {
   display: inline-block;
@@ -370,7 +375,9 @@ section {
 
 /* --- Accessibility: prefers-reduced-motion --- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *:not(.hover-shimmer),
+  *:not(.hover-shimmer)::before,
+  *:not(.hover-shimmer)::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
