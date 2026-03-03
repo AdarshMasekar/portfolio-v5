@@ -309,7 +309,7 @@ export default function Home() {
             {/* Summary Highlights */}
             <div id="highlights" className="mb-16 w-full relative">
               {isAvatarState}
-              <div className="rounded-2xl border border-foreground/10 bg-background/55 p-4 sm:p-6 data-[avatar-mode=true]:border-[var(--color-earth-accent)] data-[avatar-mode=true]:bg-[var(--color-earth-bg)] data-[avatar-mode=true]:shadow-[0_8px_0_var(--color-earth-accent)] data-[avatar-mode=true]:-translate-y-2 transition-all duration-500">
+              <div className="rounded-2xl border border-foreground/10 bg-background/90 p-4 sm:p-6 data-[avatar-mode=true]:border-[var(--color-earth-accent)] data-[avatar-mode=true]:bg-[var(--color-earth-bg)] data-[avatar-mode=true]:shadow-[0_8px_0_var(--color-earth-accent)] data-[avatar-mode=true]:-translate-y-2 transition-all duration-500">
                 <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-foreground/70 data-[avatar-mode=true]:text-[var(--color-earth-accent)]">
                   Key Highlights
                 </h3>
@@ -689,7 +689,7 @@ export default function Home() {
               >
                 Get in Touch
               </h2>
-              <div className="rounded-2xl border border-foreground/10 bg-background/55 p-6 sm:p-8 relative">
+              <div className="rounded-2xl border border-foreground/10 bg-background/90 p-6 sm:p-8 relative">
                 {isAvatarState && <FireNationBalloon />}
                 <div className="space-y-6 relative z-10">
                   <div>
