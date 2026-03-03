@@ -125,6 +125,7 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={item.label}
                 className="group h-8 w-8 rounded-full flex justify-center items-center transition-colors hover:bg-foreground/5 dark:hover:bg-foreground/10 avatar:hover:bg-amber-500/10"
                 onMouseEnter={() => setActiveIndex(index)}
                 onMouseLeave={() => setActiveIndex(null)}
@@ -140,6 +141,7 @@ export function MenuBar({ items, className, ...props }: MenuBarProps) {
             <Element
               key={index}
               onClick={item.onClick}
+              aria-label={item.label}
               className={cn(
                 "group flex rounded-full justify-center items-center transition-colors",
                 item.element
