@@ -69,7 +69,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               className={clsx(
                 "pointer-events-auto flex items-center justify-between gap-4 rounded-xl px-5 py-3.5 shadow-2xl border text-sm font-medium min-w-[300px] max-w-sm backdrop-blur-md",
                 {
-                  "bg-black/90 text-white border-white/10 dark:bg-[#1c1917] dark:text-gray-100":
+                  "bg-black/90 text-white border-white/10 dark:bg-zinc-800 dark:text-white dark:border-zinc-600/30":
                     toast.type === "message",
                   "bg-emerald-600/90 text-white border-emerald-500/20":
                     toast.type === "success",
