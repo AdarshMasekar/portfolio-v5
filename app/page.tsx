@@ -43,11 +43,14 @@ function AnimatedCounter({
 
   const motionValue = useMotionValue(0);
   const springValue = useSpring(motionValue, { stiffness: 100, damping: 20 });
-  const [displayValue, setDisplayValue] = useState(0);
+  const [displayValue, setDisplayValue] = useState("0");
+
+  // Determine decimal places from the target value
+  const decimalPlaces = (value.toString().split(".")[1] || "").length;
 
   useEffect(() => {
     const unsubscribe = springValue.on("change", (latest) => {
-      setDisplayValue(Math.round(latest));
+      setDisplayValue(latest.toFixed(decimalPlaces));
     });
 
     if (isInView) {
@@ -298,7 +301,7 @@ export default function Home() {
                 Adarsh Masekar
               </h1>
               <h2 className="text-xl font-medium text-foreground/80 sm:text-2xl data-[avatar-mode=true]:animate-[float_2s_ease-in-out_infinite_alternate] data-[avatar-mode=true]:text-[var(--color-air-accent)] transition-colors duration-300">
-                Product Support Engineer
+                Junior Product Support Engineer
               </h2>
               <p className="mt-2 text-sm text-foreground/60 sm:text-base">
                 Enterprise B2B SaaS · L2/L3 Support · JavaScript · Java · SQL ·
@@ -315,7 +318,7 @@ export default function Home() {
                 </h3>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <div className="text-center data-[avatar-mode=true]:border-l-4 data-[avatar-mode=true]:border-[var(--color-fire-accent)] data-[avatar-mode=true]:pl-2 transition-all duration-300">
-                    <AnimatedCounter value={2} suffix="+" />
+                    <AnimatedCounter value={1.5} suffix="+" />
                     <div className="text-xs text-foreground/60 sm:text-sm">
                       Years Experience
                     </div>
@@ -356,11 +359,12 @@ export default function Home() {
 
             <div className="mb-16 mt-4 w-full space-y-4 text-left text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
               <p>
-                Product Support Engineer with 2+ years in Enterprise B2B SaaS,
-                specializing in solving complex engineering-level issues and
-                delivering technical solutions using Java, Python, JavaScript,
-                SQL, and CI/CD integrations while maintaining 95%+ SLA adherence
-                through Root Cause Analysis and automation.
+                Junior Product Support Engineer with around 2 years in
+                Enterprise B2B SaaS, specializing in solving complex
+                engineering-level issues and delivering technical solutions
+                using Java, Python, JavaScript, SQL, and CI/CD integrations
+                while maintaining 95%+ SLA adherence through Root Cause Analysis
+                and automation.
               </p>
             </div>
 
@@ -412,7 +416,7 @@ export default function Home() {
               <div className="space-y-8">
                 <ExperienceItem
                   title="Qualitia Software"
-                  role="Product Support Engineer | Pune, India (Remote)"
+                  role="Junior Product Support Engineer | Pune, India (Remote)"
                   collapsible={true}
                 >
                   <div className="space-y-3">
@@ -490,7 +494,7 @@ export default function Home() {
                 >
                   <div className="space-y-3">
                     <p className="font-semibold text-foreground/70 text-sm mb-4">
-                      December 2023 – December 2024
+                      March 2024 – September 2024
                     </p>
                     <p className="text-sm text-foreground/80 mb-4 italic">
                       Provided L1/L2 production support and incident triage for

@@ -18,7 +18,7 @@ January 2025 – Present | Pune, India (Remote)
 
 ### Tech Mahindra
 **Associate Software Engineer**
-December 2023 – December 2024 | Bengaluru, India
+March 2024 – Seotember 2024 | Bengaluru, India
 
 - Provided L1/L2 production support for enterprise loan platform processing 5,000+ daily transactions, performing code-level debugging in Java/Spring Boot microservices and reducing incident response time by 25%.
 - Conducted comprehensive Root Cause Analysis on production defects with stack trace analysis and code references, enabling development teams to implement permanent fixes 30% faster.
