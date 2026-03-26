@@ -7,7 +7,7 @@ Product Support Engineer with 2+ years in Enterprise B2B SaaS, specializing in s
 
 ## Experience
 
-### S********t [🛒 Great Deal Incoming]
+### S********t [🚀 Incoming]
 ********** ***** Specialist 1**
 April 6, 2026 – Present | Bengaluru, India (Remote)
 

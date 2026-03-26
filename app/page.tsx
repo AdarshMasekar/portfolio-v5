@@ -109,12 +109,10 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
     <div className="flex gap-2 sm:gap-4 mt-6 justify-center">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="flex flex-col items-center">
-          <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-lg bg-red-600 border border-red-500 text-xl md:text-2xl font-bold font-mono text-white shadow-lg overflow-hidden relative">
-            {/* Amazon-style gloss effect */}
-            <div className="absolute top-0 w-full h-1/2 bg-white/20"></div>
-            <span className="relative z-10 drop-shadow-sm">{value.toString().padStart(2, "0")}</span>
+          <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-lg bg-foreground/10 text-xl md:text-2xl font-bold font-mono text-foreground/90 backdrop-blur-md shadow-inner border border-foreground/20 data-[avatar-mode=true]:border-[var(--color-air-accent)]/30 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20 data-[avatar-mode=true]:text-[var(--color-air-accent)]">
+            <span className="relative z-10">{value.toString().padStart(2, "0")}</span>
           </div>
-          <span className="mt-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-foreground/60">{unit}</span>
+          <span className="mt-2 text-[10px] sm:text-xs uppercase tracking-widest text-foreground/50 data-[avatar-mode=true]:text-[var(--color-air-accent)]/70">{unit}</span>
         </div>
       ))}
     </div>
@@ -461,29 +459,31 @@ export default function Home() {
                 Experience
               </h2>
               <div className="space-y-8">
-                <div className="relative rounded-2xl border-2 border-orange-500/50 bg-gradient-to-br from-orange-500/10 to-red-500/5 p-1 transition-all duration-300 hover:border-orange-500/80 hover:shadow-[0_0_15px_rgba(249,115,22,0.3)] data-[avatar-mode=true]:border-[var(--color-fire-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-fire-bg)]/20">
-                  <div className="absolute -top-4 right-4 z-10 rounded bg-red-600 px-3 py-1 text-sm font-bold uppercase tracking-wider text-white shadow-md flex items-center gap-1.5 transform rotate-3 data-[avatar-mode=true]:bg-[var(--color-fire-accent)]">
-                    Great Indian Sale!
+                <div className="relative rounded-2xl border-2 border-dashed border-foreground/20 bg-foreground/5 p-1 transition-all duration-300 hover:border-foreground/40 hover:bg-foreground/10 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
+                  <div className="absolute -top-3 right-4 z-10 rounded-full bg-background px-3 py-0.5 text-xs font-medium text-foreground/60 border border-foreground/10 flex items-center gap-1.5 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/30">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
+                    </span>
+                    Joining Soon
                   </div>
                   <ExperienceItem
-                    title="S********t (Classified Target)"
+                    title="S********t"
                     role="******** ***** Specialist 1 | Bengaluru (Remote)"
                     collapsible={true}
                   >
                     <div className="space-y-4 py-2">
-                      <div className="flex flex-col items-center justify-center p-6 text-center bg-background/80 rounded-xl border border-orange-500/20 shadow-inner relative overflow-hidden">
-                        {/* Deals backdrop pattern */}
-                        <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiAvPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjMDAwIiAvPgo8L3N2Zz4=')]"></div>
-                        <Lock className="w-8 h-8 text-orange-500/60 mb-2 relative z-10" />
-                        <p className="font-bold text-lg text-foreground/90 relative z-10">
+                      <div className="flex flex-col items-center justify-center p-6 text-center bg-background/50 rounded-xl border border-foreground/5">
+                        <Lock className="w-8 h-8 text-foreground/40 mb-3" />
+                        <p className="font-medium text-foreground/80">
                           Unlocking on April 6th, 2026...
                         </p>
-                        <p className="text-sm font-medium text-orange-600 dark:text-orange-400 mt-1 relative z-10">
-                          Prices drop... I mean, Role starts soon!
+                        <p className="text-sm text-foreground/50 mt-2">
+                          Loading next chapter. Can't wait!
                         </p>
 
                         <div className="relative z-10 w-full">
-                          <CountdownTimer targetDate="2026-04-06T00:00:00" />
+                          <CountdownTimer targetDate="2026-04-06T12:30:00" />
                         </div>
                       </div>
                     </div>
