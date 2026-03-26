@@ -514,8 +514,8 @@ export default function Home() {
                 Experience
               </h2>
               <div className="space-y-8">
-                <div className="rounded-[1.25rem] border-2 border-dashed border-foreground/20 p-2 sm:p-2.5 transition-all duration-300 hover:border-foreground/30 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50">
-                  <div className="relative group hover-shimmer rounded-[0.85rem] bg-background/50 backdrop-blur-sm p-4 sm:p-6 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
+                <div className="rounded-[1.25rem] border-2 border-dashed border-foreground/20 p-1 sm:p-1.5 transition-all duration-300 hover:border-foreground/30 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50">
+                  <div className="relative group hover-shimmer relative rounded-[1rem] border border-foreground/10 p-6 transition-all duration-300 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5 avatar:hover:border-amber-500/50 avatar:hover:shadow-amber-500/100">
                     {/* Header row: logo placeholder + title + role */}
                     <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
                       {/* Logo placeholder */}
