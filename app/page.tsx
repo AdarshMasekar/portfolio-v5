@@ -514,37 +514,30 @@ export default function Home() {
                 Experience
               </h2>
               <div className="space-y-8">
-                <div className="relative group hover-shimmer rounded-[1rem] border-2 border-dashed border-foreground/20 bg-background/50 backdrop-blur-sm p-6 transition-all duration-300 hover:border-foreground/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
-                  {/* Joining Soon badge */}
-                  <div className="absolute top-0 right-6 -translate-y-1/2 z-10 rounded-full bg-background w-fit px-3 py-1 text-xs font-medium text-foreground/70 border border-foreground/10 shadow-sm flex items-center gap-1.5 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/30">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
-                    </span>
-                    Joining Soon
-                  </div>
-
-                  {/* Header row: logo placeholder + title + role */}
-                  <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
-                    {/* Logo placeholder */}
-                    <div className="flex-shrink-0 h-10 w-10 rounded-xl border-2 border-dashed border-blue-400/40 bg-blue-500/5 flex items-center justify-center text-blue-500/50 data-[avatar-mode=true]:border-[var(--color-air-accent)]/40 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/30 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
-                      <Lock className="w-4 h-4" />
+                <div className="rounded-[1.25rem] border-2 border-dashed border-foreground/20 p-2 sm:p-2.5 transition-all duration-300 hover:border-foreground/30 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50">
+                  <div className="relative group hover-shimmer rounded-[0.85rem] bg-background/50 backdrop-blur-sm p-4 sm:p-6 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
+                    {/* Header row: logo placeholder + title + role */}
+                    <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
+                      {/* Logo placeholder */}
+                      <div className="flex-shrink-0 h-10 w-10 rounded-xl border-2 border-dashed border-blue-400/40 bg-blue-500/5 flex items-center justify-center text-blue-500/50 data-[avatar-mode=true]:border-[var(--color-air-accent)]/40 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/30 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
+                        <Lock className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                        <span className="font-semibold text-foreground text-lg tracking-tight">S********t</span>
+                        <span className="text-sm text-foreground/55">********* Specialist &middot; Bengaluru, India (Remote)</span>
+                      </div>
                     </div>
-                    <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                      <span className="font-semibold text-foreground text-lg tracking-tight">S********t</span>
-                      <span className="text-sm text-foreground/55">******** ***** Specialist 1 &middot; Bengaluru, India (Remote)</span>
+
+                    {/* Countdown */}
+                    <div className="w-full mb-1">
+                      <CountdownTimer targetDate="2026-04-06T09:30:00" offerDate="2026-03-15T00:00:00" />
                     </div>
-                  </div>
 
-                  {/* Countdown */}
-                  <div className="w-full mb-1">
-                    <CountdownTimer targetDate="2026-04-06T09:30:00" offerDate="2026-03-15T00:00:00" />
-                  </div>
-
-                  {/* Footer */}
-                  <div className="flex items-center justify-center gap-2 pt-5 border-t border-foreground/5 text-xs font-medium tracking-widest uppercase text-blue-500/60 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
-                    <Lock className="w-3.5 h-3.5" />
-                    <span>Unlocking April 6th, 2026</span>
+                    {/* Footer */}
+                    <div className="flex items-center justify-center gap-2 pt-5 border-t border-foreground/5 text-xs font-medium tracking-widest uppercase text-blue-500/60 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
+                      <Lock className="w-3.5 h-3.5" />
+                      <span>Unlocking April 6th, 2026</span>
+                    </div>
                   </div>
                 </div>
 
