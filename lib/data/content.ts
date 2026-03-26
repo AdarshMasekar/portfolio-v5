@@ -7,6 +7,12 @@ Product Support Engineer with 2+ years in Enterprise B2B SaaS, specializing in s
 
 ## Experience
 
+### Smartsheet [🚀 Incoming]
+**Technical Support Specialist 1**
+April 6, 2026 – Present | Bengaluru, India (Remote)
+
+- 🔒 *Loading next chapter... Unlocking on April 6th.*
+
 ### Qualitia Software
 **Product Support Engineer (L2)**
 January 2025 – Present | Pune, India (Remote)

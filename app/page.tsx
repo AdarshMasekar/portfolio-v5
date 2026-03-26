@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Github, Linkedin, Bot, User, QrCode, X, FileText } from "lucide-react";
+import { Github, Linkedin, Bot, User, QrCode, X, FileText, Lock } from "lucide-react";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { QRCodeSVG } from "qrcode.react";
@@ -414,6 +414,33 @@ export default function Home() {
                 Experience
               </h2>
               <div className="space-y-8">
+                <div className="relative rounded-2xl border-2 border-dashed border-foreground/20 bg-foreground/5 p-1 transition-all duration-300 hover:border-foreground/40 hover:bg-foreground/10 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
+                  <div className="absolute -top-3 right-4 z-10 rounded-full bg-background px-3 py-0.5 text-xs font-medium text-foreground/60 border border-foreground/10 flex items-center gap-1.5 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/30">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
+                    </span>
+                    Joining Soon
+                  </div>
+                  <ExperienceItem
+                    title="Smartsheet"
+                    role="Technical Support Specialist 1 | Bengaluru (Remote)"
+                    collapsible={true}
+                  >
+                    <div className="space-y-4 py-2">
+                      <div className="flex flex-col items-center justify-center p-6 text-center bg-background/50 rounded-xl border border-foreground/5">
+                        <Lock className="w-8 h-8 text-foreground/40 mb-3" />
+                        <p className="font-medium text-foreground/80">
+                          Unlocking on April 6th, 2026...
+                        </p>
+                        <p className="text-sm text-foreground/50 mt-2">
+                          Loading next chapter. Can't wait to start!
+                        </p>
+                      </div>
+                    </div>
+                  </ExperienceItem>
+                </div>
+
                 <ExperienceItem
                   title="Qualitia Software"
                   role="Junior Product Support Engineer | Pune, India (Remote)"
