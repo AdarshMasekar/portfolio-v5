@@ -423,8 +423,8 @@ export default function Home() {
                     Joining Soon
                   </div>
                   <ExperienceItem
-                    title="Smartsheet"
-                    role="Technical Support Specialist 1 | Bengaluru (Remote)"
+                    title="██████████"
+                    role="████████████████████████████ | Bengaluru (Remote)"
                     collapsible={true}
                   >
                     <div className="space-y-4 py-2">
