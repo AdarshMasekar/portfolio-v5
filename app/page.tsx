@@ -106,13 +106,13 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
   if (!isMounted) return null;
 
   return (
-    <div className="flex gap-2 sm:gap-4 mt-6 justify-center">
+    <div className="flex gap-2 sm:gap-4 justify-center">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="flex flex-col items-center">
-          <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-lg bg-foreground/10 text-xl md:text-2xl font-bold font-mono text-foreground/90 backdrop-blur-md shadow-inner border border-foreground/20 data-[avatar-mode=true]:border-[var(--color-air-accent)]/30 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20 data-[avatar-mode=true]:text-[var(--color-air-accent)]">
+          <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-background text-xl md:text-2xl font-bold font-mono text-foreground tracking-tighter border border-foreground/10 shadow-sm data-[avatar-mode=true]:border-[var(--color-air-accent)]/30 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/10 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:shadow-[0_0_10px_var(--color-air-accent)]/20">
             <span className="relative z-10">{value.toString().padStart(2, "0")}</span>
           </div>
-          <span className="mt-2 text-[10px] sm:text-xs uppercase tracking-widest text-foreground/50 data-[avatar-mode=true]:text-[var(--color-air-accent)]/70">{unit}</span>
+          <span className="mt-2 text-[10px] sm:text-[11px] uppercase tracking-widest text-foreground/40 font-medium data-[avatar-mode=true]:text-[var(--color-air-accent)]/70">{unit}</span>
         </div>
       ))}
     </div>
@@ -363,7 +363,7 @@ export default function Home() {
                 </h3>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <div className="text-center data-[avatar-mode=true]:border-l-4 data-[avatar-mode=true]:border-[var(--color-fire-accent)] data-[avatar-mode=true]:pl-2 transition-all duration-300">
-                    <AnimatedCounter value={1.5} suffix="+" />
+                    <AnimatedCounter value={1.8}suffix="+" />
                     <div className="text-xs text-foreground/60 sm:text-sm">
                       Years Experience
                     </div>
@@ -459,7 +459,7 @@ export default function Home() {
                 Experience
               </h2>
               <div className="space-y-8">
-                <div className="relative rounded-2xl border-2 border-dashed border-foreground/20 bg-foreground/5 p-1 transition-all duration-300 hover:border-foreground/40 hover:bg-foreground/10 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
+                <div className="relative group hover-shimmer rounded-[1rem] border-2 border-dashed border-foreground/20 bg-background/50 backdrop-blur-sm p-6 transition-all duration-300 hover:border-foreground/30 hover:shadow-lg hover:shadow-foreground/5 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20 avatar:hover:shadow-[var(--color-air-accent)]/10">
                   <div className="absolute -top-3 right-4 z-10 rounded-full bg-background px-3 py-0.5 text-xs font-medium text-foreground/60 border border-foreground/10 flex items-center gap-1.5 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/30">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
@@ -468,28 +468,23 @@ export default function Home() {
                     Joining Soon
                   </div>
 
-                  {/* Countdown stays visible regardless of collapsed state */}
-                  <div className="pt-4 pb-0 w-full">
+                  <div className="mb-6 flex flex-col justify-between sm:flex-row sm:items-baseline">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-foreground text-lg">S********t (Classified Target)</span>
+                    </div>
+                    <span className="text-sm text-foreground/60 mt-1 sm:mt-0">******** ***** Specialist 1 | Bengaluru (Remote)</span>
+                  </div>
+
+                  <div className="w-full flex justify-center mb-6">
                     <CountdownTimer targetDate="2026-04-06T00:00:00" />
                   </div>
 
-                  <ExperienceItem
-                    title="S********t (Classified Target)"
-                    role="******** ***** Specialist 1 | Bengaluru (Remote)"
-                    collapsible={true}
-                  >
-                    <div className="space-y-4 py-2">
-                      <div className="flex flex-col items-center justify-center p-6 text-center bg-background/50 rounded-xl border border-foreground/5">
-                        <Lock className="w-8 h-8 text-foreground/40 mb-3" />
-                        <p className="font-medium text-foreground/80">
-                          Unlocking on April 6th, 2026...
-                        </p>
-                        <p className="text-sm text-foreground/50 mt-2">
-                          Loading next chapter. Can't wait!
-                        </p>
-                      </div>
-                    </div>
-                  </ExperienceItem>
+                  <div className="flex flex-col items-center justify-center pt-5 border-t border-foreground/5">
+                    <Lock className="w-5 h-5 text-foreground/30 mb-2" />
+                    <p className="text-xs font-medium text-foreground/50 tracking-widest uppercase">
+                      Unlocking April 6th, 2026
+                    </p>
+                  </div>
                 </div>
 
                 <ExperienceItem
