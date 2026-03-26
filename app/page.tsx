@@ -467,8 +467,14 @@ export default function Home() {
                     </span>
                     Joining Soon
                   </div>
+
+                  {/* Countdown stays visible regardless of collapsed state */}
+                  <div className="pt-4 pb-0 w-full">
+                    <CountdownTimer targetDate="2026-04-06T00:00:00" />
+                  </div>
+
                   <ExperienceItem
-                    title="S********t"
+                    title="S********t (Classified Target)"
                     role="******** ***** Specialist 1 | Bengaluru (Remote)"
                     collapsible={true}
                   >
@@ -481,10 +487,6 @@ export default function Home() {
                         <p className="text-sm text-foreground/50 mt-2">
                           Loading next chapter. Can't wait!
                         </p>
-
-                        <div className="relative z-10 w-full">
-                          <CountdownTimer targetDate="2026-04-06T12:30:00" />
-                        </div>
                       </div>
                     </div>
                   </ExperienceItem>
