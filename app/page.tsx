@@ -75,7 +75,7 @@ function AnimatedCounter({
 }
 
 // Countdown Timer Component
-function CountdownTimer({ targetDate }: { targetDate: string }) {
+function CountdownTimer({ targetDate, offerDate }: { targetDate: string; offerDate?: string }) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isMounted, setIsMounted] = useState(false);
 
@@ -83,38 +83,93 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
     setIsMounted(true);
     const target = new Date(targetDate).getTime();
 
-    const interval = setInterval(() => {
+    const calculate = () => {
       const now = new Date().getTime();
       const distance = target - now;
-
-      if (distance < 0) {
-        clearInterval(interval);
-        return;
-      }
-
+      if (distance < 0) return;
       setTimeLeft({
         days: Math.floor(distance / (1000 * 60 * 60 * 24)),
         hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((distance % (1000 * 60)) / 1000),
       });
-    }, 1000);
+    };
 
+    calculate();
+    const interval = setInterval(calculate, 1000);
     return () => clearInterval(interval);
   }, [targetDate]);
 
+  const progressPercent = offerDate
+    ? Math.min(
+        100,
+        Math.max(
+          0,
+          ((Date.now() - new Date(offerDate).getTime()) /
+            (new Date(targetDate).getTime() - new Date(offerDate).getTime())) *
+            100
+        )
+      )
+    : null;
+
   if (!isMounted) return null;
 
+  const units = Object.entries(timeLeft) as [string, number][];
+
   return (
-    <div className="flex gap-2 sm:gap-4 justify-center">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="flex flex-col items-center">
-          <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-background text-xl md:text-2xl font-bold font-mono text-foreground tracking-tighter border border-foreground/10 shadow-sm data-[avatar-mode=true]:border-[var(--color-air-accent)]/30 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/10 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:shadow-[0_0_10px_var(--color-air-accent)]/20">
-            <span className="relative z-10">{value.toString().padStart(2, "0")}</span>
+    <div className="w-full space-y-5">
+      <div className="flex gap-2 sm:gap-3 justify-center">
+        {units.map(([unit, value], i) => (
+          <div key={unit} className="flex items-center">
+            <div className="flex flex-col items-center">
+              {/* Timer Box */}
+              <div
+                className="flex h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem] items-center justify-center rounded-2xl
+                  bg-white dark:bg-foreground/[0.04]
+                  text-2xl sm:text-3xl font-bold tabular-nums
+                  bg-gradient-to-b from-foreground/90 to-foreground/60 bg-clip-text text-transparent
+                  border border-foreground/10
+                  shadow-[0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)]
+                  dark:shadow-[0_4px_12px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.07)]
+                  data-[avatar-mode=true]:border-[var(--color-air-accent)]/30
+                  data-[avatar-mode=true]:text-[var(--color-air-accent)]
+                  data-[avatar-mode=true]:shadow-[0_0_12px_var(--color-air-accent)]/10"
+              >
+                {value.toString().padStart(2, "0")}
+              </div>
+              <span
+                className="mt-2 text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-foreground/50 font-semibold
+                  data-[avatar-mode=true]:text-[var(--color-air-accent)]/60"
+              >
+                {unit}
+              </span>
+            </div>
+            {/* Colon separator */}
+            {i < units.length - 1 && (
+              <span className="mx-0.5 sm:mx-1 mb-5 text-xl font-bold text-foreground/20 select-none">:</span>
+            )}
           </div>
-          <span className="mt-2 text-[10px] sm:text-[11px] uppercase tracking-widest text-foreground/40 font-medium data-[avatar-mode=true]:text-[var(--color-air-accent)]/70">{unit}</span>
+        ))}
+      </div>
+
+      {/* Progress bar */}
+      {progressPercent !== null && (
+        <div className="space-y-1.5">
+          <div className="h-1 w-full rounded-full bg-foreground/8 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-blue-500/70 to-blue-400/50
+                transition-all duration-1000 ease-linear
+                data-[avatar-mode=true]:from-[var(--color-air-accent)]/80 data-[avatar-mode=true]:to-[var(--color-air-accent)]/40"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+          <div className="flex justify-between text-[9px] tracking-wider text-foreground/30 font-medium uppercase">
+            <span>Offer Accepted</span>
+            <span>{Math.round(progressPercent)}% to Day 1</span>
+            <span>Apr 6, 2026</span>
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
 }
@@ -459,7 +514,8 @@ export default function Home() {
                 Experience
               </h2>
               <div className="space-y-8">
-                <div className="relative group hover-shimmer rounded-[1rem] border-2 border-dashed border-foreground/20 bg-background/50 backdrop-blur-sm p-6 transition-all duration-300 hover:border-foreground/30 hover:shadow-lg hover:shadow-foreground/5 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20 avatar:hover:shadow-[var(--color-air-accent)]/10">
+                <div className="relative group hover-shimmer rounded-[1rem] border-2 border-dashed border-foreground/20 bg-background/50 backdrop-blur-sm p-6 transition-all duration-300 hover:border-foreground/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
+                  {/* Joining Soon badge */}
                   <div className="absolute -top-3 right-4 z-10 rounded-full bg-background px-3 py-0.5 text-xs font-medium text-foreground/60 border border-foreground/10 flex items-center gap-1.5 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/30">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
@@ -468,22 +524,27 @@ export default function Home() {
                     Joining Soon
                   </div>
 
-                  <div className="mb-6 flex flex-col justify-between sm:flex-row sm:items-baseline">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-foreground text-lg">S********t (Classified Target)</span>
+                  {/* Header row: logo placeholder + title + role */}
+                  <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
+                    {/* Logo placeholder */}
+                    <div className="flex-shrink-0 h-10 w-10 rounded-xl border-2 border-dashed border-blue-400/40 bg-blue-500/5 flex items-center justify-center text-blue-500/50 data-[avatar-mode=true]:border-[var(--color-air-accent)]/40 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/30 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
+                      <Lock className="w-4 h-4" />
                     </div>
-                    <span className="text-sm text-foreground/60 mt-1 sm:mt-0">******** ***** Specialist 1 | Bengaluru (Remote)</span>
+                    <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <span className="font-semibold text-foreground text-lg tracking-tight">S********t</span>
+                      <span className="text-sm text-foreground/55">******** ***** Specialist 1 &middot; Bengaluru (Remote)</span>
+                    </div>
                   </div>
 
-                  <div className="w-full flex justify-center mb-6">
-                    <CountdownTimer targetDate="2026-04-06T00:00:00" />
+                  {/* Countdown */}
+                  <div className="w-full mb-1">
+                    <CountdownTimer targetDate="2026-04-06T09:30:00" offerDate="2026-03-15T00:00:00" />
                   </div>
 
-                  <div className="flex flex-col items-center justify-center pt-5 border-t border-foreground/5">
-                    <Lock className="w-5 h-5 text-foreground/30 mb-2" />
-                    <p className="text-xs font-medium text-foreground/50 tracking-widest uppercase">
-                      Unlocking April 6th, 2026
-                    </p>
+                  {/* Footer */}
+                  <div className="flex items-center justify-center gap-2 pt-5 border-t border-foreground/5 text-xs font-medium tracking-widest uppercase text-blue-500/60 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
+                    <Lock className="w-3.5 h-3.5" />
+                    <span>Unlocking April 6th, 2026</span>
                   </div>
                 </div>
 
