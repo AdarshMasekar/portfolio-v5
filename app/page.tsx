@@ -516,7 +516,7 @@ export default function Home() {
               <div className="space-y-8">
                 <div className="relative group hover-shimmer rounded-[1rem] border-2 border-dashed border-foreground/20 bg-background/50 backdrop-blur-sm p-6 transition-all duration-300 hover:border-foreground/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/50 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/20">
                   {/* Joining Soon badge */}
-                  <div className="absolute -top-3 right-4 z-10 rounded-full bg-background w-fit px-3 py-0.5 text-xs font-medium text-foreground/60 border border-foreground/10 flex items-center gap-1.5 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/30">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 rounded-full bg-background w-fit px-3 py-0.5 text-xs font-medium text-foreground/60 border border-foreground/10 flex items-center gap-1.5 data-[avatar-mode=true]:text-[var(--color-air-accent)] data-[avatar-mode=true]:border-[var(--color-air-accent)]/30">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500 data-[avatar-mode=true]:bg-[var(--color-air-accent)]"></span>
@@ -532,7 +532,7 @@ export default function Home() {
                     </div>
                     <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                       <span className="font-semibold text-foreground text-lg tracking-tight">S********t</span>
-                      <span className="text-sm text-foreground/55">******** ***** Specialist 1 &middot; Bengaluru (Remote)</span>
+                      <span className="text-sm text-foreground/55">******** ***** Specialist 1 &middot; Bengaluru,India (Remote)</span>
                     </div>
                   </div>
 
