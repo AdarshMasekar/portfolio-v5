@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Github, Linkedin, Bot, User, QrCode, X, FileText, Lock } from "lucide-react";
-import { useState, useMemo, useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
+import { Github, Linkedin, QrCode, X, FileText, Lock, Bot, User } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
   motion,
@@ -11,7 +10,6 @@ import {
   useInView,
   useMotionValue,
   useSpring,
-  useTransform,
 } from "framer-motion";
 import dynamic from "next/dynamic";
 
@@ -23,11 +21,6 @@ import { LinkedInButton } from "@/components/ui/LinkedInButton";
 import { MenuBar, MenuBarItem } from "@/components/ui/bottom-menu";
 import { SiLeetcode } from "react-icons/si";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { useAvatarState } from "@/components/providers/AvatarStateProvider";
-import { JasmineDragon } from "@/components/easter-eggs/JasmineDragon";
-import { ZukoFlame } from "@/components/easter-eggs/ZukoFlame";
-import { FireNationBalloon } from "@/components/easter-eggs/FireNationBalloon";
-import { PaiShoListener } from "@/components/easter-eggs/PaiShoListener";
 import { SideNav } from "@/components/SideNav";
 
 // Animated Counter Component
@@ -58,7 +51,7 @@ function AnimatedCounter({
     }
 
     return () => unsubscribe();
-  }, [isInView, motionValue, springValue, value]);
+  }, [isInView, motionValue, springValue, value, decimalPlaces]);
 
   return (
     <motion.div
@@ -130,16 +123,12 @@ function CountdownTimer({ targetDate, offerDate }: { targetDate: string; offerDa
                   bg-gradient-to-b from-foreground/90 to-foreground/60 bg-clip-text text-transparent
                   border border-foreground/10
                   shadow-[0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)]
-                  dark:shadow-[0_4px_12px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.07)]
-                  data-[avatar-mode=true]:border-[var(--color-air-accent)]/30
-                  data-[avatar-mode=true]:text-[var(--color-air-accent)]
-                  data-[avatar-mode=true]:shadow-[0_0_12px_var(--color-air-accent)]/10"
+                  dark:shadow-[0_4px_12px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.07)]"
               >
                 {value.toString().padStart(2, "0")}
               </div>
               <span
-                className="mt-2 text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-foreground/50 font-semibold
-                  data-[avatar-mode=true]:text-[var(--color-air-accent)]/60"
+                className="mt-2 text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-foreground/50 font-semibold"
               >
                 {unit}
               </span>
@@ -158,8 +147,7 @@ function CountdownTimer({ targetDate, offerDate }: { targetDate: string; offerDa
           <div className="h-1 w-full rounded-full bg-foreground/8 overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-blue-500/70 to-blue-400/50
-                transition-all duration-1000 ease-linear
-                data-[avatar-mode=true]:from-[var(--color-air-accent)]/80 data-[avatar-mode=true]:to-[var(--color-air-accent)]/40"
+                transition-all duration-1000 ease-linear"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -185,31 +173,11 @@ const GithubGraph = dynamic(
   () => import("@/components/GithubGraph").then((mod) => mod.GithubGraph),
   { ssr: true },
 );
-const AvatarJourney = dynamic(
-  () => import("@/components/AvatarJourney").then((mod) => mod.AvatarJourney),
-  { ssr: false },
-);
-const ATLAQuote = dynamic(
-  () => import("@/components/ATLAQuote").then((mod) => mod.ATLAQuote),
-  { ssr: false },
-);
 
 export default function Home() {
   const [showQR, setShowQR] = useState(false);
   const [mode, setMode] = useState<"human" | "agent">("human");
 
-  const { resolvedTheme } = useTheme();
-
-  const { isAvatarState, toggleAvatarState } = useAvatarState();
-
-  const starPositions = useMemo(() => {
-    return [...Array(50)].map(() => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      duration: 2 + Math.random() * 3,
-      delay: Math.random() * 5,
-    }));
-  }, []);
 
   const menuItems: MenuBarItem[] = [
     {
@@ -269,72 +237,9 @@ export default function Home() {
 
   return (
     <div
-      data-avatar-mode={isAvatarState}
       className={`relative flex min-h-screen flex-col items-center bg-background px-3 pt-8 text-foreground selection:bg-foreground/20
-      data-[avatar-mode=true]:selection:bg-amber-500/30 data-[avatar-mode=true]:selection:text-amber-500
       pb-16 sm:px-4 sm:pt-12 sm:pb-20 overflow-x-hidden transition-colors duration-300`}
     >
-      <PaiShoListener />
-      {/* Avatar State Easter Egg Effects */}
-      <AnimatePresence>
-        {isAvatarState && (
-          <>
-            {/* Outer warm air nomad edge glow */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="fixed inset-0 z-[100] pointer-events-none"
-              style={{
-                boxShadow:
-                  "inset 0 0 120px rgba(249,115,22,0.18), inset 0 0 60px rgba(249,115,22,0.05)",
-              }}
-            />
-
-            {/* Twinkling Stars — ATLA element palette */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
-            >
-              {starPositions.map((pos, i) => {
-                const elementColors = [
-                  "rgba(147,197,253,0.9)",
-                  "rgba(253,186,116,0.9)",
-                  "rgba(110,231,183,0.9)",
-                  "rgba(251,191,36,0.9)",
-                ];
-                const color = elementColors[i % 4];
-                return (
-                  <motion.div
-                    key={i}
-                    className="absolute h-[2px] w-[2px] rounded-full"
-                    style={{
-                      top: pos.top,
-                      left: pos.left,
-                      background: color,
-                      boxShadow: `0 0 4px 1px ${color}`,
-                    }}
-                    animate={{
-                      opacity: [0.1, 1, 0.1],
-                      scale: [0.6, 1.4, 0.6],
-                    }}
-                    transition={{
-                      duration: pos.duration,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: pos.delay,
-                    }}
-                  />
-                );
-              })}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
       {/* Theme Toggle in Top Right */}
       <div className="fixed top-6 right-6 z-50">
         <ThemeToggle />
@@ -368,31 +273,26 @@ export default function Home() {
             {/* Background Animations */}
             <BackgroundBeams className="fixed -z-10" />
 
-            {/* Profile Image - Easter Egg Trigger */}
+            {/* Profile Image */}
             <div className="relative mb-2 group flex items-center justify-center">
-              {/* Diffused Airbender Cyan Glow */}
-              <div className="absolute inset-2 rounded-full opacity-0 group-[[data-avatar-mode=true]]:opacity-100 transition-all duration-700 pointer-events-none bg-[var(--color-air-accent)]/30 blur-[30px] scale-110" />
-
-              <button
-                onClick={toggleAvatarState}
-                className="relative h-40 w-40 sm:h-56 sm:w-56 cursor-pointer transition-all duration-500 grayscale filter group-hover:grayscale-0 active:scale-95 drop-shadow-md group-hover:drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]"
+              <div
+                className="relative h-40 w-40 sm:h-56 sm:w-56"
                 style={{
                   maskImage:
                     "linear-gradient(to bottom, black 70%, transparent 100%)",
                   WebkitMaskImage:
                     "linear-gradient(to bottom, black 70%, transparent 100%)",
                 }}
-                aria-label="Toggle Aura Mode"
               >
                 <Image
-                  src="/me1.png" // User's photo
+                  src="/me1.png"
                   alt="Adarsh Masekar - Profile Photo"
                   fill
                   sizes="(max-width: 640px) 160px, 224px"
-                  className={`object-contain transition-all duration-700 scale-100`}
+                  className="object-contain transition-all duration-700 grayscale filter group-hover:grayscale-0 drop-shadow-md group-hover:drop-shadow-[0_0_15px_rgba(0,0,0,0.2)]"
                   priority
                 />
-              </button>
+              </div>
             </div>
 
             {/* Hero Text */}
@@ -400,24 +300,23 @@ export default function Home() {
               <h1 className="mb-2 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
                 Adarsh Masekar
               </h1>
-              <h2 className="text-xl font-medium text-foreground/80 sm:text-2xl data-[avatar-mode=true]:animate-[float_2s_ease-in-out_infinite_alternate] data-[avatar-mode=true]:text-[var(--color-air-accent)] transition-colors duration-300">
+              <h2 className="text-xl font-medium text-foreground/80 sm:text-2xl transition-colors duration-300">
                 Technical Support Specialist
               </h2>
               <p className="mt-2 text-sm text-foreground/60 sm:text-base">
-                Enterprise B2B SaaS · L2/L3 Support · JavaScript · Java · SQL · API & Integration · RCA
+                Enterprise B2B SaaS · API &amp; Integration Support · Java · JavaScript · SQL · RCA · SRE Mindset
               </p>
             </div>
 
             {/* Summary Highlights */}
             <div id="highlights" className="mb-16 w-full relative">
-              {isAvatarState}
-              <div className="rounded-2xl border border-foreground/10 bg-background/90 p-4 sm:p-6 data-[avatar-mode=true]:border-[var(--color-earth-accent)] data-[avatar-mode=true]:bg-[var(--color-earth-bg)] data-[avatar-mode=true]:shadow-[0_8px_0_var(--color-earth-accent)] data-[avatar-mode=true]:-translate-y-2 transition-all duration-500">
-                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-foreground/70 data-[avatar-mode=true]:text-[var(--color-earth-accent)]">
+              <div className="rounded-2xl border border-foreground/10 bg-background/90 p-4 sm:p-6 transition-all duration-500">
+                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-foreground/70">
                   Key Highlights
                 </h3>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  <div className="text-center data-[avatar-mode=true]:border-l-4 data-[avatar-mode=true]:border-[var(--color-fire-accent)] data-[avatar-mode=true]:pl-2 transition-all duration-300">
-                    <AnimatedCounter value={1.8}suffix="+" />
+                  <div className="text-center">
+                    <AnimatedCounter value={1.8} suffix="+" />
                     <div className="text-xs text-foreground/60 sm:text-sm">
                       Years Experience
                     </div>
@@ -425,31 +324,28 @@ export default function Home() {
                       Enterprise B2B SaaS
                     </div>
                   </div>
-                  <div className="text-center data-[avatar-mode=true]:border-l-4 data-[avatar-mode=true]:border-[var(--color-fire-accent)] data-[avatar-mode=true]:pl-2 transition-all duration-300">
+                  <div className="text-center">
                     <AnimatedCounter value={300} suffix="+" />
                     <div className="text-xs text-foreground/60 sm:text-sm">
-                      L2/L3 Issues
-                    </div>
-                    <div className="text-xs text-foreground/50">
-                      Code-Level Debugging
+                      L2/L3 Escalations Resolved
                     </div>
                   </div>
-                  <div className="text-center data-[avatar-mode=true]:border-l-4 data-[avatar-mode=true]:border-[var(--color-fire-accent)] data-[avatar-mode=true]:pl-2 transition-all duration-300">
+                  <div className="text-center">
                     <AnimatedCounter value={50} suffix="+" />
                     <div className="text-xs text-foreground/60 sm:text-sm">
-                      Knowledge Base
+                      KB Articles
                     </div>
                     <div className="text-xs text-foreground/50">
-                      Self-Service usage +40%
+                      Self-Service +40%
                     </div>
                   </div>
-                  <div className="text-center data-[avatar-mode=true]:border-l-4 data-[avatar-mode=true]:border-[var(--color-fire-accent)] data-[avatar-mode=true]:pl-2 transition-all duration-300">
+                  <div className="text-center">
                     <AnimatedCounter value={95} suffix="%+" />
                     <div className="text-xs text-foreground/60 sm:text-sm">
                       SLA Adherence
                     </div>
                     <div className="text-xs text-foreground/50">
-                      Resolution Time -35%
+                      MTTR -35%
                     </div>
                   </div>
                 </div>
@@ -458,62 +354,30 @@ export default function Home() {
 
             <div className="mb-16 mt-4 w-full space-y-4 text-justify text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
               <p>
-                Technical Support Specialist with 1.8+ years in Enterprise B2B SaaS, specializing in code-level debugging, Root Cause Analysis, and API/integration support. Experienced in resolving complex L2/L3 escalations, building scalable knowledge systems, and delivering custom engineering solutions using Java, JavaScript, SQL, and REST APIs — while maintaining 95%+ SLA adherence.
+                Technical Support Specialist with 1.8+ years in Enterprise B2B SaaS,
+                specializing in API/integration debugging, code-level Root Cause Analysis,
+                and engineering-grade customer solutions. Proven track record of resolving
+                300+ L2/L3 escalations, building self-service knowledge systems, and
+                delivering custom fixes under pressure — while maintaining 95%+ SLA
+                adherence across global enterprise clients.
               </p>
             </div>
-
-            {/* Scroll Hint for Easter Egg */}
-            <AnimatePresence>
-              {isAvatarState && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="w-full flex justify-center mb-16 overflow-hidden"
-                >
-                  <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 2,
-                      ease: "easeInOut",
-                    }}
-                    className="flex flex-col items-center gap-2 text-amber-500/80"
-                  >
-                    <span className="text-sm font-semibold tracking-widest uppercase">
-                      The Avatar&apos;s Journey Awaits Below
-                    </span>
-                    <svg
-                      className="w-5 h-5 animate-bounce"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                    </svg>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* Experience Section */}
             <div
               id="experience"
-              className="mb-16 w-full text-left data-[avatar-mode=true]:bg-[var(--color-water-bg)] data-[avatar-mode=true]:p-6 data-[avatar-mode=true]:rounded-3xl transition-colors duration-500"
+              className="mb-16 w-full text-left"
             >
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70 data-[avatar-mode=true]:text-[var(--color-water-accent)]">
+              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Experience
               </h2>
               <div className="space-y-8">
-                <div className="rounded-[1.25rem] border-2 border-dashed border-foreground/20 p-1 sm:p-1.5 transition-all duration-300 hover:border-foreground/30 data-[avatar-mode=true]:border-[var(--color-air-accent)]/50">
-                  <div className="relative group hover-shimmer relative rounded-[1rem] border border-foreground/10 p-6 transition-all duration-300 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5 avatar:hover:border-amber-500/50 avatar:hover:shadow-amber-500/100">
+                <div className="rounded-[1.25rem] border-2 border-dashed border-foreground/20 p-1 sm:p-1.5 transition-all duration-300 hover:border-foreground/30">
+                  <div className="relative group hover-shimmer relative rounded-[1rem] border border-foreground/10 p-6 transition-all duration-300 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5">
                     {/* Header row: logo placeholder + title + role */}
                     <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
                       {/* Logo placeholder */}
-                      <div className="flex-shrink-0 h-10 w-10 rounded-xl border-2 border-dashed border-blue-400/40 bg-blue-500/5 flex items-center justify-center text-blue-500/50 data-[avatar-mode=true]:border-[var(--color-air-accent)]/40 data-[avatar-mode=true]:bg-[var(--color-air-bg)]/30 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
+                      <div className="flex-shrink-0 h-10 w-10 rounded-xl border-2 border-dashed border-blue-400/40 bg-blue-500/5 flex items-center justify-center text-blue-500/50">
                         <Lock className="w-4 h-4" />
                       </div>
                       <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
@@ -528,7 +392,7 @@ export default function Home() {
                     </div>
 
                     {/* Footer */}
-                    <div className="flex items-center justify-center gap-2 pt-5 border-t border-foreground/5 text-xs font-medium tracking-widest uppercase text-blue-500/60 data-[avatar-mode=true]:text-[var(--color-air-accent)]/60">
+                    <div className="flex items-center justify-center gap-2 pt-5 border-t border-foreground/5 text-xs font-medium tracking-widest uppercase text-blue-500/60">
                       <Lock className="w-3.5 h-3.5" />
                       <span>Unlocking April 6th, 2026</span>
                     </div>
@@ -537,7 +401,7 @@ export default function Home() {
 
                 <ExperienceItem
                   title="Qualitia Software"
-                  role="Junior Product Support Engineer | Pune, India (Remote)"
+                  role="Product Support Engineer I | Pune, India (Remote)"
                   collapsible={true}
                 >
                   <div className="space-y-3">
@@ -545,60 +409,61 @@ export default function Home() {
                       January 2025 – March 2026
                     </p>
                     <p className="text-sm text-foreground/80 mb-4 italic">
-                      Own L2/L3 support for enterprise test automation platform,
-                      handling escalations, RCA, and customer-facing fixes for
-                      global B2B clients.
+                      Provided L2/L3 technical support for an enterprise test automation SaaS
+                      platform, handling complex escalations requiring code-level debugging,
+                      custom engineering solutions, and cross-team collaboration for global
+                      B2B clients.
                     </p>
                     <div className="space-y-2">
                       <p className="flex items-start gap-2">
                         <span className="text-foreground/40 mt-1">•</span>
                         <span>
                           <strong>
-                            Reduced incident resolution time by 35%
+                            Engineered a custom Java/JDBC integration module for IBM DB2
                           </strong>{" "}
-                          by debugging Selenium/Appium automation and optimizing
-                          test scripts across 300+ L2/L3 issues using Java and
-                          Python for enterprise customers.
+                          within 36 hours, implementing connection pooling to resolve a critical enterprise
+                          account failure and prevent churn.
+                        </span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Resolved 300+ L2/L3 escalations</strong>{" "}
+                          through code-level debugging of Selenium and Appium frameworks,
+                          reducing MTTR by 35% while maintaining 95%+ SLA adherence.
                         </span>
                       </p>
                       <p className="flex items-start gap-2">
                         <span className="text-foreground/40 mt-1">•</span>
                         <span>
                           <strong>
-                            Engineered custom Java integration module for IBM
-                            DB2
+                            Authored 50+ technical knowledge base articles
                           </strong>{" "}
-                          within 36 hours, implementing JDBC connectivity layer
-                          with connection pooling to retain critical accounts
-                          for enterprise stakeholders.
+                          with executable code samples, achieving 40% increase in
+                          self-service resolution and reducing inbound ticket volume.
                         </span>
                       </p>
                       <p className="flex items-start gap-2">
                         <span className="text-foreground/40 mt-1">•</span>
                         <span>
-                          <strong>
-                            Architected 50+ technical knowledge base articles
-                          </strong>{" "}
-                          with code samples, achieving 40% increase in
-                          self-service deflection and 20% faster customer
-                          onboarding for QA and product teams.
+                          <strong>Mentored 3 junior support engineers</strong> on
+                          product architecture and troubleshooting methodologies,
+                          cutting team ramp-up time by 40%.
                         </span>
                       </p>
                       <p className="flex items-start gap-2">
                         <span className="text-foreground/40 mt-1">•</span>
                         <span>
-                          <strong>Mentored 3 junior engineers</strong> and
-                          trained 30+ QA testers on product architecture and
-                          troubleshooting methodologies, reducing team ramp-up
-                          time by 40% for customer success.
-                          {isAvatarState && <JasmineDragon />}
+                          <strong>Collaborated directly with product engineering</strong>{" "}
+                          on bug escalations, feature validation, and API testing —
+                          acting as the technical voice of the customer in roadmap discussions.
                         </span>
                       </p>
                     </div>
                     <div className="mt-4 pt-3 border-t border-foreground/10">
                       <p className="text-xs text-foreground/50">
-                        <strong>Keywords:</strong> Java, Spring Boot, REST APIs,
-                        SQL, RCA, Selenium, Appium, CI/CD
+                        <strong>Keywords:</strong> Java, JDBC, IBM DB2, Selenium,
+                        Appium, Spring Boot, REST APIs, SQL, RCA, CI/CD
                       </p>
                       <p className="text-xs text-foreground/50 mt-1">
                         <strong>Ticketing:</strong> Jira, internal tools (L1–L3
@@ -682,80 +547,79 @@ export default function Home() {
                 Featured projects
               </h2>
               <div className="space-y-8">
-                <div className="data-[avatar-mode=true]:border-t-[var(--color-water-accent)] data-[avatar-mode=true]:border-b-[var(--color-earth-accent)] data-[avatar-mode=true]:border-t-2 data-[avatar-mode=true]:border-b-4 data-[avatar-mode=true]:rounded-3xl transition-all duration-500 hover:data-[avatar-mode=true]:-translate-y-1">
-                  <ExperienceItem
-                    title="AI-Powered Log Analysis Portal"
-                    role="MongoDB, Express.js, React.js, Node.js, LLM | 2025"
-                    collapsible={true}
-                  >
-                    <div className="space-y-3">
-                      <p className="text-sm text-foreground/70 mb-3">
-                        Internal tool concept for L1/L2 teams to reduce manual
-                        stack-trace analysis and accelerate RCA
+                <ExperienceItem
+                  title="AI-Powered Log Analysis Portal"
+                  role="MongoDB, Express.js, React.js, Node.js, LLM | 2025"
+                  collapsible={true}
+                >
+                  <div className="space-y-3">
+                    <p className="text-sm text-foreground/70 mb-1">
+                      Internal tool concept for L1/L2 teams to reduce manual
+                      stack-trace analysis and accelerate RCA.
+                    </p>
+                    <p className="text-sm text-foreground/55 mb-3 italic">
+                      Identified gap from 300+ manual RCA cycles; built as internal tooling
+                      proof-of-concept to address a real support bottleneck.
+                    </p>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Problem:</strong> Support teams spending
+                          excessive time manually analyzing Java stack traces
+                          and error patterns across multiple systems for
+                          enterprise customers.
+                        </span>
                       </p>
-                      <div className="space-y-2">
-                        <p className="flex items-start gap-2">
-                          <span className="text-foreground/40 mt-1">•</span>
-                          <span>
-                            <strong>Problem:</strong> Support teams spending
-                            excessive time manually analyzing Java stack traces
-                            and error patterns across multiple systems for
-                            enterprise customers.
-                          </span>
-                        </p>
-                        <p className="flex items-start gap-2">
-                          <span className="text-foreground/40 mt-1">•</span>
-                          <span>
-                            <strong>Solution:</strong> Built automated portal
-                            with file uploads, API integrations, and Groq API
-                            integration to parse errors, targeting 40%
-                            deflection in L1 tickets and faster MTTR for L2.
-                          </span>
-                        </p>
-                      </div>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Solution:</strong> Built automated portal
+                          with file uploads, API integrations, and Groq API
+                          integration to parse errors, targeting 40%
+                          deflection in L1 tickets and faster MTTR for L2.
+                        </span>
+                      </p>
                     </div>
-                  </ExperienceItem>
-                </div>
+                  </div>
+                </ExperienceItem>
 
-                <div className="data-[avatar-mode=true]:border-t-[var(--color-water-accent)] data-[avatar-mode=true]:border-b-[var(--color-earth-accent)] data-[avatar-mode=true]:border-t-2 data-[avatar-mode=true]:border-b-4 data-[avatar-mode=true]:rounded-3xl transition-all duration-500 hover:data-[avatar-mode=true]:-translate-y-1">
-                  <ExperienceItem
-                    title={
-                      <span className="flex items-center">
-                        Product Enhancement: In-House Code Editor
-                        {isAvatarState && <ZukoFlame />}
-                      </span>
-                    }
-                    role="Java, Eclipse RCP | 2025"
-                    collapsible={true}
-                  >
-                    <div className="space-y-3">
-                      <p className="text-sm text-foreground/70 mb-3">
-                        Technical analysis and specification for in-house IDE
-                        solution to reduce customer friction
+                <ExperienceItem
+                  title="Product Enhancement: In-House Code Editor"
+                  role="Java, Eclipse RCP | 2025"
+                  collapsible={true}
+                >
+                  <div className="space-y-3">
+                    <p className="text-sm text-foreground/70 mb-1">
+                      Technical analysis and specification for in-house IDE
+                      solution to reduce customer friction.
+                    </p>
+                    <p className="text-sm text-foreground/55 mb-3 italic">
+                      Proposed after tracking 20+ escalation tickets rooted in external IDE
+                      dependency issues — translating support data into a product-level solution.
+                    </p>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Problem:</strong> 20+ escalation tickets
+                          related to setup issues and external IDE
+                          dependencies causing customer friction and longer
+                          onboarding for enterprise clients.
+                        </span>
                       </p>
-                      <div className="space-y-2">
-                        <p className="flex items-start gap-2">
-                          <span className="text-foreground/40 mt-1">•</span>
-                          <span>
-                            <strong>Problem:</strong> 20+ escalation tickets
-                            related to setup issues and external IDE
-                            dependencies causing customer friction and longer
-                            onboarding for enterprise clients.
-                          </span>
-                        </p>
-                        <p className="flex items-start gap-2">
-                          <span className="text-foreground/40 mt-1">•</span>
-                          <span>
-                            <strong>Solution:</strong> Researched Eclipse RCP
-                            frameworks, created technical specifications
-                            projected to reduce setup-related escalation tickets
-                            by 30% and cut onboarding time for new users.
-                          </span>
-                        </p>
-                      </div>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Solution:</strong> Researched Eclipse RCP
+                          frameworks, created technical specifications
+                          projected to reduce setup-related escalation tickets
+                          by 30% and cut onboarding time for new users.
+                        </span>
+                      </p>
                     </div>
-                  </ExperienceItem>
-                </div>
+                  </div>
+                </ExperienceItem>
               </div>
             </div>
 
@@ -765,16 +629,14 @@ export default function Home() {
                 Education
               </h2>
               <div className="space-y-12">
-                <div className="data-[avatar-mode=true]:border-l-4 data-[avatar-mode=true]:border-b-2 data-[avatar-mode=true]:border-[var(--color-earth-accent)] data-[avatar-mode=true]:pl-4 data-[avatar-mode=true]:rounded-bl-xl transition-all duration-300">
-                  <ExperienceItem
-                    title="Visvesvaraya Technological University"
-                    role="Bachelor of Engineering in Computer Science"
-                  >
-                    <p className="text-foreground/70">
-                      Graduated: 2023 | CGPA: 8.6/10
-                    </p>
-                  </ExperienceItem>
-                </div>
+                <ExperienceItem
+                  title="Visvesvaraya Technological University"
+                  role="Bachelor of Engineering in Computer Science"
+                >
+                  <p className="text-foreground/70">
+                    Graduated: 2023 | CGPA: 8.6/10
+                  </p>
+                </ExperienceItem>
               </div>
             </div>
 
@@ -815,16 +677,16 @@ export default function Home() {
                 Get in Touch
               </h2>
               <div className="rounded-2xl border border-foreground/10 bg-background/90 p-6 sm:p-8 relative">
-                {isAvatarState && <FireNationBalloon />}
                 <div className="space-y-6 relative z-10">
                   <div>
                     <p className="mb-4 text-lg font-medium text-foreground max-w-xl">
-                      Ready to contribute to your team's success. Available for
-                      Product Support / Application Support / SRE-adjacent
-                      roles.
+                      Currently transitioning into a Technical Support Specialist role.
                     </p>
                     <p className="text-md text-foreground/70 max-w-xl">
-                      Available for Technical Support Specialist / Product Support / SRE-adjacent roles. Strong background in enterprise B2B SaaS support, API/integration debugging, and incident management.
+                      Open to high-impact opportunities in Technical Support, Product Support Engineering,
+                      or SRE-adjacent functions at enterprise SaaS companies. Let&apos;s talk if you&apos;re
+                      looking for someone who debugs at the code level and treats every ticket as
+                      a product signal.
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-4">
@@ -846,16 +708,6 @@ export default function Home() {
 
               <FocusTools />
             </div>
-
-            {/* Avatar Journey and Quotes — visible only in Avatar State */}
-            <AnimatePresence>
-              {isAvatarState && (
-                <>
-                  <AvatarJourney />
-                  <ATLAQuote />
-                </>
-              )}
-            </AnimatePresence>
           </motion.main>
         )}
       </AnimatePresence>

@@ -3,12 +3,10 @@
 import { GitHubCalendar } from "react-github-calendar";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useAvatarState } from "@/components/providers/AvatarStateProvider";
 import { motion } from "framer-motion";
 
 export function GithubGraph() {
   const { theme } = useTheme();
-  const { isAvatarState } = useAvatarState();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -18,10 +16,7 @@ export function GithubGraph() {
   if (!mounted)
     return <div className="min-h-[165px] w-full" aria-hidden="true" />;
 
-  const airTheme = {
-    light: ["#fffbeb", "#fde68a", "#fbbf24", "#d97706", "#b45309"],
-    dark: ["#451a03", "#b45309", "#d97706", "#fbbf24", "#fde68a"],
-  };
+
 
   return (
     <div className="w-full overflow-x-auto pb-4 scrollbar-hide">
@@ -33,7 +28,6 @@ export function GithubGraph() {
         <GitHubCalendar
           username="AdarshMasekar"
           colorScheme={theme === "dark" ? "dark" : "light"}
-          theme={isAvatarState ? airTheme : undefined}
           blockSize={9}
           blockMargin={3}
           fontSize={12}

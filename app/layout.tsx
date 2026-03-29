@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
-import { AvatarStateProvider } from "@/components/providers/AvatarStateProvider";
 import { ToastProvider } from "@/components/toast";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -104,7 +103,7 @@ export default function RootLayout({
         />
         <ThemeProvider>
           <ToastProvider>
-            <AvatarStateProvider>{children}</AvatarStateProvider>
+            {children}
           </ToastProvider>
         </ThemeProvider>
         <SpeedInsights />

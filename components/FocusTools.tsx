@@ -3,8 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Play, Pause, RotateCcw, Clock, Music, Volume2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAvatarState } from "@/components/providers/AvatarStateProvider";
-import { MomoPomodoro } from "@/components/easter-eggs/MomoPomodoro";
+
 
 interface FocusToolsProps {
   className?: string;
@@ -12,15 +11,13 @@ interface FocusToolsProps {
 
 export function FocusTools({ className = "" }: FocusToolsProps) {
   const [activeTab, setActiveTab] = useState<"pomodoro" | "lofi">("pomodoro");
-  const { isAvatarState } = useAvatarState();
 
   return (
     <div
-      className={`rounded-2xl border border-foreground/10 bg-background/55 h-24 ${className} data-[avatar-mode=true]:bg-[var(--color-air-bg)] transition-all duration-500`}
-      data-avatar-mode={isAvatarState}
+      className={`rounded-2xl border border-foreground/10 bg-background/55 h-24 ${className} transition-all duration-500`}
     >
       {/* Tab Headers */}
-      <div className="flex items-center gap-1 p-2 bg-background/55 rounded-t-lg border-b border-foreground/10 data-[avatar-mode=true]:bg-[var(--color-air-bg)] transition-colors">
+      <div className="flex items-center gap-1 p-2 bg-background/55 rounded-t-lg border-b border-foreground/10 transition-colors">
         <button
           onClick={() => setActiveTab("pomodoro")}
           className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all duration-200 ${
@@ -31,7 +28,6 @@ export function FocusTools({ className = "" }: FocusToolsProps) {
         >
           <Clock size={10} />
           Pomodoro
-          {isAvatarState && <MomoPomodoro />}
         </button>
         <button
           onClick={() => setActiveTab("lofi")}
