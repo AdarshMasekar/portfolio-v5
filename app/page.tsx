@@ -401,11 +401,10 @@ export default function Home() {
                 Adarsh Masekar
               </h1>
               <h2 className="text-xl font-medium text-foreground/80 sm:text-2xl data-[avatar-mode=true]:animate-[float_2s_ease-in-out_infinite_alternate] data-[avatar-mode=true]:text-[var(--color-air-accent)] transition-colors duration-300">
-                Junior Product Support Engineer
+                Technical Support Specialist
               </h2>
               <p className="mt-2 text-sm text-foreground/60 sm:text-base">
-                Enterprise B2B SaaS · L2/L3 Support · JavaScript · Java · SQL ·
-                Ticketing · RCA · SRE mindset
+                Enterprise B2B SaaS · L2/L3 Support · JavaScript · Java · SQL · API & Integration · RCA
               </p>
             </div>
 
@@ -457,14 +456,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mb-16 mt-4 w-full space-y-4 text-left text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
+            <div className="mb-16 mt-4 w-full space-y-4 text-justify text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
               <p>
-                Junior Product Support Engineer with around 2 years in
-                Enterprise B2B SaaS, specializing in solving complex
-                engineering-level issues and delivering technical solutions
-                using Java, Python, JavaScript, SQL, and CI/CD integrations
-                while maintaining 95%+ SLA adherence through Root Cause Analysis
-                and automation.
+                Technical Support Specialist with 1.8+ years in Enterprise B2B SaaS, specializing in code-level debugging, Root Cause Analysis, and API/integration support. Experienced in resolving complex L2/L3 escalations, building scalable knowledge systems, and delivering custom engineering solutions using Java, JavaScript, SQL, and REST APIs — while maintaining 95%+ SLA adherence.
               </p>
             </div>
 
@@ -830,10 +824,7 @@ export default function Home() {
                       roles.
                     </p>
                     <p className="text-md text-foreground/70 max-w-xl">
-                      Strong background in enterprise B2B SaaS support, incident
-                      management, and automation. Let's discuss how I can help
-                      reduce your ticket volume and improve customer
-                      satisfaction.
+                      Available for Technical Support Specialist / Product Support / SRE-adjacent roles. Strong background in enterprise B2B SaaS support, API/integration debugging, and incident management.
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-4">
