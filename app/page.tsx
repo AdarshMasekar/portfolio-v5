@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Github, Linkedin, QrCode, X, FileText, Bot, User } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
   motion,
@@ -83,6 +83,22 @@ const GithubGraph = dynamic(
 export default function Home() {
   const [showQR, setShowQR] = useState(false);
   const [mode, setMode] = useState<"human" | "agent">("human");
+  const closeQRRef = useRef<HTMLButtonElement>(null);
+
+  const closeQR = useCallback(() => setShowQR(false), []);
+
+  // Close QR modal on Escape key
+  useEffect(() => {
+    if (!showQR) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeQR(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [showQR, closeQR]);
+
+  // Focus close button when modal opens
+  useEffect(() => {
+    if (showQR) closeQRRef.current?.focus();
+  }, [showQR]);
 
 
   const menuItems: MenuBarItem[] = [
@@ -94,6 +110,7 @@ export default function Home() {
             className="group relative flex h-7 w-12 cursor-pointer rounded-full bg-foreground/10 p-1 transition-colors duration-200 ease-in-out hover:bg-foreground/20 focus:outline-none"
             role="switch"
             aria-checked={mode === "agent"}
+            aria-label={`Switch to ${mode === "human" ? "agent" : "human"} mode`}
           >
             <div
               className={`flex h-5 w-5 transform items-center justify-center rounded-full bg-background shadow-sm transition duration-200 ease-in-out ${
@@ -637,16 +654,22 @@ export default function Home() {
       {showQR && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-foreground/20 backdrop-blur-sm"
-          onClick={() => setShowQR(false)}
+          onClick={closeQR}
+          role="presentation"
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="qr-modal-title"
             className="relative rounded-2xl border border-foreground/10 bg-background p-8 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
+            <p id="qr-modal-title" className="sr-only">Portfolio QR Code</p>
             <button
-              onClick={() => setShowQR(false)}
+              ref={closeQRRef}
+              onClick={closeQR}
               className="absolute -right-3 -top-3 rounded-full bg-foreground p-2 text-background transition-transform hover:scale-110"
-              aria-label="Close"
+              aria-label="Close QR code dialog"
             >
               <X className="h-4 w-4" />
             </button>

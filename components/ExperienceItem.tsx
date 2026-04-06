@@ -10,6 +10,7 @@ interface ExperienceItemProps {
   collapsible?: boolean;
   link?: string;
   collapsedHeight?: string;
+  id?: string;
 }
 
 export function ExperienceItem({
@@ -19,8 +20,10 @@ export function ExperienceItem({
   collapsible = false,
   link,
   collapsedHeight = "max-h-20",
+  id,
 }: ExperienceItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const contentId = id ? `${id}-content` : undefined;
 
   return (
     <div className="group hover-shimmer relative rounded-[1rem] border border-foreground/10 p-6 transition-all duration-300 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5 avatar:hover:border-amber-500/50 avatar:hover:shadow-amber-500/10">
@@ -42,6 +45,7 @@ export function ExperienceItem({
       </div>
 
       <div
+        id={contentId}
         className={`relative max-w-xl text-sm leading-relaxed text-foreground/70 transition-all duration-300 ${!isExpanded && collapsible ? `${collapsedHeight} overflow-hidden` : ""}`}
       >
         {children}
@@ -53,6 +57,8 @@ export function ExperienceItem({
       {collapsible && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
+          aria-expanded={isExpanded}
+          aria-controls={contentId}
           className="mt-4 flex items-center gap-1 text-xs font-medium text-foreground/50 hover:text-foreground transition-colors"
         >
           {isExpanded ? (
