@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Github, Linkedin, QrCode, X, FileText, Lock, Bot, User } from "lucide-react";
+import { Github, Linkedin, QrCode, X, FileText, Bot, User } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
@@ -67,100 +67,6 @@ function AnimatedCounter({
   );
 }
 
-// Countdown Timer Component
-function CountdownTimer({ targetDate, offerDate }: { targetDate: string; offerDate?: string }) {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-    const target = new Date(targetDate).getTime();
-
-    const calculate = () => {
-      const now = new Date().getTime();
-      const distance = target - now;
-      if (distance < 0) return;
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-      });
-    };
-
-    calculate();
-    const interval = setInterval(calculate, 1000);
-    return () => clearInterval(interval);
-  }, [targetDate]);
-
-  const progressPercent = offerDate
-    ? Math.min(
-        100,
-        Math.max(
-          0,
-          ((Date.now() - new Date(offerDate).getTime()) /
-            (new Date(targetDate).getTime() - new Date(offerDate).getTime())) *
-            100
-        )
-      )
-    : null;
-
-  if (!isMounted) return null;
-
-  const units = Object.entries(timeLeft) as [string, number][];
-
-  return (
-    <div className="w-full space-y-5">
-      <div className="flex gap-2 sm:gap-3 justify-center">
-        {units.map(([unit, value], i) => (
-          <div key={unit} className="flex items-center">
-            <div className="flex flex-col items-center">
-              {/* Timer Box */}
-              <div
-                className="flex h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem] items-center justify-center rounded-2xl
-                  bg-white dark:bg-foreground/[0.04]
-                  text-2xl sm:text-3xl font-bold tabular-nums
-                  bg-gradient-to-b from-foreground/90 to-foreground/60 bg-clip-text text-transparent
-                  border border-foreground/10
-                  shadow-[0_4px_12px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)]
-                  dark:shadow-[0_4px_12px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.07)]"
-              >
-                {value.toString().padStart(2, "0")}
-              </div>
-              <span
-                className="mt-2 text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-foreground/50 font-semibold"
-              >
-                {unit}
-              </span>
-            </div>
-            {/* Colon separator */}
-            {i < units.length - 1 && (
-              <span className="mx-0.5 sm:mx-1 mb-5 text-xl font-bold text-foreground/20 select-none">:</span>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Progress bar */}
-      {progressPercent !== null && (
-        <div className="space-y-1.5">
-          <div className="h-1 w-full rounded-full bg-foreground/8 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-blue-500/70 to-blue-400/50
-                transition-all duration-1000 ease-linear"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-          <div className="flex justify-between text-[9px] tracking-wider text-foreground/30 font-medium uppercase">
-            <span>Offer Accepted</span>
-            <span>{Math.round(progressPercent)}% to Day 1</span>
-            <span>Apr 6, 2026</span>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 import { AgentMarkdownView } from "@/components/AgentMarkdownView";
 
@@ -372,32 +278,40 @@ export default function Home() {
                 Experience
               </h2>
               <div className="space-y-8">
-                <div className="rounded-[1.25rem] border-2 border-dashed border-foreground/20 p-1 sm:p-1.5 transition-all duration-300 hover:border-foreground/30">
-                  <div className="relative group hover-shimmer relative rounded-[1rem] border border-foreground/10 p-6 transition-all duration-300 hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5">
-                    {/* Header row: logo placeholder + title + role */}
-                    <div className="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
-                      {/* Logo placeholder */}
-                      <div className="flex-shrink-0 h-10 w-10 rounded-xl border-2 border-dashed border-blue-400/40 bg-blue-500/5 flex items-center justify-center text-blue-500/50">
-                        <Lock className="w-4 h-4" />
-                      </div>
-                      <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                        <span className="font-semibold text-foreground text-lg tracking-tight">S********t</span>
-                        <span className="text-sm text-foreground/55">********* Specialist &middot; Bengaluru, India (Remote)</span>
-                      </div>
-                    </div>
-
-                    {/* Countdown */}
-                    <div className="w-full mb-1">
-                      <CountdownTimer targetDate="2026-04-06T09:30:00" offerDate="2026-03-15T00:00:00" />
-                    </div>
-
-                    {/* Footer */}
-                    <div className="flex items-center justify-center gap-2 pt-5 border-t border-foreground/5 text-xs font-medium tracking-widest uppercase text-blue-500/60">
-                      <Lock className="w-3.5 h-3.5" />
-                      <span>Unlocking April 6th, 2026</span>
+                <ExperienceItem
+                  title="Smartsheet"
+                  role="Technical Support Specialist · Bengaluru, India (Hybrid)"
+                  collapsible={true}
+                >
+                  <div className="space-y-3">
+                    <p className="font-semibold text-foreground/70 text-sm mb-4">
+                      April 2026 – Present
+                    </p>
+                    <p className="text-sm text-foreground/80 mb-4 italic">
+                      Completed onboarding and actively ramping up — immersed in product training,
+                      exploring the Smartsheet platform end-to-end, and building a deep understanding
+                      of the tools and workflows that power enterprise support at scale.
+                    </p>
+                    <div className="space-y-2">
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Deep product exploration</strong> — studying Smartsheet&apos;s
+                          core platform, automation capabilities, integration ecosystem, and
+                          enterprise feature set to build a strong technical foundation.
+                        </span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Structured product training</strong> — going through comprehensive
+                          onboarding programs to understand support processes, internal tooling,
+                          and the customer journey across enterprise accounts.
+                        </span>
+                      </p>
                     </div>
                   </div>
-                </div>
+                </ExperienceItem>
 
                 <ExperienceItem
                   title="Qualitia Software"
@@ -680,13 +594,12 @@ export default function Home() {
                 <div className="space-y-6 relative z-10">
                   <div>
                     <p className="mb-4 text-lg font-medium text-foreground max-w-xl">
-                      Currently transitioning into a Technical Support Specialist role.
+                      Currently a Technical Support Specialist at Smartsheet.
                     </p>
                     <p className="text-md text-foreground/70 max-w-xl">
-                      Open to high-impact opportunities in Technical Support, Product Support Engineering,
-                      or SRE-adjacent functions at enterprise SaaS companies. Let&apos;s talk if you&apos;re
-                      looking for someone who debugs at the code level and treats every ticket as
-                      a product signal.
+                      Open to connecting with folks working on enterprise SaaS, support engineering,
+                      or SRE-adjacent problems. If you value engineers who debug at the code level
+                      and treat every ticket as a product signal — let&apos;s talk.
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-4">
