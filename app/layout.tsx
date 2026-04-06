@@ -14,19 +14,21 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Adarsh Masekar | Product Support Engineer",
+    default: "Adarsh Masekar | Technical Support Specialist at Smartsheet",
     template: "%s | Adarsh Masekar",
   },
   description:
-    "Product Support Engineer specializing in enterprise SaaS, solving complex engineering issues with Java, Python, JavaScript, and SQL.",
+    "Technical Support Specialist at Smartsheet specializing in enterprise B2B SaaS, API & integration debugging, Root Cause Analysis, and engineering-grade customer solutions.",
   keywords: [
+    "Technical Support Specialist",
+    "Smartsheet",
+    "Enterprise SaaS Support",
+    "API Integration Support",
     "Product Support Engineer",
-    "Software Engineer",
     "Java",
-    "Python",
     "JavaScript",
     "SQL",
-    "Technical Support",
+    "Root Cause Analysis",
     "B2B SaaS",
   ],
   authors: [{ name: "Adarsh Masekar" }],
@@ -35,16 +37,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://adarshmasekar.vercel.app/",
-    title: "Adarsh Masekar | Product Support Engineer",
+    title: "Adarsh Masekar | Technical Support Specialist at Smartsheet",
     description:
-      "Product Support Engineer specializing in enterprise SaaS, resolving complex engineering issues.",
+      "Technical Support Specialist at Smartsheet — enterprise B2B SaaS, API debugging, RCA, and engineering-grade support.",
     siteName: "Adarsh Masekar Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Adarsh Masekar | Product Support Engineer",
+    title: "Adarsh Masekar | Technical Support Specialist at Smartsheet",
     description:
-      "Product Support Engineer specializing in enterprise SaaS, resolving complex engineering issues.",
+      "Technical Support Specialist at Smartsheet — enterprise B2B SaaS, API debugging, RCA, and engineering-grade support.",
     creator: "@adarshmasekar",
   },
   robots: {
@@ -68,7 +70,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Adarsh Masekar",
-  jobTitle: "Product Support Engineer",
+  jobTitle: "Technical Support Specialist",
   url: "https://adarshmasekar.vercel.app",
   sameAs: [
     "https://github.com/adarshmasekar",
@@ -77,7 +79,7 @@ const jsonLd = {
   ],
   worksFor: {
     "@type": "Organization",
-    name: "Qualitia Software",
+    name: "Smartsheet",
   },
 };
 
