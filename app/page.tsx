@@ -315,7 +315,7 @@ export default function Home() {
 
                 <ExperienceItem
                   title="Qualitia Software"
-                  role="Product Support Engineer I | Pune, India (Remote)"
+                  role="Product Support Engineer | Pune, India (Remote)"
                   collapsible={true}
                 >
                   <div className="space-y-3">
