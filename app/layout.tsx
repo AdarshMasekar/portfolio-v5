@@ -41,6 +41,14 @@ export const metadata: Metadata = {
     description:
       "Technical Support Specialist at Smartsheet — enterprise B2B SaaS, API debugging, RCA, and engineering-grade support.",
     siteName: "Adarsh Masekar Portfolio",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Adarsh Masekar — Technical Support Specialist at Smartsheet",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -48,6 +56,7 @@ export const metadata: Metadata = {
     description:
       "Technical Support Specialist at Smartsheet — enterprise B2B SaaS, API debugging, RCA, and engineering-grade support.",
     creator: "@adarshmasekar",
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
