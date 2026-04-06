@@ -280,7 +280,7 @@ export default function Home() {
               <div className="space-y-8">
                 <ExperienceItem
                   title="Smartsheet"
-                  role="Technical Support Specialist · Bengaluru, India (Hybrid)"
+                  role="Technical Support Specialist | Bengaluru, India (Hybrid)"
                   collapsible={true}
                 >
                   <div className="space-y-3">
