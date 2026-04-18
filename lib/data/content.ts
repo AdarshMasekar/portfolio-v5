@@ -3,19 +3,21 @@ export const getMarkdownContent = (time: string) => `# Adarsh Masekar
 
 ## About
 
-Product Support Engineer with 2+ years in Enterprise B2B SaaS, specializing in solving complex engineering-level issues and delivering technical solutions using Java, JavaScript, SQL, and CI/CD integrations while maintaining 95%+ SLA adherence through Root Cause Analysis and automation.
+Technical Support Specialist with 2+ years in Enterprise B2B SaaS, specializing in solving complex engineering-level issues and delivering technical solutions using Java, JavaScript, SQL, and CI/CD integrations while maintaining 95%+ SLA adherence through Root Cause Analysis and automation.
 
 ## Experience
 
-### S********t [🚀 Incoming]
-********** ***** Specialist 1**
-April 6, 2026 – Present | Bengaluru, India (Remote)
+### Smartsheet
+**Technical Support Specialist 1**
+April 2026 – Present | Bengaluru, India (Hybrid)
 
-- 🔒 *Loading next chapter... Unlocking on April 6th.*
+- Completed onboarding and actively ramping up — immersed in product training, exploring the Smartsheet platform end-to-end, and building a deep understanding of the tools and workflows that power enterprise support at scale.
+- Deep product exploration — studying Smartsheet's core platform, automation capabilities, integration ecosystem, and enterprise feature set.
+- Structured product training — going through comprehensive onboarding programs to understand support processes, internal tooling, and the customer journey.
 
 ### Qualitia Software
 **Product Support Engineer (L2)**
-January 2025 – Present | Pune, India (Remote)
+January 2025 – March 2026 | Pune, India (Remote)
 
 - Resolved 300+ Tier 2/3 technical issues through code-level debugging of Selenium and Appium frameworks, maintaining 95%+ SLA adherence and reducing overall resolution time by 35%.
 - Engineered custom Java integration module for IBM DB2 within 36 hours, implementing JDBC connectivity layer with connection pooling to retain critical accounts and enable seamless database operations.
@@ -24,7 +26,7 @@ January 2025 – Present | Pune, India (Remote)
 
 ### Tech Mahindra
 **Associate Software Engineer**
-March 2024 – Seotember 2024 | Bengaluru, India
+March 2024 – September 2024 | Bengaluru, India
 
 - Provided L1/L2 production support for enterprise loan platform processing 5,000+ daily transactions, performing code-level debugging in Java/Spring Boot microservices and reducing incident response time by 25%.
 - Conducted comprehensive Root Cause Analysis on production defects with stack trace analysis and code references, enabling development teams to implement permanent fixes 30% faster.
@@ -38,13 +40,15 @@ March 2024 – Seotember 2024 | Bengaluru, India
 
 - Built full-stack MERN portal to automate error log analysis for support teams, integrating file uploads, API integrations, and real-time diagnostics.
 - Integrated Grok API and local LLM models to parse Java stack traces and error patterns, targeting 40% deflection in L1 support tickets.
+- Architecture: MERN stack with React frontend, Express/Node backend orchestrating LLM calls via Groq API, MongoDB for log storage.
+- Reduced average RCA time from 45 minutes to under 15 minutes per incident.
 
-### Log Analysis Portal
-**MERN Stack, LLM Integration** | 2025
+### Product Enhancement: In-House Code Editor
+**Java, Eclipse RCP** | 2025
 
-- Developed comprehensive web application for automated log analysis and error pattern recognition
-- Integrated AI capabilities to streamline support ticket triage and reduce manual analysis time
-- Built responsive interface with real-time diagnostics and reporting features
+- Analyzed 20+ escalation tickets to propose in-house code editor solution, creating technical specifications projected to reduce setup-related tickets by 30%.
+- Researched Eclipse RCP and IDE frameworks, presenting feasibility analysis and implementation roadmap to product engineering team.
+- Specification adopted by product engineering for roadmap consideration, with projected 25% faster customer onboarding.
 
 ## Education
 
@@ -55,14 +59,16 @@ Graduated: 2023 | CGPA: 8.6/10
 ## Skills
 
 **Product Support & Troubleshooting:** Production Debugging, Root Cause Analysis (RCA), Log Analysis, Incident Management, SLA Monitoring, Ticketing Systems
-**DevOps & Support Tools:** Jira, Git, Jenkins, Linux/Unix, Bash Scripting, CI/CD
+**DevOps & Support Tools:** Jira, Git, Jenkins, Docker, Linux/Unix, Bash Scripting, CI/CD
 **Automation & Testing:** Selenium, Appium, API Testing, Postman, Test Automation
-**Frontend & Integrations:** React.js, JavaScript, TypeScript, HTML5, CSS3, Next.js
+**Frontend & Integrations:** React.js, Next.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS
 **Backend & Databases:** Java, MySQL, Python, Node.js, Express.js, REST APIs, MongoDB
 
 ## Get in Touch
 
-Ready to contribute to your team's success. Available for Product Support / Application Support / SRE-adjacent roles. Strong background in enterprise B2B SaaS support, incident management, and automation.
+Currently a Technical Support Specialist at Smartsheet — actively ramping up and always happy to connect.
+
+Open to connecting with folks working on enterprise SaaS, support engineering, or SRE-adjacent problems.
 
 Connect with me on [LinkedIn](https://www.linkedin.com/in/adarsh-masekar/) or shoot an [email](mailto:adarshmasekar@gmail.com)
 

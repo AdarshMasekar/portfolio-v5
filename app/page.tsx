@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Github, Linkedin, QrCode, X, FileText, Bot, User } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import {
   motion,
@@ -22,6 +22,7 @@ import { MenuBar, MenuBarItem } from "@/components/ui/bottom-menu";
 import { SiLeetcode } from "react-icons/si";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SideNav } from "@/components/SideNav";
+import { getYearsOfExperience } from "@/lib/utils";
 
 // Animated Counter Component
 function AnimatedCounter({
@@ -77,13 +78,14 @@ const TechStack = dynamic(
 
 const GithubGraph = dynamic(
   () => import("@/components/GithubGraph").then((mod) => mod.GithubGraph),
-  { ssr: true },
+  { ssr: false },
 );
 
 export default function Home() {
   const [showQR, setShowQR] = useState(false);
   const [mode, setMode] = useState<"human" | "agent">("human");
   const closeQRRef = useRef<HTMLButtonElement>(null);
+  const yearsExp = useMemo(() => getYearsOfExperience(), []);
 
   const closeQR = useCallback(() => setShowQR(false), []);
 
@@ -199,7 +201,7 @@ export default function Home() {
             {/* Profile Image */}
             <div className="relative mb-2 group flex items-center justify-center">
               <div
-                className="relative h-40 w-40 sm:h-56 sm:w-56"
+                className="relative h-28 w-28 sm:h-56 sm:w-56"
                 style={{
                   maskImage:
                     "linear-gradient(to bottom, black 70%, transparent 100%)",
@@ -211,7 +213,7 @@ export default function Home() {
                   src="/me1.png"
                   alt="Adarsh Masekar - Profile Photo"
                   fill
-                  sizes="(max-width: 640px) 160px, 224px"
+                  sizes="(max-width: 640px) 112px, 224px"
                   className="object-contain transition-all duration-700 grayscale filter group-hover:grayscale-0 drop-shadow-md group-hover:drop-shadow-[0_0_15px_rgba(0,0,0,0.2)]"
                   priority
                 />
@@ -219,7 +221,7 @@ export default function Home() {
             </div>
 
             {/* Hero Text */}
-            <div className="mb-6 text-center">
+            <div className="mb-4 sm:mb-6 text-center">
               <h1 className="mb-2 text-5xl font-bold tracking-tight sm:text-7xl cursor-default">
                 Adarsh Masekar
               </h1>
@@ -232,14 +234,14 @@ export default function Home() {
             </div>
 
             {/* Summary Highlights */}
-            <div id="highlights" className="mb-16 w-full relative">
+            <section id="highlights" className="mb-16 w-full relative" aria-labelledby="highlights-heading">
               <div className="rounded-2xl border border-foreground/10 bg-background/90 p-4 sm:p-6 transition-all duration-500">
-                <h3 className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-foreground/70">
+                <h3 id="highlights-heading" className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-foreground/70">
                   Key Highlights
                 </h3>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                   <div className="text-center">
-                    <AnimatedCounter value={1.8} suffix="+" />
+                    <AnimatedCounter value={yearsExp} suffix="+" />
                     <div className="text-xs text-foreground/60 sm:text-sm">
                       Years Experience
                     </div>
@@ -273,11 +275,11 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
 
             <div className="mb-16 mt-4 w-full space-y-4 text-justify text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
               <p>
-                Technical Support Specialist with 1.8+ years in Enterprise B2B SaaS,
+                Technical Support Specialist with {yearsExp}+ years in Enterprise B2B SaaS,
                 specializing in API/integration debugging, code-level Root Cause Analysis,
                 and engineering-grade customer solutions. Proven track record of resolving
                 300+ L2/L3 escalations, building self-service knowledge systems, and
@@ -287,11 +289,12 @@ export default function Home() {
             </div>
 
             {/* Experience Section */}
-            <div
+            <section
               id="experience"
               className="mb-16 w-full text-left"
+              aria-labelledby="experience-heading"
             >
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+              <h2 id="experience-heading" className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Experience
               </h2>
               <div className="space-y-8">
@@ -470,14 +473,15 @@ export default function Home() {
                   </div>
                 </ExperienceItem>
               </div>
-            </div>
+            </section>
 
             {/* Featured Projects Section */}
-            <div id="projects" className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+            <section id="projects" className="mb-16 w-full text-left" aria-labelledby="projects-heading">
+              <h2 id="projects-heading" className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Featured projects
               </h2>
               <div className="space-y-8">
+                <article>
                 <ExperienceItem
                   title="AI-Powered Log Analysis Portal"
                   role="MongoDB, Express.js, React.js, Node.js, LLM | 2025"
@@ -511,10 +515,36 @@ export default function Home() {
                           deflection in L1 tickets and faster MTTR for L2.
                         </span>
                       </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Architecture:</strong> MERN stack with
+                          React frontend for file uploads and real-time
+                          diagnostics, Express/Node backend orchestrating
+                          LLM calls via Groq API, and MongoDB for log
+                          storage and pattern history.
+                        </span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Impact:</strong> Reduced average RCA time
+                          from 45 minutes to under 15 minutes per incident,
+                          enabling L1 teams to self-serve on common error
+                          patterns without escalation.
+                        </span>
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-foreground/10">
+                      <p className="text-xs text-foreground/50">
+                        <strong>Stack:</strong> React, Node.js, Express, MongoDB, Groq API, REST APIs
+                      </p>
                     </div>
                   </div>
                 </ExperienceItem>
+                </article>
 
+                <article>
                 <ExperienceItem
                   title="Product Enhancement: In-House Code Editor"
                   role="Java, Eclipse RCP | 2025"
@@ -548,15 +578,41 @@ export default function Home() {
                           by 30% and cut onboarding time for new users.
                         </span>
                       </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Approach:</strong> Analyzed Eclipse RCP
+                          plugin architecture, evaluated SWT vs JavaFX for
+                          UI, and developed a modular specification
+                          supporting syntax highlighting, auto-completion,
+                          and integrated debugging — all runnable without
+                          external IDE installation.
+                        </span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-foreground/40 mt-1">•</span>
+                        <span>
+                          <strong>Impact:</strong> Specification adopted by
+                          product engineering for roadmap consideration,
+                          with projected 30% reduction in setup-related
+                          escalations and 25% faster customer onboarding.
+                        </span>
+                      </p>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-foreground/10">
+                      <p className="text-xs text-foreground/50">
+                        <strong>Stack:</strong> Java, Eclipse RCP, SWT, Plugin Architecture
+                      </p>
                     </div>
                   </div>
                 </ExperienceItem>
+                </article>
               </div>
-            </div>
+            </section>
 
             {/* Education Section */}
-            <div id="education" className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+            <section id="education" className="mb-16 w-full text-left" aria-labelledby="education-heading">
+              <h2 id="education-heading" className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Education
               </h2>
               <div className="space-y-12">
@@ -569,11 +625,11 @@ export default function Home() {
                   </p>
                 </ExperienceItem>
               </div>
-            </div>
+            </section>
 
             {/* GitHub Activity Section */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+            <section id="github" className="mb-16 w-full text-left" aria-labelledby="github-heading">
+              <h2 id="github-heading" className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 GitHub Activity
               </h2>
               <p className="mb-8 text-md text-foreground/70">
@@ -581,11 +637,11 @@ export default function Home() {
                 automation tools, log analysis utilities, and backend services.
               </p>
               <GithubGraph />
-            </div>
+            </section>
 
             {/* Tech Stack Section */}
-            <div id="skills" className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+            <section id="skills" className="mb-16 w-full text-left" aria-labelledby="skills-heading">
+              <h2 id="skills-heading" className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Tech Stack
               </h2>
               <p className="mb-8 text-lg text-foreground/70">
@@ -593,7 +649,7 @@ export default function Home() {
                 support and engineering engagements:
               </p>
               <TechStack />
-            </div>
+            </section>
 
             {/* Get in Touch Section */}
             <section
@@ -613,10 +669,13 @@ export default function Home() {
                     <p className="mb-4 text-lg font-medium text-foreground max-w-xl">
                       Currently a Technical Support Specialist at Smartsheet.
                     </p>
-                    <p className="text-md text-foreground/70 max-w-xl">
+                    <p className="text-md text-foreground/70 max-w-xl mb-2">
                       Open to connecting with folks working on enterprise SaaS, support engineering,
                       or SRE-adjacent problems. If you value engineers who debug at the code level
                       and treat every ticket as a product signal — let&apos;s talk.
+                    </p>
+                    <p className="text-sm text-foreground/50 italic">
+                      Currently in training at Smartsheet — actively ramping up and always happy to connect.
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-4">
@@ -628,8 +687,8 @@ export default function Home() {
             </section>
 
             {/* Focus Tools */}
-            <div className="mb-16 w-full text-left">
-              <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
+            <section id="extras" className="mb-16 w-full text-left" aria-labelledby="extras-heading">
+              <h2 id="extras-heading" className="mb-6 text-xs font-bold uppercase tracking-widest text-foreground/70">
                 Extras
               </h2>
               <p className="mb-8 text-md text-foreground/70 max-w-xl">
@@ -637,7 +696,7 @@ export default function Home() {
               </p>
 
               <FocusTools />
-            </div>
+            </section>
           </motion.main>
         )}
       </AnimatePresence>

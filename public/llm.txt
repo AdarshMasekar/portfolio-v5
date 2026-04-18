@@ -1,15 +1,21 @@
 # Adarsh Masekar
-/ˈædɑːrš məˈseɪkər/ • noun • 00:00:00 IST
+/ˈædɑːrš məˈseɪkər/ • noun
 
 ## About
 
-Product Support Engineer with 2+ years in Enterprise B2B SaaS, specializing in solving complex engineering-level issues and delivering technical solutions using Java, Python, JavaScript, SQL, and CI/CD integrations while maintaining 95%+ SLA adherence through Root Cause Analysis and automation.
+Technical Support Specialist with 2+ years in Enterprise B2B SaaS, specializing in solving complex engineering-level issues and delivering technical solutions using Java, JavaScript, SQL, and CI/CD integrations while maintaining 95%+ SLA adherence through Root Cause Analysis and automation.
 
 ## Experience
 
+### Smartsheet
+**Technical Support Specialist 1**
+April 2026 – Present | Bengaluru, India (Hybrid)
+
+- Completed onboarding and actively ramping up — immersed in product training, exploring the Smartsheet platform end-to-end, and building a deep understanding of the tools and workflows that power enterprise support at scale.
+
 ### Qualitia Software
 **Product Support Engineer (L2)**
-January 2025 – Present | Pune, India (Remote)
+January 2025 – March 2026 | Pune, India (Remote)
 
 - Resolved 300+ Tier 2/3 technical issues through code-level debugging of Selenium and Appium frameworks, maintaining 95%+ SLA adherence and reducing overall resolution time by 35%.
 - Engineered custom Java integration module for IBM DB2 within 36 hours, implementing JDBC connectivity layer with connection pooling to retain critical accounts and enable seamless database operations.
@@ -18,7 +24,7 @@ January 2025 – Present | Pune, India (Remote)
 
 ### Tech Mahindra
 **Associate Software Engineer**
-December 2023 – December 2024 | Bengaluru, India
+March 2024 – September 2024 | Bengaluru, India
 
 - Provided L1/L2 production support for enterprise loan platform processing 5,000+ daily transactions, performing code-level debugging in Java/Spring Boot microservices and reducing incident response time by 25%.
 - Conducted comprehensive Root Cause Analysis on production defects with stack trace analysis and code references, enabling development teams to implement permanent fixes 30% faster.
@@ -48,17 +54,18 @@ Graduated: 2023 | CGPA: 8.6/10
 ## Skills
 
 **Product Support & Troubleshooting:** Production Debugging, Root Cause Analysis (RCA), Log Analysis, Incident Management, SLA Monitoring
-**DevOps & Support Tools:** Jira, Git, Jenkins, Linux/Unix, Bash Scripting
+**DevOps & Support Tools:** Jira, Git, Jenkins, Docker, Linux/Unix, Bash Scripting
 **Automation & Testing:** Selenium, Appium, API Testing, Postman
-**Frontend & Integrations:** React.js, JavaScript, HTML5, CSS3
-**Backend & Databases:** Java, MySQL, Python, Node.js, Express.js, REST APIs
+**Frontend & Integrations:** React.js, Next.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS
+**Backend & Databases:** Java, MySQL, Python, Node.js, Express.js, REST APIs, MongoDB
 
 ## Get in Touch
 
-Connect with me on [LinkedIn](https://linkedin.com) or shoot an [email](mailto:adarshmasekar@gmail.com)
+Connect with me on [LinkedIn](https://www.linkedin.com/in/adarsh-masekar/) or shoot an [email](mailto:adarshmasekar@gmail.com)
 
 ---
 
 **Links:**
 - Email: adarshmasekar@gmail.com
-- Phone: +91-9591265305
+- LinkedIn: https://www.linkedin.com/in/adarsh-masekar/
+- GitHub: https://github.com/adarshmasekar

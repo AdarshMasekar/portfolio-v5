@@ -30,6 +30,16 @@ export const metadata: Metadata = {
     "SQL",
     "Root Cause Analysis",
     "B2B SaaS",
+    "L2/L3 SaaS Support",
+    "Support Automation Engineer",
+    "Enterprise Technical Support",
+    "Production Debugging",
+    "Incident Management",
+    "SRE Mindset",
+    "Java Stack Trace Analysis",
+    "MERN Stack Support Tools",
+    "Next.js",
+    "Full-Stack Support Engineering",
   ],
   authors: [{ name: "Adarsh Masekar" }],
   creator: "Adarsh Masekar",
@@ -77,19 +87,83 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Adarsh Masekar",
-  jobTitle: "Technical Support Specialist",
-  url: "https://adarshmasekar.vercel.app",
-  sameAs: [
-    "https://github.com/adarshmasekar",
-    "https://www.linkedin.com/in/adarsh-masekar/",
-    "https://leetcode.com/u/adarshmasekar/",
+  "@graph": [
+    {
+      "@type": "Person",
+      name: "Adarsh Masekar",
+      jobTitle: "Technical Support Specialist",
+      description:
+        "Technical Support Specialist with 2+ years in Enterprise B2B SaaS, specializing in API/integration debugging, code-level Root Cause Analysis, and engineering-grade customer solutions.",
+      url: "https://adarshmasekar.vercel.app",
+      sameAs: [
+        "https://github.com/adarshmasekar",
+        "https://www.linkedin.com/in/adarsh-masekar/",
+        "https://leetcode.com/u/adarshmasekar/",
+      ],
+      worksFor: {
+        "@type": "Organization",
+        name: "Smartsheet",
+      },
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "Visvesvaraya Technological University",
+      },
+      knowsAbout: [
+        "Enterprise B2B SaaS Support",
+        "API & Integration Debugging",
+        "Root Cause Analysis",
+        "Java",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "Selenium",
+        "Appium",
+        "Next.js",
+        "React",
+        "Node.js",
+        "MongoDB",
+        "CI/CD",
+        "Docker",
+      ],
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Technical Support Specialist",
+        occupationLocation: {
+          "@type": "City",
+          name: "Bengaluru, India",
+        },
+        skills:
+          "Production Debugging, Root Cause Analysis, API Testing, Java, JavaScript, SQL, Incident Management",
+      },
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      name: "AI-Powered Log Analysis Portal",
+      description:
+        "Full-stack MERN portal automating error log analysis for support teams with LLM-powered Java stack trace parsing, targeting 40% deflection in L1 support tickets.",
+      programmingLanguage: ["JavaScript", "Node.js"],
+      runtimePlatform: "Node.js",
+      author: { "@type": "Person", name: "Adarsh Masekar" },
+      dateCreated: "2025",
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      name: "In-House Code Editor Specification",
+      description:
+        "Technical specification for an Eclipse RCP-based IDE solution, projected to reduce setup-related escalation tickets by 30% and cut enterprise customer onboarding time.",
+      programmingLanguage: ["Java"],
+      author: { "@type": "Person", name: "Adarsh Masekar" },
+      dateCreated: "2025",
+    },
+    {
+      "@type": "WebSite",
+      url: "https://adarshmasekar.vercel.app",
+      name: "Adarsh Masekar Portfolio",
+      description:
+        "Portfolio of Adarsh Masekar — Technical Support Specialist at Smartsheet.",
+      author: { "@type": "Person", name: "Adarsh Masekar" },
+    },
   ],
-  worksFor: {
-    "@type": "Organization",
-    name: "Smartsheet",
-  },
 };
 
 export default function RootLayout({

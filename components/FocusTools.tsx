@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Play, Pause, RotateCcw, Clock, Music, Volume2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,15 +12,35 @@ interface FocusToolsProps {
 export function FocusTools({ className = "" }: FocusToolsProps) {
   const [activeTab, setActiveTab] = useState<"pomodoro" | "lofi">("pomodoro");
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        setActiveTab((prev) => (prev === "pomodoro" ? "lofi" : "pomodoro"));
+      }
+    },
+    [],
+  );
+
   return (
     <div
       className={`rounded-2xl border border-foreground/10 bg-background/55 h-24 ${className} transition-all duration-500`}
     >
       {/* Tab Headers */}
-      <div className="flex items-center gap-1 p-2 bg-background/55 rounded-t-lg border-b border-foreground/10 transition-colors">
+      <div
+        className="flex items-center gap-1 p-2 bg-background/55 rounded-t-lg border-b border-foreground/10 transition-colors"
+        role="tablist"
+        aria-label="Focus tools"
+        onKeyDown={handleKeyDown}
+      >
         <button
           onClick={() => setActiveTab("pomodoro")}
-          className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all duration-200 ${
+          role="tab"
+          id="tab-pomodoro"
+          aria-selected={activeTab === "pomodoro"}
+          aria-controls="tabpanel-pomodoro"
+          tabIndex={activeTab === "pomodoro" ? 0 : -1}
+          className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2 ${
             activeTab === "pomodoro"
               ? "bg-background text-foreground shadow-sm"
               : "text-foreground/60 hover:text-foreground/80"
@@ -31,7 +51,12 @@ export function FocusTools({ className = "" }: FocusToolsProps) {
         </button>
         <button
           onClick={() => setActiveTab("lofi")}
-          className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all duration-200 ${
+          role="tab"
+          id="tab-lofi"
+          aria-selected={activeTab === "lofi"}
+          aria-controls="tabpanel-lofi"
+          tabIndex={activeTab === "lofi" ? 0 : -1}
+          className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2 ${
             activeTab === "lofi"
               ? "bg-background text-foreground shadow-sm"
               : "text-foreground/60 hover:text-foreground/80"
@@ -48,6 +73,9 @@ export function FocusTools({ className = "" }: FocusToolsProps) {
           {activeTab === "pomodoro" ? (
             <motion.div
               key="pomodoro"
+              id="tabpanel-pomodoro"
+              role="tabpanel"
+              aria-labelledby="tab-pomodoro"
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
@@ -59,6 +87,9 @@ export function FocusTools({ className = "" }: FocusToolsProps) {
           ) : (
             <motion.div
               key="lofi"
+              id="tabpanel-lofi"
+              role="tabpanel"
+              aria-labelledby="tab-lofi"
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -10 }}
@@ -163,8 +194,8 @@ function PomodoroContent() {
       <div className="flex items-center gap-2">
         <button
           onClick={toggleTimer}
-          className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95"
-          aria-label={isActive ? "Pause" : "Start"}
+          className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2"
+          aria-label={isActive ? "Pause timer" : "Start timer"}
         >
           {isActive ? (
             <Pause size={12} className="text-foreground" />
@@ -175,31 +206,35 @@ function PomodoroContent() {
 
         <button
           onClick={resetTimer}
-          className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95"
-          aria-label="Reset"
+          className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2"
+          aria-label="Reset timer"
         >
           <RotateCcw size={12} className="text-foreground" />
         </button>
 
         {/* Mode Switcher */}
-        <div className="flex items-center gap-1 border-l border-foreground/20 pl-2">
+        <div className="flex items-center gap-1 border-l border-foreground/20 pl-2" role="group" aria-label="Timer mode">
           <button
             onClick={() => switchMode("work")}
-            className={`px-1.5 py-0.5 rounded text-xs font-medium transition-all ${
+            className={`px-1.5 py-0.5 rounded text-xs font-medium transition-all focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2 ${
               mode === "work"
                 ? "bg-foreground text-background"
                 : "text-foreground/60 hover:text-foreground/80"
             }`}
+            aria-label="Work mode"
+            aria-pressed={mode === "work"}
           >
             W
           </button>
           <button
             onClick={() => switchMode("break")}
-            className={`px-1.5 py-0.5 rounded text-xs font-medium transition-all ${
+            className={`px-1.5 py-0.5 rounded text-xs font-medium transition-all focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2 ${
               mode === "break"
                 ? "bg-foreground text-background"
                 : "text-foreground/60 hover:text-foreground/80"
             }`}
+            aria-label="Break mode"
+            aria-pressed={mode === "break"}
           >
             B
           </button>
@@ -258,8 +293,8 @@ function LofiContent() {
         {/* Play/Pause Button */}
         <button
           onClick={toggleLofi}
-          className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 transition-all duration-300 hover:bg-foreground/20 hover:scale-105 active:scale-95 border border-foreground/20"
-          aria-label={isLofiPlaying ? "Pause Lofi" : "Play Lofi"}
+          className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 transition-all duration-300 hover:bg-foreground/20 hover:scale-105 active:scale-95 border border-foreground/20 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2"
+          aria-label={isLofiPlaying ? "Pause lofi music" : "Play lofi music"}
         >
           {isLofiPlaying ? (
             <Pause size={12} className="text-foreground" fill="currentColor" />
@@ -273,10 +308,10 @@ function LofiContent() {
         </button>
 
         {/* Volume Controls */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1" role="group" aria-label="Volume controls">
           <button
             onClick={() => setLofiVolume(Math.max(0, lofiVolume - 0.1))}
-            className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95"
+            className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2"
             aria-label="Decrease volume"
           >
             <span className="text-xs text-foreground/60">−</span>
@@ -284,7 +319,7 @@ function LofiContent() {
 
           <button
             onClick={() => setLofiVolume(Math.min(1, lofiVolume + 0.1))}
-            className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95"
+            className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/10 transition-all hover:bg-foreground/20 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-foreground focus-visible:outline-offset-2"
             aria-label="Increase volume"
           >
             <span className="text-xs text-foreground/60">+</span>
@@ -292,7 +327,7 @@ function LofiContent() {
         </div>
 
         {/* Volume Percentage */}
-        <div className="text-xs text-foreground/60 font-medium">
+        <div className="text-xs text-foreground/60 font-medium" aria-live="polite" aria-label={`Volume ${Math.round(lofiVolume * 100)}%`}>
           {Math.round(lofiVolume * 100)}%
         </div>
 
@@ -314,6 +349,7 @@ function LofiContent() {
                 step="0.01"
                 value={lofiVolume}
                 onChange={(e) => setLofiVolume(parseFloat(e.target.value))}
+                aria-label="Volume slider"
                 className="w-12 h-[1px] cursor-pointer appearance-none rounded-full bg-foreground/10 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-1 [&::-webkit-slider-thumb]:w-1 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-foreground [&::-webkit-slider-thumb]:hover:scale-110 [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:h-1 [&::-moz-range-thumb]:w-1 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-foreground hover:[&::-moz-range-thumb]:scale-110 transition-all"
               />
             </motion.div>
