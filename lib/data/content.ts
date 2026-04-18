@@ -78,5 +78,5 @@ Connect with me on [LinkedIn](https://www.linkedin.com/in/adarsh-masekar/) or sh
 - Email: [adarshmasekar@gmail.com](mailto:adarshmasekar@gmail.com)
 - LinkedIn: [https://www.linkedin.com/in/adarsh-masekar/](https://www.linkedin.com/in/adarsh-masekar/)
 - GitHub: [https://github.com/adarshmasekar](https://github.com/adarshmasekar)
-- Resume: [Download PDF](/Adarsh%20Masekar%20-%20PSE.pdf)
+- Resume: [Download PDF](/Adarsh%20Masekar%20-%20TSS.pdf)
 `;

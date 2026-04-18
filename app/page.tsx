@@ -133,7 +133,7 @@ export default function Home() {
     {
       label: "Download Resume",
       icon: FileText,
-      href: "/Adarsh Masekar - PSE.pdf",
+      href: "/Adarsh Masekar - TSS.pdf",
     },
     {
       label: "QR Code",
